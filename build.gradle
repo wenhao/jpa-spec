@@ -8,5 +8,5 @@ repositories {
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
 
-    testCompile 'junit:junit:$junitVersion'
+    testCompile("junit:junit:$junitVersion")
 }
