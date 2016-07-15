@@ -61,7 +61,7 @@ Specification<Person> specification = new Specifications<Person>()
         .like("nickName", "*og")
         .build();
         
-Sort sort = new Sort("name", DESC);        
+Sort sort = new Sort(new Order(DESC, "name"), new Order(ASC, "birthday"));
         
 personRepository.findAll(specification, new PageRequest(0, 15, sort));        
 ```
