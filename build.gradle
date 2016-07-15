@@ -1,5 +1,10 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'com.jfrog.bintray'
 
 repositories {
     jcenter()
@@ -28,5 +33,30 @@ dependencies {
         archives jar
         archives sourcesJar
         archives javadocJar
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'jpa-spec'
+        desc = 'A JAP Query By Specification framework'
+        licenses = ['Apache-2.0']
+        websiteUrl = 'https://github.com/wenhao/jpa-spec'
+        issueTrackerUrl = 'https://github.com/wenhao/jpa-spec/issues'
+        vcsUrl = 'https://github.com/wenhao/jpa-spec'
+        labels = ['jpa', 'spring-data']
+        publicDownloadNumbers = true
+        githubRepo = 'wenhao/jpa-spec'
+        githubReleaseNotesFile = 'README.md'
+        version {
+            name = '1.0.0'
+            desc = 'A JAP Query By Specification framework 1.0.0'
+            released = new Date()
+            vcsTag = '1.0.0'
+        }
     }
 }
