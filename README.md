@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)
+
 # jpa-spec
 
 JPA 2 introduces a criteria API that can be used to build queries programmatically. 
