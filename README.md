@@ -24,20 +24,44 @@ public interface JpaSpecificationExecutor<T> {
 
 ```
 
-Generate Specification easy way:
+### Specification By Examples:
+
+####Each specification support three parameters:
+
+1. property: field name.
+2. value: compare value with model.
+3. condition: if true(default), apply this specification.
+
+```java
+//query by person model
+Person person = new Person();
+person.setName("Jack");
+person.setNickName("dog);
+person.setAge(20);
+person.setBirthday(new Date())
+person.setCompany(null);
+
+Specification<Person> specification = new Specifications<Person>()
+        .eq("name", person.getName(), StringUtils.isNotBlank(person.getName()))
+        .gt("age", 18, Objects.nonNull(person.getAge()))
+        .between("birthday", new Range<>(new Date(), new Date()))
+        .like("nickName", "*og")
+        .build();
+        
+personRepository.findAll(specification, new PageRequest(0, 15));           
+```
+
+####Sort
 
 ```java
 Specification<Person> specification = new Specifications<Person>()
-        .eq("name", "Jack")
-        .ne("company", "ThoughtWorks", isNotBlank("ThoughtWorks"))
-        .gt("age", 1)
-        .ge("age", 2)
-        .lt("age", 3)
-        .le("age", 4)
-        .between("age", new Range<>(1, 20))
-        .between("birthday", new Range<>(new Date(), new Date()), nonNull(new Range<>(1, 2)))
-        .like("nickName", "*Jack")
+        .eq("name", person.getName(), StringUtils.isNotBlank(person.getName()))
+        .gt("age", 18)
+        .between("birthday", new Range<>(new Date(), new Date()))
+        .like("nickName", "*og")
         .build();
         
-personRepository.findAll(specification)        
+Sort sort = new Sort("name", DESC);        
+        
+personRepository.findAll(specification, new PageRequest(0, 15, sort));        
 ```
