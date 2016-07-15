@@ -51,7 +51,7 @@ Specification<Person> specification = new Specifications<Person>()
 personRepository.findAll(specification, new PageRequest(0, 15));           
 ```
 
-####Sort
+####Sort by fields:
 
 ```java
 Specification<Person> specification = new Specifications<Person>()
