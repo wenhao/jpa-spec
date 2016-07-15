@@ -5,9 +5,28 @@ repositories {
     jcenter()
 }
 
+group = 'com.github.wenhao'
+version = '1.0.0'
+
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
-    compile ("org.apache.openjpa:openjpa:$openJpaVersion")
+    compile("org.apache.openjpa:openjpa:$openJpaVersion")
 
     testCompile("junit:junit:$junitVersion")
+
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allSource
+        classifier = 'sources'
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives jar
+        archives sourcesJar
+        archives javadocJar
+    }
 }

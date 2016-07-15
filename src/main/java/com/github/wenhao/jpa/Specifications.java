@@ -18,7 +18,11 @@ import com.github.wenhao.jpa.specification.LtSpecification;
 import com.github.wenhao.jpa.specification.NotEqualSpecification;
 
 public class Specifications<T> {
-    private List<Specification<T>> specifications = new ArrayList<>();
+    private List<Specification<T>> specifications;
+
+    public Specifications() {
+        this.specifications = new ArrayList<>();
+    }
 
     public Specifications<T> eq(String property, Object object) {
         return eq(property, object, true);
