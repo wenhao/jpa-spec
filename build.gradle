@@ -4,6 +4,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'maven'
 apply plugin: 'com.jfrog.bintray'
 
 repositories {
@@ -57,6 +58,48 @@ bintray {
             desc = 'A JAP Query By Specification framework 1.0.0'
             released = new Date()
             vcsTag = '1.0.0'
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'jpa-spec'
+            description 'A JAP Query By Specification framework.'
+            url 'https://github.com/wenhao/jpa-spec'
+            inceptionYear '2016'
+
+            packaging 'jar'
+            groupId 'com.github.wenhao'
+            artifactId 'jpa-spec'
+            version '1.0.0'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            scm {
+                url 'https://github.com/wenhao/jpa-spec'
+                connection 'https://github.com/wenhao/jpa-spec.git'
+                developerConnection 'git@github.com:wenhao/http.git'
+            }
+
+            developers {
+                developer {
+                    id 'wenhao'
+                    name 'Hao Wen'
+                    email 'wenhao@126.com'
+                    organization 'Hao Wen'
+                    roles {
+                        role 'Developer'
+                    }
+                }
+            }
         }
     }
 }
