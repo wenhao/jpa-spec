@@ -20,7 +20,7 @@ public class SpecificationsTest {
         // when
         Specification<Person> specification = new Specifications<Person>()
                 .eq("name", "Jack", "Jame")
-                .ne("company", "ThoughtWorks", isNotBlank("ThoughtWorks"))
+                .ne(isNotBlank("ThoughtWorks"), "company", "ThoughtWorks")
                 .gt("age", 1)
                 .ge("age", 2)
                 .lt("age", 3)
