@@ -28,9 +28,9 @@ public interface JpaSpecificationExecutor<T> {
 
 ####Each specification support three parameters:
 
-1. property: field name.
-2. value: compare value with model.
 3. condition: if true(default), apply this specification.
+1. property: field name.
+2. values: compare value with model, eq/ne/like support multiple values.
 
 ```java
 Person person = new Person();
@@ -41,10 +41,10 @@ person.setBirthday(new Date())
 person.setCompany(null);
 
 Specification<Person> specification = new Specifications<Person>()
-        .eq("name", person.getName(), StringUtils.isNotBlank(person.getName()))
-        .gt("age", 18, Objects.nonNull(person.getAge()))
+        .eq(StringUtils.isNotBlank(person.getName()), "name", person.getName())
+        .gt(Objects.nonNull(person.getAge()), "age", 18)
         .between("birthday", new Range<>(new Date(), new Date()))
-        .like("nickName", "*og")
+        .like("nickName", "*og", "*me")
         .build();
         
 personRepository.findAll(specification, new PageRequest(0, 15));           

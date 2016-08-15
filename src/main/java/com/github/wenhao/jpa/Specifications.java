@@ -24,23 +24,22 @@ public class Specifications<T> {
         this.specifications = new ArrayList<>();
     }
 
-    public Specifications<T> eq(String property, Object object) {
-        return eq(property, object, true);
+    public Specifications<T> eq(String property, Object... values) {
+        return eq(true, property, values);
     }
 
-    public Specifications<T> eq(String property, Object object, boolean condition) {
+    public Specifications<T> eq(boolean condition, String property, Object... values) {
         if (condition) {
-            this.specifications.add(new EqualSpecification<T>(property, object));
+            this.specifications.add(new EqualSpecification<T>(property, values));
         }
         return this;
     }
 
-    public Specifications<T> ne(String property, Object object) {
+    public Specifications<T> ne(String property, Object... object) {
         return ne(property, object, true);
     }
 
-
-    public Specifications<T> ne(String property, Object object, boolean condition) {
+    public Specifications<T> ne(boolean condition, String property, Object... object) {
         if (condition) {
             this.specifications.add(new NotEqualSpecification<T>(property, object));
         }
@@ -121,5 +120,4 @@ public class Specifications<T> {
             return criteriaBuilder.and(predicates);
         };
     }
-
 }
