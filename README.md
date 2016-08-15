@@ -33,7 +33,6 @@ public interface JpaSpecificationExecutor<T> {
 3. condition: if true(default), apply this specification.
 
 ```java
-//query by person model
 Person person = new Person();
 person.setName("Jack");
 person.setNickName("dog);
