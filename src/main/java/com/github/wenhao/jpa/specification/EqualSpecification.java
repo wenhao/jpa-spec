@@ -1,9 +1,10 @@
 package com.github.wenhao.jpa.specification;
 
+import static java.util.Objects.isNull;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,10 +25,13 @@ public class EqualSpecification<T> implements Specification<T>, Serializable {
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if (values.length == 1) {
+            if (isNull(values[0])) {
+                return criteriaBuilder.isNull(root.get(property));
+            }
             return criteriaBuilder.equal(root.get(property), values[0]);
         }
         Arrays.asList(Arrays.copyOfRange(values, 0, values.length - 2)).forEach(value -> {
-            if (Objects.isNull(value)) {
+            if (isNull(value)) {
                 criteriaBuilder.or(criteriaBuilder.isNull(root.get(property)));
             } else {
                 criteriaBuilder.or(criteriaBuilder.equal(root.get(property), value));

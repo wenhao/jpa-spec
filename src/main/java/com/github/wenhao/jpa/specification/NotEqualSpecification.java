@@ -1,5 +1,7 @@
 package com.github.wenhao.jpa.specification;
 
+import static java.util.Objects.isNull;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,6 +26,9 @@ public class NotEqualSpecification<T> implements Specification<T>, Serializable 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if (values.length == 1) {
+            if (isNull(values[0])) {
+                return criteriaBuilder.isNull(root.get(property));
+            }
             return criteriaBuilder.notEqual(root.get(property), values[0]);
         }
         Arrays.asList(Arrays.copyOfRange(values, 0, values.length - 2)).forEach(value -> {
