@@ -101,13 +101,13 @@ public class Specifications<T> {
         return this;
     }
 
-    public Specifications<T> like(String property, String pattern) {
-        return like(true, property, pattern);
+    public Specifications<T> like(String property, String... patterns) {
+        return like(true, property, patterns);
     }
 
-    public Specifications<T> like(boolean condition, String property, String pattern) {
+    public Specifications<T> like(boolean condition, String property, String... patterns) {
         if (condition) {
-            this.specifications.add(new LikeSpecification<T>(property, pattern));
+            this.specifications.add(new LikeSpecification<T>(property, patterns));
         }
         return this;
     }

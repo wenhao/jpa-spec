@@ -26,7 +26,7 @@ public class SpecificationsTest {
                 .lt("age", 3)
                 .le("age", 4)
                 .between("age", new Range<>(1, 20))
-                .between("birthday", new Range<>(new Date(), new Date()), nonNull(new Range<>(1, 2)))
+                .between(nonNull(new Range<>(1, 2)), "birthday", new Range<>(new Date(), new Date()))
                 .like("nickName", "*Jack")
                 .build();
         // then
