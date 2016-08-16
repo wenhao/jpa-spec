@@ -27,15 +27,15 @@ public class NotEqualSpecification<T> implements Specification<T>, Serializable 
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if (values.length == 1) {
             if (isNull(values[0])) {
-                return criteriaBuilder.isNull(root.get(property));
+                return criteriaBuilder.isNotNull(root.get(property));
             }
             return criteriaBuilder.notEqual(root.get(property), values[0]);
         }
         Arrays.asList(Arrays.copyOfRange(values, 0, values.length - 2)).forEach(value -> {
             if (Objects.isNull(value)) {
-                criteriaBuilder.or(criteriaBuilder.isNull(root.get(property)));
+                criteriaBuilder.or(criteriaBuilder.isNotNull(root.get(property)));
             } else {
-                criteriaBuilder.or(criteriaBuilder.equal(root.get(property), value));
+                criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), value));
             }
         });
         return criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), values[values.length - 1]));
