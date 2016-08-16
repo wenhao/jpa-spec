@@ -2,6 +2,7 @@ package com.github.wenhao.jpa.specification;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,7 +18,7 @@ public class EqualSpecification<T> implements Specification<T>, Serializable {
 
     public EqualSpecification(String property, Object... values) {
         this.property = property;
-        this.values = values;
+        this.values = new HashSet<>(Arrays.asList(values)).toArray();
     }
 
     @Override
@@ -35,3 +36,4 @@ public class EqualSpecification<T> implements Specification<T>, Serializable {
         return criteriaBuilder.or(criteriaBuilder.equal(root.get(property), values[values.length - 1]));
     }
 }
+

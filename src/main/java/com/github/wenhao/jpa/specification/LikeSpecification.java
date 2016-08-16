@@ -2,6 +2,7 @@ package com.github.wenhao.jpa.specification;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,7 +17,7 @@ public class LikeSpecification<T> implements Specification<T>, Serializable {
 
     public LikeSpecification(String property, String... patterns) {
         this.property = property;
-        this.patterns = patterns;
+        this.patterns = new HashSet<>(Arrays.asList(patterns)).stream().toArray(String[]::new);
     }
 
     @Override
