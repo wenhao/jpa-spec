@@ -11,4 +11,5 @@
 build/
 jpa-spec.ipr
 jpa-spec.iws
+jpa-spec.iml
 src/.DS_Store
