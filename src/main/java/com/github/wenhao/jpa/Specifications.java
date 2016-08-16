@@ -47,10 +47,10 @@ public class Specifications<T> {
     }
 
     public Specifications<T> gt(String property, Number number) {
-        return gt(property, number, true);
+        return gt(true, property, number);
     }
 
-    public Specifications<T> gt(String property, Number number, boolean condition) {
+    public Specifications<T> gt(boolean condition, String property, Number number) {
         if (condition) {
             this.specifications.add(new GtSpification<T>(property, number));
         }
@@ -58,10 +58,10 @@ public class Specifications<T> {
     }
 
     public Specifications<T> ge(String property, Number number) {
-        return ge(property, number, true);
+        return ge(true, property, number);
     }
 
-    public Specifications<T> ge(String property, Number number, boolean condition) {
+    public Specifications<T> ge(boolean condition, String property, Number number) {
         if (condition) {
             this.specifications.add(new GeSpecification<T>(property, number));
         }
@@ -69,10 +69,10 @@ public class Specifications<T> {
     }
 
     public Specifications<T> lt(String property, Number number) {
-        return lt(property, number, true);
+        return lt(true, property, number);
     }
 
-    public Specifications<T> lt(String property, Number number, boolean condition) {
+    public Specifications<T> lt(boolean condition, String property, Number number) {
         if (condition) {
             this.specifications.add(new LtSpecification<T>(property, number));
         }
@@ -80,10 +80,10 @@ public class Specifications<T> {
     }
 
     public Specifications<T> le(String property, Number number) {
-        return le(property, number, true);
+        return le(true, property, number);
     }
 
-    public Specifications<T> le(String property, Number number, boolean condition) {
+    public Specifications<T> le(boolean condition, String property, Number number) {
         if (condition) {
             this.specifications.add(new LeSpecification<T>(property, number));
         }
@@ -91,10 +91,10 @@ public class Specifications<T> {
     }
 
     public Specifications<T> between(String property, Range<? extends Comparable<?>> range) {
-        return between(property, range, true);
+        return between(true, property, range);
     }
 
-    public Specifications<T> between(String property, Range<? extends Comparable<?>> range, boolean condition) {
+    public Specifications<T> between(boolean condition, String property, Range<? extends Comparable<?>> range) {
         if (condition) {
             this.specifications.add(new BetweenSpecification<T>(property, range));
         }
@@ -102,10 +102,10 @@ public class Specifications<T> {
     }
 
     public Specifications<T> like(String property, String pattern) {
-        return like(property, pattern, true);
+        return like(true, property, pattern);
     }
 
-    public Specifications<T> like(String property, String pattern, boolean condition) {
+    public Specifications<T> like(boolean condition, String property, String pattern) {
         if (condition) {
             this.specifications.add(new LikeSpecification<T>(property, pattern));
         }
