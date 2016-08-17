@@ -25,7 +25,7 @@ public class LikeSpecification<T> implements Specification<T>, Serializable {
         if (patterns.length == 1) {
             return criteriaBuilder.like(root.get(property), patterns[0]);
         }
-        Arrays.asList(Arrays.copyOfRange(patterns, 0, patterns.length - 2)).forEach(value -> criteriaBuilder.or(criteriaBuilder.like(root.get(property), patterns[patterns.length - 1])));
+        Arrays.asList(Arrays.copyOfRange(patterns, 0, patterns.length - 1)).forEach(value -> criteriaBuilder.or(criteriaBuilder.like(root.get(property), patterns[patterns.length - 1])));
         return criteriaBuilder.or(criteriaBuilder.like(root.get(property), patterns[patterns.length - 1]));
     }
 }

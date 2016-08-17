@@ -31,7 +31,7 @@ public class NotEqualSpecification<T> implements Specification<T>, Serializable 
             }
             return criteriaBuilder.notEqual(root.get(property), values[0]);
         }
-        Arrays.asList(Arrays.copyOfRange(values, 0, values.length - 2)).forEach(value -> {
+        Arrays.asList(Arrays.copyOfRange(values, 0, values.length - 1)).forEach(value -> {
             if (Objects.isNull(value)) {
                 criteriaBuilder.or(criteriaBuilder.isNotNull(root.get(property)));
             } else {
