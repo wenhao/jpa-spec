@@ -3,8 +3,6 @@ package com.github.wenhao.jpa.specification;
 import static java.util.Objects.isNull;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,13 +12,15 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import static com.github.wenhao.jpa.util.ArrayUtils.removeDuplicate;
+
 public class NotEqualSpecification<T> implements Specification<T>, Serializable {
     private final String property;
     private final Object[] values;
 
     public NotEqualSpecification(String property, Object... values) {
         this.property = property;
-        this.values = new HashSet<>(Arrays.asList(values)).toArray();
+        this.values = removeDuplicate(values);
     }
 
     @Override
@@ -31,13 +31,15 @@ public class NotEqualSpecification<T> implements Specification<T>, Serializable 
             }
             return criteriaBuilder.notEqual(root.get(property), values[0]);
         }
-        Arrays.asList(Arrays.copyOfRange(values, 0, values.length - 1)).forEach(value -> {
-            if (Objects.isNull(value)) {
+
+        for (int i = 0; i < values.length - 1; i++) {
+            if (Objects.isNull(values[i])) {
                 criteriaBuilder.or(criteriaBuilder.isNotNull(root.get(property)));
             } else {
-                criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), value));
+                criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), values[i]));
             }
-        });
+        }
         return criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), values[values.length - 1]));
     }
 }
+
