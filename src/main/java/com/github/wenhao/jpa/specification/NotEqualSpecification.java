@@ -3,6 +3,8 @@ package com.github.wenhao.jpa.specification;
 import static java.util.Objects.isNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -32,14 +34,16 @@ public class NotEqualSpecification<T> implements Specification<T>, Serializable 
             return criteriaBuilder.notEqual(root.get(property), values[0]);
         }
 
+        List<Predicate> predicates = new ArrayList<>();
         for (int i = 0; i < values.length - 1; i++) {
             if (Objects.isNull(values[i])) {
-                criteriaBuilder.or(criteriaBuilder.isNotNull(root.get(property)));
+                predicates.add(criteriaBuilder.isNotNull(root.get(property)));
             } else {
-                criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), values[i]));
+                predicates.add(criteriaBuilder.notEqual(root.get(property), values[i]));
             }
         }
-        return criteriaBuilder.or(criteriaBuilder.notEqual(root.get(property), values[values.length - 1]));
+        predicates.add(criteriaBuilder.notEqual(root.get(property), values[values.length - 1]));
+        return criteriaBuilder.or(predicates.stream().toArray(Predicate[]::new));
     }
 }
 

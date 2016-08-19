@@ -1,8 +1,11 @@
 package com.github.wenhao.jpa.specification;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,7 +28,10 @@ public class LikeSpecification<T> implements Specification<T>, Serializable {
         if (patterns.length == 1) {
             return criteriaBuilder.like(root.get(property), patterns[0]);
         }
-        Arrays.asList(Arrays.copyOfRange(patterns, 0, patterns.length - 1)).forEach(value -> criteriaBuilder.or(criteriaBuilder.like(root.get(property), patterns[patterns.length - 1])));
-        return criteriaBuilder.or(criteriaBuilder.like(root.get(property), patterns[patterns.length - 1]));
+        List<Predicate> predicates = Arrays.asList(Arrays.copyOfRange(patterns, 0, patterns.length - 1)).stream()
+                .map(value -> criteriaBuilder.like(root.get(property), value))
+                .collect(toList());
+        predicates.add(criteriaBuilder.like(root.get(property), patterns[patterns.length - 1]));
+        return criteriaBuilder.or(predicates.stream().toArray(Predicate[]::new));
     }
 }
