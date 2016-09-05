@@ -24,6 +24,24 @@ public interface JpaSpecificationExecutor<T> {
 
 ```
 
+### Gradle
+
+```groovy
+dependencies {
+    compile 'com.github.wenhao:jpa-spec:2.0.6'
+}
+```
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>com.github.wenhao</groupId>
+    <artifactId>jpa-spec</artifactId>
+    <version>2.0.6</version>
+</dependency>
+```
+
 ### Specification By Examples:
 
 ####Each specification support three parameters:
