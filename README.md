@@ -27,12 +27,18 @@ public interface JpaSpecificationExecutor<T> {
 ### Gradle
 
 ```groovy
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile 'com.github.wenhao:jpa-spec:2.0.6'
 }
 ```
 
 ### Maven
+
+add repository [http://jcenter.bintray.com](http://jcenter.bintray.com) to maven settings.xml file.
 
 ```xml
 <dependency>
@@ -53,6 +59,9 @@ dependencies {
 ####General Example
 
 ```java
+public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
+}
+
 Person person = new Person();
 person.setName("Jack");
 person.setNickName("dog");
