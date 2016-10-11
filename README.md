@@ -89,7 +89,7 @@ person.setNickName("dog");
 
 Specification<Person> specification = new Specifications<Person>()
         .eq("nickName", "dog")
-        .eq(StringUtils.isNotBlank(person.getName()), "name", Jack", "Eric", null)
+        .eq(StringUtils.isNotBlank(person.getName()), "name", "Jack", "Eric", null)
         .build();
         
 personRepository.findAll(specification)); 
