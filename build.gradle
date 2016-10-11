@@ -15,9 +15,13 @@ group = 'com.github.wenhao'
 version = '2.0.7-SNAPSHOT'
 
 dependencies {
-    compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
+    compile("org.springframework.data:spring-data-jpa:$springBootVersion")
     compile("org.apache.openjpa:openjpa:$openJpaVersion")
 
+    testCompile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+    testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testCompile("org.springframework:spring-orm:4.3.3.RELEASE")
+    testCompile("com.h2database:h2:$h2Version")
     testCompile("junit:junit:$junitVersion")
 
     task sourcesJar(type: Jar) {
@@ -35,6 +39,10 @@ dependencies {
         archives sourcesJar
         archives javadocJar
     }
+}
+
+configurations.all {
+    resolutionStrategy.force 'org.springframework:spring-orm:4.3.3.RELEASE'
 }
 
 bintray {
