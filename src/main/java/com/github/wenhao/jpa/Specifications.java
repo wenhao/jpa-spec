@@ -35,13 +35,13 @@ public class Specifications<T> {
         return this;
     }
 
-    public Specifications<T> ne(String property, Object... object) {
-        return ne(property, object, true);
+    public Specifications<T> ne(String property, Object... values) {
+        return ne(true, property, values);
     }
 
-    public Specifications<T> ne(boolean condition, String property, Object... object) {
+    public Specifications<T> ne(boolean condition, String property, Object... values) {
         if (condition) {
-            this.specifications.add(new NotEqualSpecification<T>(property, object));
+            this.specifications.add(new NotEqualSpecification<T>(property, values));
         }
         return this;
     }
