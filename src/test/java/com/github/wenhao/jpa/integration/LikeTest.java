@@ -18,33 +18,13 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class EqualTest {
+public class LikeTest {
 
     @Autowired
     private PersonRepository personRepository;
 
     @Test
-    public void should_be_able_to_find_by_using_equal() {
-        // given
-        Person person = new PersonBuilder()
-            .name("Jack")
-            .age(18)
-            .build();
-        personRepository.save(person);
-
-        // when
-        Specification<Person> specification = new Specifications<Person>()
-            .eq(isNotBlank(person.getName()), "name", person.getName())
-            .build();
-
-        Person result = personRepository.findOne(specification);
-
-        // then
-        assertThat(result.getName()).isEqualTo(person.getName());
-    }
-
-    @Test
-    public void should_be_able_to_find_by_using_equal_with_multiple_values() {
+    public void should_be_able_to_find_by_using_like_with_multiple_values() {
         // given
         Person jack = new PersonBuilder()
             .name("Jack")
@@ -54,22 +34,18 @@ public class EqualTest {
             .name("Eric")
             .age(20)
             .build();
-        Person jackson = new PersonBuilder()
-            .age(30)
-            .nickName("Jackson")
-            .build();
         personRepository.save(jack);
         personRepository.save(eric);
-        personRepository.save(jackson);
 
         // when
         Specification<Person> specification = new Specifications<Person>()
-            .eq(isNotBlank(jack.getName()), "name", jack.getName(), eric.getName(), null)
+            .like(isNotBlank(jack.getName()), "name", "%ac%", "%ri%")
             .build();
 
         List<Person> persons = personRepository.findAll(specification);
 
         // then
-        assertThat(persons.size()).isEqualTo(3);
+        assertThat(persons.size()).isEqualTo(2);
     }
+
 }
