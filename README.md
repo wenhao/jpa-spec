@@ -7,6 +7,7 @@
 * Compatible with JPA 2 interface.
 * Equal/NotEqual/Like support multiple values, Equal/NotEqual support **Null** value.
 * Builder style specification creator.
+* Support pagination and sort.
 
 
 ### JPA 2 criteria API introduction
