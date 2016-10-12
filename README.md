@@ -136,7 +136,7 @@ Specification<Person> specification = new Specifications<Person>()
 personRepository.findAll(specification);      
 ```
 
-####Pagination and Sort:
+####Pagination and Sort
 
 ```java
 Specification<Person> specification = new Specifications<Person>()
