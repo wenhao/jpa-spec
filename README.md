@@ -2,6 +2,15 @@
 
 # jpa-spec
 
+### Features
+
+* Compatible with JPA 2 interface.
+* Equal/NotEqual/Like support multiple values, Equal/NotEqual support **Null** value.
+* Builder style specification creator.
+
+
+### JPA 2 criteria API introduction
+
 JPA 2 introduces a criteria API that can be used to build queries programmatically. 
 
 Writing a criteria you actually define the where-clause of a query for a domain class.
@@ -32,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:2.0.6'
+    compile 'com.github.wenhao:jpa-spec:2.0.7'
 }
 ```
 
@@ -44,7 +53,7 @@ add repository [http://jcenter.bintray.com](http://jcenter.bintray.com) to maven
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>2.0.6</version>
+    <version>2.0.7</version>
 </dependency>
 ```
 
@@ -76,7 +85,7 @@ Specification<Person> specification = new Specifications<Person>()
         .like("nickName", "%og", "%me")
         .build();
         
-personRepository.findAll(specification, new PageRequest(0, 15));           
+Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15));           
 ```
 
 ####Equal/NotEqual Example
@@ -107,7 +116,7 @@ Specification<Person> specification = new Specifications<Person>()
         .gt(Objects.nonNull(person.getAge()), "age", 18)
         .build();
         
-personRepository.findAll(specification, new PageRequest(0, 15));    
+Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15));    
 ```
 
 ####Between Example
@@ -139,5 +148,6 @@ Specification<Person> specification = new Specifications<Person>()
         
 Sort sort = new Sort(new Order(DESC, "name"), new Order(ASC, "birthday"));
         
-personRepository.findAll(specification, new PageRequest(0, 15, sort));        
+Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15, sort));
+long totalCount = personRepository.count(specification);        
 ```
