@@ -43,8 +43,7 @@ public class BetweenTest {
 
         // when
         Specification<Person> specification = new Specifications<Person>()
-            .between(Objects.nonNull(jack.getBirthday()), "birthday", new Range<>(getDate("1980-01-01"), getDate
-                ("1989-12-31")))
+            .between(Objects.nonNull(jack.getBirthday()), "birthday", new Range<>(getDate("1980-01-01"), getDate("1989-12-31")))
             .build();
 
         List<Person> persons = personRepository.findAll(specification);
