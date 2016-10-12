@@ -67,6 +67,8 @@ add repository [http://jcenter.bintray.com](http://jcenter.bintray.com) to maven
 
 ####General Example
 
+every Repository class should extends from two super class **JpaRepository** and **JpaSpecificationExecutor**.
+
 ```java
 public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
 }
@@ -82,7 +84,7 @@ Specification<Person> specification = new Specifications<Person>()
         .eq(StringUtils.isNotBlank(person.getName()), "name", person.getName())
         .gt(Objects.nonNull(person.getAge()), "age", 18)
         .between("birthday", new Range<>(new Date(), new Date()))
-        .like("nickName", "%og", "%me")
+        .like("nickName", "%og%", "%me")
         .build();
         
 Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15));           
