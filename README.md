@@ -7,7 +7,7 @@
 * Compatible with JPA 2 interface.
 * Equal/NotEqual/Like support multiple values, Equal/NotEqual support **Null** value.
 * Builder style specification creator.
-* Support pagination and sort.
+* Support pagination and sort builder.
 
 
 ### JPA 2 criteria API introduction
@@ -149,7 +149,10 @@ Specification<Person> specification = new Specifications<Person>()
         .like("nickName", "%og%")
         .build();
         
-Sort sort = new Sort(new Order(DESC, "name"), new Order(ASC, "birthday"));
+Sort sort = new Sorts()
+    .desc(StringUtils.isNotBlank(person.getName()), "name")
+    .asc("birthday")
+    .build();
         
 Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15, sort));
 long totalCount = personRepository.count(specification);        
