@@ -2,6 +2,10 @@
 
 # jpa-spec
 
+Inspired by [Legacy Hibernate Criteria Queries](https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria), while this should be considered deprecated vs JPA APIs,
+
+but it still productive and  easily understandable.
+
 ### Features
 
 * Compatible with JPA 2 interface.
