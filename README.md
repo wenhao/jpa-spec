@@ -9,7 +9,7 @@ but it still productive and  easily understandable.
 ### Features
 
 * Compatible with JPA 2 interface.
-* Equal/NotEqual/Like support multiple values, Equal/NotEqual support **Null** value.
+* Equal/NotEqual/Like/In support multiple values, Equal/NotEqual support **Null** value.
 * Builder style specification creator.
 * Support pagination and sort builder.
 
@@ -106,6 +106,22 @@ person.setNickName("dog");
 Specification<Person> specification = new Specifications<Person>()
         .eq("nickName", "dog")
         .eq(StringUtils.isNotBlank(person.getName()), "name", "Jack", "Eric", null)
+        .build();
+        
+personRepository.findAll(specification)); 
+```
+
+####In Example
+
+find any person name in "Jack" or "Eric".
+
+```java
+List<String> names = new ArrayList<String>();
+names.add("Jack);
+names.add("Eric);
+
+Specification<Person> specification = new Specifications<Person>()
+        .in("name", names.toArray())// in("name", "Jack", "Eric")
         .build();
         
 personRepository.findAll(specification)); 

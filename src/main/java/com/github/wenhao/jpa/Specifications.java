@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.criteria.Predicate;
 
+import com.github.wenhao.jpa.specification.InSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -108,6 +109,17 @@ public class Specifications<T> {
     public Specifications<T> like(boolean condition, String property, String... patterns) {
         if (condition) {
             this.specifications.add(new LikeSpecification<T>(property, patterns));
+        }
+        return this;
+    }
+
+    public Specifications<T> in(String property, Object... values) {
+        return this.in(true, property, values);
+    }
+
+    public Specifications<T> in(boolean condition, String property, Object... values) {
+        if(condition) {
+            this.specifications.add(new InSpecification<T>(property, values));
         }
         return this;
     }
