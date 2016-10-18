@@ -169,3 +169,56 @@ public Page<Person> findAll(SearchRequest request) {
     return personRepository.findAll(specification, new PageRequest(0, 15, sort));
 }
 ```
+
+####ManyToOne Query
+
+```java
+@Entity
+public class Person {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private Integer age;
+    private String name;
+    private String nickName;
+    private String company;
+    private Date birthday;
+    @OneToMany(cascade = ALL)
+    private Set<Phone> phones= new HashSet<>();
+    
+    // getter and setter
+```
+
+```java
+@Entity
+public class Phone {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String number;
+    private String brand;
+    @ManyToOne
+    private Person person;
+    
+    // getter and setter
+```
+
+```java
+public interface PhoneRepository extends JpaRepository<Phone, Long>, JpaSpecificationExecutor<Phone> {
+}
+```
+
+```java
+public List<Phone> findAll(SearchRequest request) {
+    Specification<Phone> specification = new Specifications<Phone>()
+        .eq(StringUtils.isNotBlank(request.getBrand()), "brand", request.getBrand())
+        .and(StringUtils.isNotBlank(request.getPersonName()), (root, query, cb) -> {
+            Path<Person> person = root.get("person");
+            return cb.equal(person.get("name"), request.getPersonName());
+        })
+        .build();
+
+    return phoneRepository.findAll(specification);
+}
+```

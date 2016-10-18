@@ -1,15 +1,6 @@
 package com.github.wenhao.jpa;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.Predicate;
-
-import com.github.wenhao.jpa.specification.InSpecification;
-import com.github.wenhao.jpa.specification.ManyToOneSpecification;
-import org.springframework.data.domain.Range;
-import org.springframework.data.jpa.domain.Specification;
-
+import com.github.wenhao.jpa.specification.AndSpecification;
 import com.github.wenhao.jpa.specification.BetweenSpecification;
 import com.github.wenhao.jpa.specification.EqualSpecification;
 import com.github.wenhao.jpa.specification.GeSpecification;
@@ -19,6 +10,13 @@ import com.github.wenhao.jpa.specification.LeSpecification;
 import com.github.wenhao.jpa.specification.LikeSpecification;
 import com.github.wenhao.jpa.specification.LtSpecification;
 import com.github.wenhao.jpa.specification.NotEqualSpecification;
+import org.springframework.data.domain.Range;
+import org.springframework.data.jpa.domain.Specification;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.Predicate;
 
 public class Specifications<T> {
     private List<Specification<T>> specifications;
@@ -126,11 +124,22 @@ public class Specifications<T> {
         return this;
     }
 
+    public Specifications<T> and(Specification specification) {
+        return and(true, specification);
+    }
+
+    public Specifications<T> and(boolean condition, Specification specification) {
+        if (condition) {
+            this.specifications.add(new AndSpecification<T>(specification));
+        }
+        return this;
+    }
+
     public Specification<T> build() {
         return (root, query, criteriaBuilder) -> {
             Predicate[] predicates = this.specifications.stream()
-                    .map(spec -> spec.toPredicate(root, query, criteriaBuilder))
-                    .toArray(Predicate[]::new);
+                .map(spec -> spec.toPredicate(root, query, criteriaBuilder))
+                .toArray(Predicate[]::new);
             return criteriaBuilder.and(predicates);
         };
     }
