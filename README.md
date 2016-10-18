@@ -76,23 +76,20 @@ every Repository class should extends from two super class **JpaRepository** and
 
 ```java
 public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
+}    
+```
+
+```java
+public Page<Person> findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
+            .gt(Objects.nonNull(request.getAge()), "age", 18)
+            .between("birthday", new Range<>(new Date(), new Date()))
+            .like("nickName", "%og%", "%me")
+            .build();
+            
+    return personRepository.findAll(specification, new PageRequest(0, 15)); 
 }
-
-Person person = new Person();
-person.setName("Jack");
-person.setNickName("dog");
-person.setAge(20);
-person.setBirthday(new Date())
-person.setCompany(null);
-
-Specification<Person> specification = new Specifications<Person>()
-        .eq(StringUtils.isNotBlank(person.getName()), "name", person.getName())
-        .gt(Objects.nonNull(person.getAge()), "age", 18)
-        .between("birthday", new Range<>(new Date(), new Date()))
-        .like("nickName", "%og%", "%me")
-        .build();
-        
-Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15));           
 ```
 
 ####Equal/NotEqual Example
@@ -100,15 +97,14 @@ Page<Person> persons = personRepository.findAll(specification, new PageRequest(0
 find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value.
 
 ```java
-Person person = new Person();
-person.setNickName("dog");
-
-Specification<Person> specification = new Specifications<Person>()
-        .eq("nickName", "dog")
-        .eq(StringUtils.isNotBlank(person.getName()), "name", "Jack", "Eric", null)
-        .build();
-        
-personRepository.findAll(specification)); 
+public Persons findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .eq("nickName", "dog")
+            .eq(StringUtils.isNotBlank(request.getName()), "name", "Jack", "Eric", null)
+            .build();
+            
+    return personRepository.findAll(specification); 
+}
 ```
 
 ####In Example
@@ -116,15 +112,13 @@ personRepository.findAll(specification));
 find any person name in "Jack" or "Eric".
 
 ```java
-List<String> names = new ArrayList<String>();
-names.add("Jack);
-names.add("Eric);
-
-Specification<Person> specification = new Specifications<Person>()
-        .in("name", names.toArray())// in("name", "Jack", "Eric")
-        .build();
-        
-personRepository.findAll(specification)); 
+public Persons findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .in("name", request.getNames.toArray())// in("name", "Jack", "Eric")
+            .build();
+            
+    return personRepository.findAll(specification); 
+}
 ```
 
 ####Numerical Example
@@ -132,14 +126,13 @@ personRepository.findAll(specification));
 find any people age bigger than 18. 
 
 ```java
-Person person = new Person();
-person.setAge(20);
-
-Specification<Person> specification = new Specifications<Person>()
-        .gt(Objects.nonNull(person.getAge()), "age", 18)
-        .build();
-        
-Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15));    
+public Persons findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .gt(Objects.nonNull(request.getAge()), "age", 18)
+            .build();
+            
+    return personRepository.findAll(specification); 
+}
 ```
 
 ####Between Example
@@ -147,33 +140,32 @@ Page<Person> persons = personRepository.findAll(specification, new PageRequest(0
 find any person age between 18 and 25, birthday between someday and someday.
 
 ```java
-Person person = new Person();
-person.setAge(20);
-person.setBirthday(new Date())
-
-Specification<Person> specification = new Specifications<Person>()
-        .between(Objects.nonNull(person.getAge(), "age", new Range<>(18, 25))
-        .between("birthday", new Range<>(new Date(), new Date()))
-        .build();
-        
-personRepository.findAll(specification);      
+public Persons findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .between(Objects.nonNull(request.getAge(), "age", new Range<>(18, 25))
+            .between("birthday", new Range<>(new Date(), new Date()))
+            .build();
+            
+    return personRepository.findAll(specification); 
+}  
 ```
 
 ####Pagination and Sort
 
 ```java
-Specification<Person> specification = new Specifications<Person>()
-        .eq(StringUtils.isNotBlank(person.getName()), "name", person.getName())
-        .gt("age", 18)
-        .between("birthday", new Range<>(new Date(), new Date()))
-        .like("nickName", "%og%")
+public Page<Person> findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
+            .gt("age", 18)
+            .between("birthday", new Range<>(new Date(), new Date()))
+            .like("nickName", "%og%")
+            .build();
+            
+    Sort sort = new Sorts()
+        .desc(StringUtils.isNotBlank(request.getName()), "name")
+        .asc("birthday")
         .build();
-        
-Sort sort = new Sorts()
-    .desc(StringUtils.isNotBlank(person.getName()), "name")
-    .asc("birthday")
-    .build();
-        
-Page<Person> persons = personRepository.findAll(specification, new PageRequest(0, 15, sort));
-long totalCount = personRepository.count(specification);        
+            
+    return personRepository.findAll(specification, new PageRequest(0, 15, sort));
+}
 ```
