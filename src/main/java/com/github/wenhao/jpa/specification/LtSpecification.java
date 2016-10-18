@@ -19,7 +19,7 @@ public class LtSpecification<T> implements Specification<T>, Serializable {
     }
 
     @Override
-    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        return criteriaBuilder.lt(root.get(property), number);
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        return cb.lt(root.get(property), number);
     }
 }

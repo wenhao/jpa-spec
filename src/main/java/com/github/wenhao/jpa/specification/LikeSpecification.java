@@ -20,13 +20,13 @@ public class LikeSpecification<T> implements Specification<T>, Serializable {
     }
 
     @Override
-    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         if (patterns.length == 1) {
-            return criteriaBuilder.like(root.get(property), patterns[0]);
+            return cb.like(root.get(property), patterns[0]);
         }
         Predicate[] predicates = Arrays.stream(patterns)
-            .map(value -> criteriaBuilder.like(root.get(property), value))
+            .map(value -> cb.like(root.get(property), value))
             .toArray(Predicate[]::new);
-        return criteriaBuilder.or(predicates);
+        return cb.or(predicates);
     }
 }

@@ -1,10 +1,15 @@
 package com.github.wenhao.jpa.model;
 
+import static javax.persistence.CascadeType.ALL;
+
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Person {
@@ -16,6 +21,8 @@ public class Person {
     private String nickName;
     private String company;
     private Date birthday;
+    @OneToMany(cascade = ALL)
+    private Set<Phone> phones= new HashSet<>();
 
     public Long getId() {
         return id;
@@ -63,5 +70,13 @@ public class Person {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
     }
 }

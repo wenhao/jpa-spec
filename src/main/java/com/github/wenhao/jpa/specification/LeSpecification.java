@@ -19,7 +19,7 @@ public class LeSpecification<T> implements Specification<T>, Serializable {
     }
 
     @Override
-    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        return criteriaBuilder.le(root.get(property), number);
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        return cb.le(root.get(property), number);
     }
 }

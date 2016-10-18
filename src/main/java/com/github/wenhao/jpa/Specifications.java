@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.criteria.Predicate;
 
 import com.github.wenhao.jpa.specification.InSpecification;
+import com.github.wenhao.jpa.specification.ManyToOneSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -13,6 +14,7 @@ import com.github.wenhao.jpa.specification.BetweenSpecification;
 import com.github.wenhao.jpa.specification.EqualSpecification;
 import com.github.wenhao.jpa.specification.GeSpecification;
 import com.github.wenhao.jpa.specification.GtSpification;
+import com.github.wenhao.jpa.specification.InSpecification;
 import com.github.wenhao.jpa.specification.LeSpecification;
 import com.github.wenhao.jpa.specification.LikeSpecification;
 import com.github.wenhao.jpa.specification.LtSpecification;
@@ -118,7 +120,7 @@ public class Specifications<T> {
     }
 
     public Specifications<T> in(boolean condition, String property, Object... values) {
-        if(condition) {
+        if (condition) {
             this.specifications.add(new InSpecification<T>(property, values));
         }
         return this;

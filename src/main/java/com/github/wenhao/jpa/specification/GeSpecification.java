@@ -19,7 +19,7 @@ public class GeSpecification<T> implements Specification<T>, Serializable {
     }
 
     @Override
-    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        return criteriaBuilder.ge(root.get(property), number);
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        return cb.ge(root.get(property), number);
     }
 }

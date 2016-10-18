@@ -22,18 +22,18 @@ public class EqualSpecification<T> implements Specification<T>, Serializable {
     }
 
     @Override
-    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         if (values.length == 1) {
-            return getPredicate(root, criteriaBuilder, values[0]);
+            return getPredicate(root, cb, values[0]);
         }
         Predicate[] predicates = Arrays.stream(values)
-            .map(value -> getPredicate(root, criteriaBuilder, value))
+            .map(value -> getPredicate(root, cb, value))
             .toArray(Predicate[]::new);
-        return criteriaBuilder.or(predicates);
+        return cb.or(predicates);
     }
 
-    private Predicate getPredicate(Root<T> root, CriteriaBuilder criteriaBuilder, Object value) {
-        return isNull(value) ? criteriaBuilder.isNull(root.get(property)) : criteriaBuilder.equal(root.get(property), value);
+    private Predicate getPredicate(Root<T> root, CriteriaBuilder cb, Object value) {
+        return isNull(value) ? cb.isNull(root.get(property)) : cb.equal(root.get(property), value);
     }
 }
 

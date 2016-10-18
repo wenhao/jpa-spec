@@ -1,6 +1,7 @@
 package com.github.wenhao.jpa.builder;
 
 import com.github.wenhao.jpa.model.Person;
+import com.github.wenhao.jpa.model.Phone;
 
 import java.util.Date;
 
@@ -33,6 +34,14 @@ public class PersonBuilder {
 
     public PersonBuilder birthday(Date birthday) {
         this.person.setBirthday(birthday);
+        return this;
+    }
+
+    public PersonBuilder phone(String brand, String number) {
+        Phone phone = new Phone();
+        phone.setBrand(brand);
+        phone.setNumber(number);
+        this.person.getPhones().add(phone);
         return this;
     }
 

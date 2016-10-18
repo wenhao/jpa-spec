@@ -21,7 +21,7 @@ public class BetweenSpecification<T> implements Specification<T>, Serializable {
     }
 
     @Override
-    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        return criteriaBuilder.between(root.get(property), range.getLowerBound(), range.getUpperBound());
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        return cb.between(root.get(property), range.getLowerBound(), range.getUpperBound());
     }
 }
