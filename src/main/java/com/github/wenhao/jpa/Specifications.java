@@ -10,6 +10,7 @@ import com.github.wenhao.jpa.specification.LeSpecification;
 import com.github.wenhao.jpa.specification.LikeSpecification;
 import com.github.wenhao.jpa.specification.LtSpecification;
 import com.github.wenhao.jpa.specification.NotEqualSpecification;
+import com.github.wenhao.jpa.specification.NotLikeSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -109,6 +110,17 @@ public class Specifications<T> {
     public Specifications<T> like(boolean condition, String property, String... patterns) {
         if (condition) {
             this.specifications.add(new LikeSpecification<T>(property, patterns));
+        }
+        return this;
+    }
+
+    public Specifications<T> notLike(String property, String... patterns) {
+        return notLike(true, property, patterns);
+    }
+
+    public Specifications<T> notLike(boolean condition, String property, String... patterns) {
+        if (condition) {
+            this.specifications.add(new NotLikeSpecification<T>(property, patterns));
         }
         return this;
     }
