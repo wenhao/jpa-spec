@@ -96,6 +96,8 @@ public Page<Person> findAll(SearchRequest request) {
 
 find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value, and company is null.
 
+**Test:** [EqualTest.java](./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java) and [NotEqualTest.java](./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java) 
+
 ```java
 public Persons findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
@@ -112,6 +114,8 @@ public Persons findAll(SearchRequest request) {
 
 find any person name in "Jack" or "Eric".
 
+**Test:** [InTest.java](./src/test/java/com/github/wenhao/jpa/integration/InTest.java)
+
 ```java
 public Persons findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
@@ -125,6 +129,8 @@ public Persons findAll(SearchRequest request) {
 ####Numerical Example
 
 find any people age bigger than 18. 
+
+**Test:** [GtTest.java](./src/test/java/com/github/wenhao/jpa/integration/GtTest.java)
 
 ```java
 public Persons findAll(SearchRequest request) {
@@ -140,6 +146,8 @@ public Persons findAll(SearchRequest request) {
 
 find any person age between 18 and 25, birthday between someday and someday.
 
+**Test:** [BetweenTest.java](./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java)
+
 ```java
 public Persons findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
@@ -154,6 +162,8 @@ public Persons findAll(SearchRequest request) {
 ####Like/NotLike Example
 
 find any person name like %ac% or %og%, company not like %ec%.
+
+**Test:** [LikeTest.java](./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java) and [NotLikeTest.java](./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java) 
 
 ```java
 public Page<Person> findAll(SearchRequest request) {
