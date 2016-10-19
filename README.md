@@ -239,3 +239,11 @@ public List<Phone> findAll(SearchRequest request) {
     return phoneRepository.findAll(specification);
 }
 ```
+
+### Copyright and license
+
+Copyright 2016 Wen Hao
+
+Licensed under [Apache License][1]
+
+[1]: ./LICENSE
