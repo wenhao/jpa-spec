@@ -167,6 +167,8 @@ public Page<Person> findAll(SearchRequest request) {
 
 ####Pagination and Sort
 
+find person by pagination and sort by name desc and birthday asc.
+
 ```java
 public Page<Person> findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
