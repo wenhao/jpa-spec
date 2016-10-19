@@ -157,7 +157,7 @@ find any person name like %ac% or %og%, company not like %ec%.
 ```java
 public Page<Person> findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
-            .like("name", "ac", %og%")
+            .like("name", "ac", "%og%")
             .notLike("company", "ec")
             .build();
             
