@@ -94,13 +94,14 @@ public Page<Person> findAll(SearchRequest request) {
 
 ####Equal/NotEqual Example
 
-find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value.
+find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value, and company is null.
 
 ```java
 public Persons findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
             .eq("nickName", "dog")
             .eq(StringUtils.isNotBlank(request.getName()), "name", "Jack", "Eric", null)
+            .eq("company", null) //or eq("company", (Object) null)
             .build();
             
     return personRepository.findAll(specification); 
@@ -114,7 +115,7 @@ find any person name in "Jack" or "Eric".
 ```java
 public Persons findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
-            .in("name", request.getNames().toArray())// in("name", "Jack", "Eric")
+            .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
             .build();
             
     return personRepository.findAll(specification); 

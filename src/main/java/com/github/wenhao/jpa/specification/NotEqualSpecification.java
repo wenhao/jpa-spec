@@ -23,6 +23,9 @@ public class NotEqualSpecification<T> implements Specification<T>, Serializable 
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        if (isNull(values)) {
+            return cb.isNotNull(root.get(property));
+        }
         if (values.length == 1) {
             return getPredicate(root, cb, values[0]);
         }

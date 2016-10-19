@@ -44,6 +44,33 @@ public class EqualTest {
     }
 
     @Test
+    public void should_be_able_to_find_by_using_equal_for_single_null_value() {
+        // given
+        Person jack = new PersonBuilder()
+            .name("Jack")
+            .age(18)
+            .company("Abc")
+            .build();
+        Person eric = new PersonBuilder()
+            .name("Eric")
+            .age(20)
+            .build();
+
+        personRepository.save(jack);
+        personRepository.save(eric);
+
+        // when
+        Specification<Person> specification = new Specifications<Person>()
+            .eq("company", null)
+            .build();
+
+        List<Person> persons = personRepository.findAll(specification);
+
+        // then
+        assertThat(persons.size()).isEqualTo(1);
+    }
+
+    @Test
     public void should_be_able_to_find_by_using_equal_with_multiple_values() {
         // given
         Person jack = new PersonBuilder()

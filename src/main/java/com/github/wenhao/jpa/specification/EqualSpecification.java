@@ -2,6 +2,8 @@ package com.github.wenhao.jpa.specification;
 
 import static java.util.Objects.isNull;
 
+import org.springframework.data.jpa.domain.Specification;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -9,8 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.springframework.data.jpa.domain.Specification;
 
 public class EqualSpecification<T> implements Specification<T>, Serializable {
     private final String property;
@@ -23,6 +23,9 @@ public class EqualSpecification<T> implements Specification<T>, Serializable {
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        if (isNull(values)) {
+            return cb.isNull(root.get(property));
+        }
         if (values.length == 1) {
             return getPredicate(root, cb, values[0]);
         }
