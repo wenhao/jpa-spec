@@ -10,6 +10,7 @@ import com.github.wenhao.jpa.specification.LeSpecification;
 import com.github.wenhao.jpa.specification.LikeSpecification;
 import com.github.wenhao.jpa.specification.LtSpecification;
 import com.github.wenhao.jpa.specification.NotEqualSpecification;
+import com.github.wenhao.jpa.specification.NotInSpecification;
 import com.github.wenhao.jpa.specification.NotLikeSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
@@ -132,6 +133,17 @@ public class Specifications<T> {
     public Specifications<T> in(boolean condition, String property, Object... values) {
         if (condition) {
             this.specifications.add(new InSpecification<T>(property, values));
+        }
+        return this;
+    }
+
+    public Specifications<T> notIn(String property, Object... values) {
+        return this.notIn(true, property, values);
+    }
+
+    public Specifications<T> notIn(boolean condition, String property, Object... values) {
+        if (condition) {
+            this.specifications.add(new NotInSpecification<T>(property, values));
         }
         return this;
     }

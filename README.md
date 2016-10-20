@@ -110,9 +110,9 @@ public Persons findAll(SearchRequest request) {
 }
 ```
 
-####In Example
+####In/NotIn Example
 
-find any person name in "Jack" or "Eric".
+find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "IBM".
 
 **Test:** [InTest.java](./src/test/java/com/github/wenhao/jpa/integration/InTest.java)
 
@@ -120,6 +120,7 @@ find any person name in "Jack" or "Eric".
 public Persons findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
             .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
+            .notIn("company", "ThoughtWorks", "IBM")
             .build();
             
     return personRepository.findAll(specification); 
