@@ -2,13 +2,13 @@
 
 # jpa-spec
 
-Inspired by [Legacy Hibernate Criteria Queries](https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria), while this should be considered deprecated vs JPA APIs,
+Inspired by [Legacy Hibernate Criteria Queries], while this should be considered deprecated vs JPA APIs,
 
-but it still productive and  easily understandable.
+but it still productive and easily understandable. Build on Spring Data JPA and simplify the dynamic query process.
 
 ### Features
 
-* Compatible with JPA 2 interface.
+* Compatible with Spring Data JPA and JPA 2 interface.
 * Equal/NotEqual/Like/NotLike/In support multiple values, Equal/NotEqual support **Null** value.
 * Builder style specification creator.
 * Support pagination and sort builder.
@@ -71,7 +71,7 @@ public Page<Person> findAll(SearchRequest request) {
 
 find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value, and company is null.
 
-**Test:** [EqualTest.java](./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java) and [NotEqualTest.java](./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java) 
+**Test:** [EqualTest.java] and [NotEqualTest.java]
 
 ```java
 public Persons findAll(SearchRequest request) {
@@ -89,7 +89,7 @@ public Persons findAll(SearchRequest request) {
 
 find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "IBM".
 
-**Test:** [InTest.java](./src/test/java/com/github/wenhao/jpa/integration/InTest.java)
+**Test:** [InTest.java]
 
 ```java
 public Persons findAll(SearchRequest request) {
@@ -106,7 +106,7 @@ public Persons findAll(SearchRequest request) {
 
 find any people age bigger than 18. 
 
-**Test:** [GtTest.java](./src/test/java/com/github/wenhao/jpa/integration/GtTest.java)
+**Test:** [GtTest.java]
 
 ```java
 public Persons findAll(SearchRequest request) {
@@ -122,7 +122,7 @@ public Persons findAll(SearchRequest request) {
 
 find any person age between 18 and 25, birthday between someday and someday.
 
-**Test:** [BetweenTest.java](./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java)
+**Test:** [BetweenTest.java]
 
 ```java
 public Persons findAll(SearchRequest request) {
@@ -139,7 +139,7 @@ public Persons findAll(SearchRequest request) {
 
 find any person name like %ac% or %og%, company not like %ec%.
 
-**Test:** [LikeTest.java](./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java) and [NotLikeTest.java](./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java) 
+**Test:** [LikeTest.java] and [NotLikeTest.java]
 
 ```java
 public Page<Person> findAll(SearchRequest request) {
@@ -174,52 +174,19 @@ public Page<Person> findAll(SearchRequest request) {
 }
 ```
 
-####ManyToOne Query
+####Custom Specification
 
-```java
-@Entity
-public class Person {
-    @Id
-    @GeneratedValue
-    private Long id;
-    private Integer age;
-    private String name;
-    private String nickName;
-    private String company;
-    private Date birthday;
-    @OneToMany(cascade = ALL)
-    private Set<Phone> phones= new HashSet<>();
-    
-    // getter and setter
-```
+@ManyToOne association query, find perosn name equals to "Jack" and phone brand equals to "HuaWei".
 
-```java
-@Entity
-public class Phone {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private String number;
-    private String brand;
-    @ManyToOne
-    private Person person;
-    
-    // getter and setter
-```
-
-```java
-public interface PhoneRepository extends JpaRepository<Phone, Long>, JpaSpecificationExecutor<Phone> {
-}
-```
+**Test:** [AndTest.java]
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Phone> specification = new Specifications<Phone>()
-        .eq(StringUtils.isNotBlank(request.getBrand()), "brand", request.getBrand())
+        .eq(StringUtils.isNotBlank(request.getBrand()), "brand", "HuaWei")
         .and(StringUtils.isNotBlank(request.getPersonName()), (root, query, cb) -> {
             Path<Person> person = root.get("person");
-            return cb.equal(person.get("name"), request.getPersonName());
+            return cb.equal(person.get("name"), "Jack");
         })
         .build();
 
@@ -231,6 +198,15 @@ public List<Phone> findAll(SearchRequest request) {
 
 Copyright 2016 Wen Hao
 
-Licensed under [Apache License][1]
+Licensed under [Apache License]
 
-[1]: ./LICENSE
+[Legacy Hibernate Criteria Queries]: https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria
+[EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java 
+[NotEqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java 
+[InTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/InTest.java
+[GtTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/GtTest.java
+[BetweenTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java
+[LikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java
+[NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java 
+[AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
+[Apache License]: ./LICENSE

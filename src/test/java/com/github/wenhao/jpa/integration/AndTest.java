@@ -23,7 +23,7 @@ import javax.persistence.criteria.Path;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class JoinTest {
+public class AndTest {
 
     @Autowired
     private PersonRepository personRepository;
