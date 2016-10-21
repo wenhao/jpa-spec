@@ -1,5 +1,6 @@
 package com.github.wenhao.jpa.builder;
 
+import com.github.wenhao.jpa.model.Address;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 
@@ -42,6 +43,14 @@ public class PersonBuilder {
         phone.setBrand(brand);
         phone.setNumber(number);
         this.person.getPhones().add(phone);
+        return this;
+    }
+
+    public PersonBuilder address(String street, Integer number) {
+        Address address = new Address();
+        address.setStreet(street);
+        address.setNumber(number);
+        this.person.getAddresses().add(address);
         return this;
     }
 

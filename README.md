@@ -176,7 +176,7 @@ public Page<Person> findAll(SearchRequest request) {
 
 ####Custom Specification
 
-@ManyToOne association query, find perosn name equals to "Jack" and phone brand equals to "HuaWei".
+@ManyToOne association query, find person name equals to "Jack" and phone brand equals to "HuaWei".
 
 **Test:** [AndTest.java]
 
@@ -188,6 +188,24 @@ public List<Phone> findAll(SearchRequest request) {
             Path<Person> person = root.get("person");
             return cb.equal(person.get("name"), "Jack");
         })
+        .build();
+
+    return phoneRepository.findAll(specification);
+}
+```
+
+@ManyToMany association query, find person age between 10 and 35, live in "Chengdu" street.
+
+**Test:** [AndTest.java]
+
+```java
+public List<Phone> findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+        .between("age", new Range<>(10, 35))
+        .and(StringUtils.isNotBlank(jack.getName()), ((root, query, cb) -> {
+            Join address = root.join("addresses", JoinType.LEFT);
+            return cb.equal(address.get("street"), "Chengdu");
+        }))
         .build();
 
     return phoneRepository.findAll(specification);

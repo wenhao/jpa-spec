@@ -6,9 +6,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -23,6 +26,8 @@ public class Person {
     private Date birthday;
     @OneToMany(cascade = ALL)
     private Set<Phone> phones= new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Address> addresses = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -78,5 +83,13 @@ public class Person {
 
     public void setPhones(Set<Phone> phones) {
         this.phones = phones;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 }
