@@ -194,6 +194,12 @@ public List<Phone> findAll(SearchRequest request) {
 }
 ```
 
+####Virtual View
+
+Using **@org.hibernate.annotations.Subselect** to define a virtual view if you don't want a database table view.
+
+There is no difference between a view and a base table for a Hibernate mapping.
+
 ### Copyright and license
 
 Copyright 2016 Wen Hao
