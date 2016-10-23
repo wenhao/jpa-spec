@@ -21,11 +21,9 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.criteria.Path;
-
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class AndTest {
+public class JoinTest {
 
     @Autowired
     private PersonRepository personRepository;
@@ -53,10 +51,7 @@ public class AndTest {
         // when
         Specification<Phone> specification = new Specifications<Phone>()
             .eq("brand", "HuaWei")
-            .and(StringUtils.isNotBlank(jack.getName()), (root, query, cb) -> {
-                Path<Person> person = root.get("person");
-                return cb.equal(person.get("name"), jack.getName());
-            })
+            .eq(StringUtils.isNotBlank(jack.getName()), "person.name", jack.getName())
             .build();
 
         List<Phone> phones = phoneRepository.findAll(specification);

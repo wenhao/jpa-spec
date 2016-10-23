@@ -174,7 +174,42 @@ public Page<Person> findAll(SearchRequest request) {
 }
 ```
 
+####Join
+
+every specification support association query as inner join. 
+
+**Test:** [JoinTest.java]
+
+@ManyToOne association query, find person name equals to "Jack" and phone brand equals to "HuaWei".
+    
+```java
+public List<Phone> findAll(SearchRequest request) {
+    Specification<Phone> specification = new Specifications<Phone>()
+        .eq(StringUtils.isNotBlank(request.getBrand()), "brand", "HuaWei")
+        .eq(StringUtils.isNotBlank(request.getPersonName()), "person.name", "Jack)
+        .build();
+
+    return phoneRepository.findAll(specification);
+}
+```
+
+@ManyToMany association query, find person age between 10 and 35, live in "Chengdu" street.
+
+```java
+public List<Phone> findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+        .between("age", new Range<>(10, 35))
+        .eq(StringUtils.isNotBlank(jack.getName()), "addresses.street", "Chengdu")
+        .build();
+
+    return phoneRepository.findAll(specification);
+}
+```
+
+
 ####Custom Specification
+
+You can custom specification to do the @ManyToOne and @ManyToMany as well.
 
 @ManyToOne association query, find person name equals to "Jack" and phone brand equals to "HuaWei".
 
@@ -233,4 +268,5 @@ Licensed under [Apache License]
 [LikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java
 [NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java 
 [AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
+[JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [Apache License]: ./LICENSE

@@ -2,17 +2,15 @@ package com.github.wenhao.jpa.specification;
 
 import static java.util.Objects.isNull;
 
-import org.springframework.data.jpa.domain.Specification;
-
-import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.From;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class EqualSpecification<T> implements Specification<T>, Serializable {
+public class EqualSpecification<T> extends AbstractSpecification<T> {
     private final String property;
     private final Object[] values;
 
@@ -23,20 +21,22 @@ public class EqualSpecification<T> implements Specification<T>, Serializable {
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        From from = getRoot(property, root);
+        String field = getProperty(property);
         if (isNull(values)) {
-            return cb.isNull(root.get(property));
+            return cb.isNull(from.get(field));
         }
         if (values.length == 1) {
-            return getPredicate(root, cb, values[0]);
+            return getPredicate(from, cb, values[0], field);
         }
         Predicate[] predicates = Arrays.stream(values)
-            .map(value -> getPredicate(root, cb, value))
+            .map(value -> getPredicate(root, cb, value, field))
             .toArray(Predicate[]::new);
         return cb.or(predicates);
     }
 
-    private Predicate getPredicate(Root<T> root, CriteriaBuilder cb, Object value) {
-        return isNull(value) ? cb.isNull(root.get(property)) : cb.equal(root.get(property), value);
+    private Predicate getPredicate(From root, CriteriaBuilder cb, Object value, String field) {
+        return isNull(value) ? cb.isNull(root.get(field)) : cb.equal(root.get(field), value);
     }
 }
 
