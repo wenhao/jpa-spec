@@ -10,6 +10,8 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 
 * Compatible with Spring Data JPA and JPA 2 interface.
 * Equal/NotEqual/Like/NotLike/In/NotIn support multiple values, Equal/NotEqual support **Null** value.
+* Each specification support join query(inner joiner). 
+* Support custom specification.
 * Builder style specification creator.
 * Support pagination and sort builder.
 
