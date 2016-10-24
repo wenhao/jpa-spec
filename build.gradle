@@ -18,7 +18,7 @@ repositories {
 }
 
 group = 'com.github.wenhao'
-version = '2.1.1-SNAPSHOT'
+version = '2.2.0'
 
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springBootVersion")
@@ -71,10 +71,10 @@ bintray {
         githubRepo = 'wenhao/jpa-spec'
         githubReleaseNotesFile = 'README.md'
         version {
-            name = '2.1.0'
-            desc = 'A JAP Query By Specification framework 2.1.0'
+            name = '2.2.0'
+            desc = 'A JAP Query By Specification framework 2.2.0'
             released = new Date()
-            vcsTag = '2.1.0'
+            vcsTag = '2.2.0'
         }
     }
 }
@@ -90,7 +90,7 @@ install {
             packaging 'jar'
             groupId 'com.github.wenhao'
             artifactId 'jpa-spec'
-            version '2.1.0'
+            version '2.2.0'
 
             licenses {
                 license {

@@ -152,28 +152,6 @@ public Page<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Pagination and Sort
-
-find person by pagination and sort by name desc and birthday asc.
-
-```java
-public Page<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = new Specifications<Person>()
-            .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
-            .gt("age", 18)
-            .between("birthday", new Range<>(new Date(), new Date()))
-            .like("nickName", "%og%")
-            .build();
-            
-    Sort sort = new Sorts()
-        .desc(StringUtils.isNotBlank(request.getName()), "name")
-        .asc("birthday")
-        .build();
-            
-    return personRepository.findAll(specification, new PageRequest(0, 15, sort));
-}
-```
-
 ####Join
 
 every specification support association query as inner join. 
@@ -205,7 +183,6 @@ public List<Phone> findAll(SearchRequest request) {
     return phoneRepository.findAll(specification);
 }
 ```
-
 
 ####Custom Specification
 
@@ -244,6 +221,28 @@ public List<Phone> findAll(SearchRequest request) {
         .build();
 
     return phoneRepository.findAll(specification);
+}
+```
+
+####Pagination and Sort
+
+find person by pagination and sort by name desc and birthday asc.
+
+```java
+public Page<Person> findAll(SearchRequest request) {
+    Specification<Person> specification = new Specifications<Person>()
+            .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
+            .gt("age", 18)
+            .between("birthday", new Range<>(new Date(), new Date()))
+            .like("nickName", "%og%")
+            .build();
+            
+    Sort sort = new Sorts()
+        .desc(StringUtils.isNotBlank(request.getName()), "name")
+        .asc("birthday")
+        .build();
+            
+    return personRepository.findAll(specification, new PageRequest(0, 15, sort));
 }
 ```
 
