@@ -22,11 +22,11 @@ version = '2.2.0'
 
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springBootVersion")
-    compile("org.apache.openjpa:openjpa:$openJpaVersion")
+    compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
 
     testCompile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
-    testCompile("org.springframework:spring-orm:4.3.3.RELEASE")
+    testCompile("org.apache.commons:commons-lang3:$commonsLang3Version")
     testCompile("com.h2database:h2:$h2Version")
     testCompile("junit:junit:$junitVersion")
 

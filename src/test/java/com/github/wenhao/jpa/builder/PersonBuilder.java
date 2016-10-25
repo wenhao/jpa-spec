@@ -1,6 +1,7 @@
 package com.github.wenhao.jpa.builder;
 
 import com.github.wenhao.jpa.model.Address;
+import com.github.wenhao.jpa.model.IdCard;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 
@@ -51,6 +52,13 @@ public class PersonBuilder {
         address.setStreet(street);
         address.setNumber(number);
         this.person.getAddresses().add(address);
+        return this;
+    }
+
+    public PersonBuilder idCard(String number) {
+        IdCard idCard = new IdCard();
+        idCard.setNumber(number);
+        this.person.setIdCard(idCard);
         return this;
     }
 

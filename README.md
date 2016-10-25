@@ -254,6 +254,22 @@ Using **@org.hibernate.annotations.Subselect** to define a virtual view if you d
 
 There is no difference between a view and a base table for a Hibernate mapping.
 
+**Test:** [VirtualViewTest.java]
+
+```java
+@Entity
+@Immutable
+@Subselect("SELECT p.id id, p.name name, p.age age, ic.number number FROM person p LEFT JOIN id_card ic ON p.id_card_id=ic.id")
+public class PersonIdCard {
+    @Id
+    private Long id;
+    private String name;
+    private Integer age;
+    private String number;
+    
+    // getter and setter
+```
+
 ### Copyright and license
 
 Copyright 2016 Wen Hao

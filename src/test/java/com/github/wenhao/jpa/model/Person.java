@@ -6,13 +6,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Person {
@@ -24,9 +25,12 @@ public class Person {
     private String nickName;
     private String company;
     private Date birthday;
+    @OneToOne(cascade = ALL)
+    @JoinColumn(name = "id_card_id")
+    private IdCard idCard;
     @OneToMany(cascade = ALL)
-    private Set<Phone> phones= new HashSet<>();
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Phone> phones = new HashSet<>();
+    @ManyToMany(cascade = ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses = new HashSet<>();
 
     public Long getId() {
@@ -75,6 +79,14 @@ public class Person {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public IdCard getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(IdCard idCard) {
+        this.idCard = idCard;
     }
 
     public Set<Phone> getPhones() {
