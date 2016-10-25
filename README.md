@@ -49,7 +49,7 @@ add repository [http://jcenter.bintray.com](http://jcenter.bintray.com) to maven
 
 ####General Example
 
-every Repository class should extends from two super class **JpaRepository** and **JpaSpecificationExecutor**.
+each Repository class should extends from two super class **JpaRepository** and **JpaSpecificationExecutor**.
 
 ```java
 public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
@@ -156,7 +156,7 @@ public Page<Person> findAll(SearchRequest request) {
 
 ####Join
 
-every specification support association query as inner join. 
+each specification support association query as inner join. 
 
 **Test:** [JoinTest.java]
 
