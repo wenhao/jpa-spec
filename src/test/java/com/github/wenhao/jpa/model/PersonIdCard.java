@@ -8,7 +8,10 @@ import javax.persistence.Id;
 
 @Entity
 @Immutable
-@Subselect("SELECT p.id id, p.name name, p.age age, ic.number number FROM person p LEFT JOIN id_card ic ON p.id_card_id=ic.id")
+@Subselect("SELECT p.id id, p.name name, p.age age, ic.number number " +
+           "FROM person p " +
+           "LEFT JOIN id_card ic " +
+           "ON p.id_card_id=ic.id")
 public class PersonIdCard {
     @Id
     private Long id;
