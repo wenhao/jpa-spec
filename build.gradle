@@ -12,6 +12,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'signing'
 
 repositories {
     jcenter()
@@ -45,12 +46,20 @@ dependencies {
         archives sourcesJar
         archives javadocJar
     }
+
+    ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+    signing {
+        required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
 }
 
 configurations.all {
     resolutionStrategy.force 'org.springframework:spring-orm:4.3.3.RELEASE'
 }
 
+// publish to jcenter
 bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
     key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
@@ -114,6 +123,67 @@ install {
                     organization 'Hao Wen'
                     roles {
                         role 'Developer'
+                    }
+                }
+            }
+        }
+    }
+}
+
+// publish to maven central
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name 'jpa-spec'
+                description 'A JAP Query By Specification framework.'
+                url 'https://github.com/wenhao/jpa-spec'
+                inceptionYear '2016'
+
+                packaging 'jar'
+                groupId 'com.github.wenhao'
+                artifactId 'jpa-spec'
+                version '2.2.1'
+
+                scm {
+                    url 'scm:git@github.com:wenhao/http.git'
+                    connection 'scm:git@github.com:wenhao/http.git'
+                    developerConnection 'git@github.com:wenhao/http.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                scm {
+                    url 'https://github.com/wenhao/jpa-spec'
+                    connection 'https://github.com/wenhao/jpa-spec.git'
+                    developerConnection 'git@github.com:wenhao/jpa-spec.git'
+                }
+
+                developers {
+                    developer {
+                        id 'wenhao'
+                        name 'Hao Wen'
+                        email 'wenhao@126.com'
+                        organization 'Hao Wen'
+                        roles {
+                            role 'Developer'
+                        }
                     }
                 }
             }
