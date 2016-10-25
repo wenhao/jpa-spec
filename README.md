@@ -166,7 +166,7 @@ each specification support association query as inner join.
 public List<Phone> findAll(SearchRequest request) {
     Specification<Phone> specification = new Specifications<Phone>()
         .eq(StringUtils.isNotBlank(request.getBrand()), "brand", "HuaWei")
-        .eq(StringUtils.isNotBlank(request.getPersonName()), "person.name", "Jack)
+        .eq(StringUtils.isNotBlank(request.getPersonName()), "person.name", "Jack")
         .build();
 
     return phoneRepository.findAll(specification);
