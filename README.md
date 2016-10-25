@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:2.2.0'
+    compile 'com.github.wenhao:jpa-spec:2.2.1'
 }
 ```
 
@@ -35,7 +35,7 @@ add repository [http://jcenter.bintray.com](http://jcenter.bintray.com) to maven
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>2.2.0</version>
+    <version>2.2.1</version>
 </dependency>
 ```
 
