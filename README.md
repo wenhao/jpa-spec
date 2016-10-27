@@ -29,8 +29,6 @@ dependencies {
 
 ### Maven
 
-add repository [http://jcenter.bintray.com](http://jcenter.bintray.com) to maven settings.xml file.
-
 ```xml
 <dependency>
     <groupId>com.github.wenhao</groupId>

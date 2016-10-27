@@ -23,7 +23,7 @@ group = 'com.github.wenhao'
 version = '2.2.1'
 
 dependencies {
-    compile("org.springframework.data:spring-data-jpa:$springBootVersion")
+    compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
     compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
 
     testCompile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
@@ -57,7 +57,7 @@ dependencies {
 }
 
 configurations.all {
-    resolutionStrategy.force 'org.springframework:spring-orm:4.3.3.RELEASE'
+    resolutionStrategy.force "org.springframework:spring-orm:$springOrmVersion"
 }
 
 // publish to jcenter
