@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
+import com.github.wenhao.jpa.model.Address;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
@@ -21,6 +22,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 
 @RunWith(SpringRunner.class)
@@ -99,7 +102,10 @@ public class AndTest {
         // when
         Specification<Person> specification = new Specifications<Person>()
             .between("age", new Range<>(10, 35))
-            .eq("addresses.street", "Chengdu")
+            .and(StringUtils.isNotBlank(jack.getName()), ((root, query, cb) -> {
+                Join address = root.join("addresses", JoinType.LEFT);
+                return cb.equal(address.get("street"), "Chengdu");
+            }))
             .build();
 
         List<Person> phones = personRepository.findAll(specification);
