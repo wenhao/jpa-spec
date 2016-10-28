@@ -74,7 +74,7 @@ find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or nul
 **Test:** [EqualTest.java] and [NotEqualTest.java]
 
 ```java
-public Persons findAll(SearchRequest request) {
+public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
             .eq("nickName", "dog")
             .eq(StringUtils.isNotBlank(request.getName()), "name", "Jack", "Eric", null)
@@ -92,7 +92,7 @@ find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "I
 **Test:** [InTest.java]
 
 ```java
-public Persons findAll(SearchRequest request) {
+public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
             .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
             .notIn("company", "ThoughtWorks", "IBM")
@@ -109,7 +109,7 @@ find any people age bigger than 18.
 **Test:** [GtTest.java]
 
 ```java
-public Persons findAll(SearchRequest request) {
+public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
             .gt(Objects.nonNull(request.getAge()), "age", 18)
             .build();
@@ -125,7 +125,7 @@ find any person age between 18 and 25, birthday between someday and someday.
 **Test:** [BetweenTest.java]
 
 ```java
-public Persons findAll(SearchRequest request) {
+public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = new Specifications<Person>()
             .between(Objects.nonNull(request.getAge(), "age", new Range<>(18, 25))
             .between("birthday", new Range<>(new Date(), new Date()))
@@ -269,6 +269,16 @@ public class PersonIdCard {
     private String number;
     
     // getter and setter
+```
+
+```java
+public List<PersonIdCard> findAll(SearchRequest request) {
+    Specification<PersonIdCard> specification = new Specifications<PersonIdCard>()
+            .gt(Objects.nonNull(request.getAge()), "age", 18)
+            .build();
+            
+    return personIdCardRepository.findAll(specification); 
+}
 ```
 
 ### Copyright and license
