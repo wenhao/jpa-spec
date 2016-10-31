@@ -269,6 +269,7 @@ public class PersonIdCard {
     private String number;
     
     // getter and setter
+}    
 ```
 
 ```java
