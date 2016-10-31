@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
-import com.github.wenhao.jpa.model.Address;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
