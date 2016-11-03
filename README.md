@@ -257,7 +257,7 @@ There is no difference between a view and a base table for a Hibernate mapping.
 ```java
 @Entity
 @Immutable
-@Subselect("SELECT p.id id, p.name name, p.age age, ic.number number " +
+@Subselect("SELECT p.id, p.name, p.age, ic.number " +
            "FROM person p " +
            "LEFT JOIN id_card ic " +
            "ON p.id_card_id=ic.id")
