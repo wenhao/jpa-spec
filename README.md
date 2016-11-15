@@ -268,7 +268,7 @@ public class PersonIdCard {
     private Integer age;
     private String number;
     
-    // getter and setter
+    // Getters and setters are omitted for brevity
 }    
 ```
 
