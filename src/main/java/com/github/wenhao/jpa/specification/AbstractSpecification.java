@@ -20,7 +20,7 @@ abstract class AbstractSpecification<T> implements Specification<T>, Serializabl
     public From getRoot(String property, Root<T> root) {
         if (property.contains(".")) {
             String joinProperty = StringUtils.split(property, ".")[0];
-            return root.join(joinProperty, JoinType.INNER);
+            return root.join(joinProperty, JoinType.LEFT);
         }
         return root;
     }

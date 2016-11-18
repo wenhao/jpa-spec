@@ -20,7 +20,7 @@ repositories {
 }
 
 group = 'com.github.wenhao'
-version = '2.2.1'
+version = '2.2.2-SNAPSHOT'
 
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
