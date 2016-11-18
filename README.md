@@ -8,7 +8,7 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 
 ### Features
 
-* Compatible with Spring Data JPA and JPA 2 interface.
+* Compatible with Spring Data JPA and JPA 2.1 interface.
 * Equal/NotEqual/Like/NotLike/In/NotIn support multiple values, Equal/NotEqual support **Null** value.
 * Each specification support join query(inner joiner). 
 * Support custom specification.
@@ -281,6 +281,14 @@ public List<PersonIdCard> findAll(SearchRequest request) {
     return personIdCardRepository.findAll(specification); 
 }
 ```
+
+####Projection, GroupBy, Aggregation
+
+Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**, 
+
+furthermore, Projection/GroupBy/Aggregation are often used for complex statistics report, it might seem like overkill to use Hibernate/JPA ORM to solve it.
+
+Alternatively, using virtual view and give a readable/significant class name to against your problem domain may be a better option.
 
 ### Copyright and license
 
