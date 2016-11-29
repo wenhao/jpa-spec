@@ -14,7 +14,7 @@ public class Sorts {
     private List<Order> orders;
 
     public Sorts() {
-        this.orders = new ArrayList<>();
+        this.orders = new ArrayList<Order>();
     }
 
     public Sorts asc(String property) {

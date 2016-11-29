@@ -19,7 +19,7 @@ public class Address {
     private Integer number;
 
     @ManyToMany(mappedBy = "addresses")
-    private Set<Person> owners = new HashSet<>();
+    private Set<Person> owners = new HashSet<Person>();
 
     public Long getId() {
         return id;

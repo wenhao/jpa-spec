@@ -33,9 +33,9 @@ public class Person {
     @JoinColumn(name = "id_card_id")
     private IdCard idCard;
     @OneToMany(cascade = ALL)
-    private Set<Phone> phones = new HashSet<>();
+    private Set<Phone> phones = new HashSet<Phone>();
     @ManyToMany(cascade = ALL, fetch = FetchType.LAZY)
-    private Set<Address> addresses = new HashSet<>();
+    private Set<Address> addresses = new HashSet<Address>();
 
     public Long getId() {
         return id;

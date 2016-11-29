@@ -22,6 +22,23 @@ repositories {
 group = 'com.github.wenhao'
 version = '2.2.2-SNAPSHOT'
 
+idea {
+    project {
+        vcs = 'Git'
+    }
+    module {
+        jdkName = '1.6'
+    }
+}
+
+def compatibility = {
+    sourceCompatibility = JavaVersion.VERSION_1_6
+    targetCompatibility = JavaVersion.VERSION_1_6
+}
+
+compileJava(compatibility)
+compileTestJava(compatibility)
+
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
     compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")

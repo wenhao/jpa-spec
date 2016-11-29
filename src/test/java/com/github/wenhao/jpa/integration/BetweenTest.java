@@ -1,7 +1,5 @@
 package com.github.wenhao.jpa.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
@@ -18,7 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -31,20 +30,20 @@ public class BetweenTest {
     public void should_be_able_to_find_by_using_between() throws ParseException {
         // given
         Person jack = new PersonBuilder()
-            .name("Jack")
-            .birthday(getDate("1987-11-14"))
-            .build();
+                .name("Jack")
+                .birthday(getDate("1987-11-14"))
+                .build();
         Person eric = new PersonBuilder()
-            .name("Eric")
-            .birthday(getDate("1990-10-12"))
-            .build();
+                .name("Eric")
+                .birthday(getDate("1990-10-12"))
+                .build();
         personRepository.save(jack);
         personRepository.save(eric);
 
         // when
         Specification<Person> specification = new Specifications<Person>()
-            .between(Objects.nonNull(jack.getBirthday()), "birthday", new Range<>(getDate("1980-01-01"), getDate("1989-12-31")))
-            .build();
+                .between(jack.getBirthday() != null, "birthday", new Range<Date>(getDate("1980-01-01"), getDate("1989-12-31")))
+                .build();
 
         List<Person> persons = personRepository.findAll(specification);
 

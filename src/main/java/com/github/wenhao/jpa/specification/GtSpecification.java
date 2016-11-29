@@ -6,11 +6,11 @@ import javax.persistence.criteria.From;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class GtSpification<T> extends AbstractSpecification<T> {
+public class GtSpecification<T> extends AbstractSpecification<T> {
     private final String property;
     private final Number number;
 
-    public GtSpification(String property, Number number) {
+    public GtSpecification(String property, Number number) {
         this.property = property;
         this.number = number;
     }

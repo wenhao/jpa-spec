@@ -1,7 +1,5 @@
 package com.github.wenhao.jpa.specification;
 
-import java.util.Arrays;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.From;
@@ -19,14 +17,15 @@ public class LikeSpecification<T> extends AbstractSpecification<T> {
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-        From<? extends Object, ? extends Object> from = getRoot(property, root);
+        From from = getRoot(property, root);
         String field = getProperty(property);
         if (patterns.length == 1) {
             return cb.like(from.get(field), patterns[0]);
         }
-        Predicate[] predicates = Arrays.stream(patterns)
-            .map(value -> cb.like(from.get(field), value))
-            .toArray(Predicate[]::new);
+        Predicate[] predicates = new Predicate[patterns.length];
+        for (int i = 0; i < patterns.length; i++) {
+            predicates[i] = cb.like(from.get(field), patterns[i]);
+        }
         return cb.or(predicates);
     }
 }

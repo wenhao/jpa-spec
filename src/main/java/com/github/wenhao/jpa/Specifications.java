@@ -4,7 +4,7 @@ import com.github.wenhao.jpa.specification.AndSpecification;
 import com.github.wenhao.jpa.specification.BetweenSpecification;
 import com.github.wenhao.jpa.specification.EqualSpecification;
 import com.github.wenhao.jpa.specification.GeSpecification;
-import com.github.wenhao.jpa.specification.GtSpification;
+import com.github.wenhao.jpa.specification.GtSpecification;
 import com.github.wenhao.jpa.specification.InSpecification;
 import com.github.wenhao.jpa.specification.LeSpecification;
 import com.github.wenhao.jpa.specification.LikeSpecification;
@@ -15,16 +15,18 @@ import com.github.wenhao.jpa.specification.NotLikeSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.criteria.Predicate;
 
 public class Specifications<T> {
     private List<Specification<T>> specifications;
 
     public Specifications() {
-        this.specifications = new ArrayList<>();
+        this.specifications = new ArrayList<Specification<T>>();
     }
 
     public Specifications<T> eq(String property, Object... values) {
@@ -55,7 +57,7 @@ public class Specifications<T> {
 
     public Specifications<T> gt(boolean condition, String property, Number number) {
         if (condition) {
-            this.specifications.add(new GtSpification<T>(property, number));
+            this.specifications.add(new GtSpecification<T>(property, number));
         }
         return this;
     }
@@ -160,11 +162,15 @@ public class Specifications<T> {
     }
 
     public Specification<T> build() {
-        return (root, query, criteriaBuilder) -> {
-            Predicate[] predicates = this.specifications.stream()
-                .map(spec -> spec.toPredicate(root, query, criteriaBuilder))
-                .toArray(Predicate[]::new);
-            return criteriaBuilder.and(predicates);
+        return new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Predicate[] predicates = new Predicate[specifications.size()];
+                for (int i = 0; i < specifications.size(); i++) {
+                    predicates[i] = specifications.get(i).toPredicate(root, query, cb);
+                }
+                return cb.and(predicates);
+            }
         };
     }
 }

@@ -1,9 +1,5 @@
 package com.github.wenhao.jpa.specification;
 
-import static java.util.Objects.isNull;
-
-import java.util.Arrays;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.From;
@@ -23,20 +19,21 @@ public class NotEqualSpecification<T> extends AbstractSpecification<T> {
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         From from = getRoot(property, root);
         String field = getProperty(property);
-        if (isNull(values)) {
+        if (values == null) {
             return cb.isNotNull(from.get(field));
         }
         if (values.length == 1) {
             return getPredicate(from, cb, values[0], field);
         }
-        Predicate[] predicates = Arrays.stream(values)
-            .map(value -> getPredicate(root, cb, value, field))
-            .toArray(Predicate[]::new);
+        Predicate[] predicates = new Predicate[values.length];
+        for (int i = 0; i < values.length; i++) {
+            predicates[i] = getPredicate(root, cb, values[i], field);
+        }
         return cb.or(predicates);
     }
 
     private Predicate getPredicate(From root, CriteriaBuilder cb, Object value, String field) {
-        return isNull(value) ? cb.isNotNull(root.get(field)) : cb.notEqual(root.get(field), value);
+        return value == null ? cb.isNotNull(root.get(field)) : cb.notEqual(root.get(field), value);
     }
 }
 

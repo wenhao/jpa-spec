@@ -93,7 +93,7 @@ public class JoinTest {
 
         // when
         Specification<Person> specification = new Specifications<Person>()
-            .between("age", new Range<>(10, 35))
+            .between("age", new Range<Integer>(10, 35))
             .eq("addresses.street", "Chengdu")
             .build();
 
