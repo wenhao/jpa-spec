@@ -20,20 +20,20 @@ repositories {
 }
 
 group = 'com.github.wenhao'
-version = '2.2.2'
+version = '2.2.3'
 
 idea {
     project {
         vcs = 'Git'
     }
     module {
-        jdkName = '1.6'
+        jdkName = '1.7'
     }
 }
 
 def compatibility = {
-    sourceCompatibility = JavaVersion.VERSION_1_6
-    targetCompatibility = JavaVersion.VERSION_1_6
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 }
 
 compileJava(compatibility)
@@ -98,10 +98,10 @@ bintray {
         githubRepo = 'wenhao/jpa-spec'
         githubReleaseNotesFile = 'README.md'
         version {
-            name = '2.2.2'
-            desc = 'A JAP Query By Specification framework 2.2.2'
+            name = '2.2.3'
+            desc = 'A JAP Query By Specification framework 2.2.3'
             released = new Date()
-            vcsTag = '2.2.2'
+            vcsTag = '2.2.3'
         }
     }
 }
@@ -117,7 +117,7 @@ install {
             packaging 'jar'
             groupId 'com.github.wenhao'
             artifactId 'jpa-spec'
-            version '2.2.2'
+            version '2.2.3'
 
             licenses {
                 license {
@@ -171,7 +171,7 @@ uploadArchives {
                 packaging 'jar'
                 groupId 'com.github.wenhao'
                 artifactId 'jpa-spec'
-                version '2.2.2'
+                version '2.2.3'
 
                 scm {
                     url 'scm:git@github.com:wenhao/jpa-spec.git'
