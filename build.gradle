@@ -174,9 +174,9 @@ uploadArchives {
                 version '2.2.2'
 
                 scm {
-                    url 'scm:git@github.com:wenhao/http.git'
-                    connection 'scm:git@github.com:wenhao/http.git'
-                    developerConnection 'git@github.com:wenhao/http.git'
+                    url 'scm:git@github.com:wenhao/jpa-spec.git'
+                    connection 'scm:git@github.com:wenhao/jpa-spec.git'
+                    developerConnection 'git@github.com:wenhao/jpa-spec.git'
                 }
 
                 licenses {
