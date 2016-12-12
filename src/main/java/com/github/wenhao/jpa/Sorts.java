@@ -1,45 +1,51 @@
 package com.github.wenhao.jpa;
 
-import static org.springframework.data.domain.Sort.Direction.ASC;
-import static org.springframework.data.domain.Sort.Direction.DESC;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.data.domain.Sort.Direction.ASC;
+import static org.springframework.data.domain.Sort.Direction.DESC;
+
 public class Sorts {
 
-    private List<Order> orders;
-
-    public Sorts() {
-        this.orders = new ArrayList<Order>();
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public Sorts asc(String property) {
-        return asc(true, property);
-    }
+    public static final class Builder {
+        private List<Order> orders;
 
-    public Sorts desc(String property) {
-        return desc(true, property);
-    }
-
-    public Sorts asc(boolean condition, String property) {
-        if (condition) {
-            orders.add(new Order(ASC, property));
+        public Builder() {
+            this.orders = new ArrayList<Order>();
         }
-        return this;
-    }
 
-    public Sorts desc(boolean condition, String property) {
-        if (condition) {
-            orders.add(new Order(DESC, property));
+        public Builder asc(String property) {
+            return asc(true, property);
         }
-        return this;
-    }
 
-    public Sort build() {
-        return new Sort(orders);
+        public Builder desc(String property) {
+            return desc(true, property);
+        }
+
+        public Builder asc(boolean condition, String property) {
+            if (condition) {
+                orders.add(new Order(ASC, property));
+            }
+            return this;
+        }
+
+        public Builder desc(boolean condition, String property) {
+            if (condition) {
+                orders.add(new Order(DESC, property));
+            }
+            return this;
+        }
+
+        public Sort build() {
+            return new Sort(orders);
+        }
     }
 }

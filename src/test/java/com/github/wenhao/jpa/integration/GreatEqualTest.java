@@ -37,7 +37,7 @@ public class GreatEqualTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
             .ge("age", 20)
             .build();
 

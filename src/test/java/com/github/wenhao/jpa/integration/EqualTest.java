@@ -33,7 +33,7 @@ public class EqualTest {
         personRepository.save(person);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
             .eq(isNotBlank(person.getName()), "name", person.getName())
             .build();
 
@@ -60,7 +60,7 @@ public class EqualTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
             .eq("company", null)
             .build();
 
@@ -90,7 +90,7 @@ public class EqualTest {
         personRepository.save(jackson);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
             .eq(isNotBlank(jack.getName()), "name", jack.getName(), eric.getName(), null)
             .build();
 

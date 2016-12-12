@@ -57,7 +57,7 @@ public class AndTest {
 
 
         // when
-        Specification<Phone> specification = new Specifications<Phone>()
+        Specification<Phone> specification = Specifications.<Phone>builder()
                 .eq("brand", "HuaWei")
                 .and(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
                     @Override
@@ -106,7 +106,7 @@ public class AndTest {
         personRepository.save(alex);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
                 .between("age", new Range<Integer>(10, 35))
                 .and(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
                     @Override

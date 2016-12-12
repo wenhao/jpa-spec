@@ -49,7 +49,7 @@ public class JoinTest {
         personRepository.save(jack);
 
         // when
-        Specification<Phone> specification = new Specifications<Phone>()
+        Specification<Phone> specification = Specifications.<Phone>builder()
             .eq("brand", "HuaWei")
             .eq(StringUtils.isNotBlank(jack.getName()), "person.name", jack.getName())
             .build();
@@ -92,7 +92,7 @@ public class JoinTest {
         personRepository.save(alex);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
             .between("age", new Range<Integer>(10, 35))
             .eq("addresses.street", "Chengdu")
             .build();

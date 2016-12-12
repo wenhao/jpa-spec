@@ -37,7 +37,7 @@ public class LessEqualTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = new Specifications<Person>()
+        Specification<Person> specification = Specifications.<Person>builder()
             .le("age", 18)
             .build();
 
