@@ -156,6 +156,8 @@ public Page<Person> findAll(SearchRequest request) {
 
 support or specifications.
 
+**Test:** [OrTest.java]
+
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>builder()
@@ -320,7 +322,8 @@ Licensed under [Apache License]
 [GtTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/GtTest.java
 [BetweenTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java
 [LikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java
-[NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java 
+[NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java
+[OrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/OrTest.java
 [AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [VirtualViewTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/VirtualViewTest.java
