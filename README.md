@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec) [:cn:](./README_CN.md)
+[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec) [![Coverage Status](https://coveralls.io/repos/github/wenhao/jpa-spec/badge.svg?branch=master)](https://coveralls.io/github/wenhao/jpa-spec?branch=master) [:cn:](./README_CN.md)
 
 # jpa-spec
 
