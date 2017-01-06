@@ -29,9 +29,11 @@ public class NotLikeTest {
         Person jack = new PersonBuilder()
             .name("Jack")
             .age(18)
+            .nickName("Dog")
             .build();
         Person eric = new PersonBuilder()
             .name("Eric")
+            .nickName("Cat")
             .age(20)
             .build();
         personRepository.save(jack);
@@ -40,6 +42,7 @@ public class NotLikeTest {
         // when
         Specification<Person> specification = Specifications.<Person>builder()
             .notLike(isNotBlank(jack.getName()), "name", "%ac%")
+            .notLike(isNotBlank(jack.getNickName()), "name", "%og%", "%ri%")
             .build();
 
         List<Person> persons = personRepository.findAll(specification);

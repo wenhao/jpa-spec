@@ -9,9 +9,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,6 +49,9 @@ public class OrTest {
                 .and(OrSpecifications.<Person>builder()
                         .like("name", "%ac%")
                         .gt("age", 19)
+                        .eq(jack.getCompany() != null, null)
+                        .ne(jack.getNickName() != null, null)
+                        .between(jack.getBirthday() != null, "birthday", new Range<Date>(new Date(), new Date()))
                         .build())
                 .build();
 
