@@ -3,7 +3,10 @@ jdk:
   - oraclejdk8
 
 install:
-  - TERM=dumb gradle assemble
+  - TERM=dumb ./gradlew assemble
 
 script:
-  - TERM=dumb gradle check -i
+  - TERM=dumb ./gradlew check -i
+
+after_success:
+- ./gradlew cobertura coveralls
