@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)
+[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)[:cn:](./README_CN.md)
 
 # jpa-spec
 
@@ -10,7 +10,7 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 
 * Compatible with Spring Data JPA and JPA 2.1 interface.
 * Equal/NotEqual/Like/NotLike/In/NotIn support multiple values, Equal/NotEqual support **Null** value.
-* Each specification support join query(left joiner). 
+* Each specification support join query(left joiner).
 * Support custom specification.
 * Builder style specification creator.
 * Support pagination and sort builder.
@@ -62,8 +62,8 @@ public Page<Person> findAll(SearchRequest request) {
             .between("birthday", new Range<>(new Date(), new Date()))
             .like("nickName", "%og%", "%me")
             .build();
-            
-    return personRepository.findAll(specification, new PageRequest(0, 15)); 
+
+    return personRepository.findAll(specification, new PageRequest(0, 15));
 }
 ```
 
@@ -80,8 +80,8 @@ public List<Person> findAll(SearchRequest request) {
             .eq(StringUtils.isNotBlank(request.getName()), "name", "Jack", "Eric", null)
             .eq("company", null) //or eq("company", (Object) null)
             .build();
-            
-    return personRepository.findAll(specification); 
+
+    return personRepository.findAll(specification);
 }
 ```
 
@@ -97,14 +97,14 @@ public List<Person> findAll(SearchRequest request) {
             .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
             .notIn("company", "ThoughtWorks", "IBM")
             .build();
-            
-    return personRepository.findAll(specification); 
+
+    return personRepository.findAll(specification);
 }
 ```
 
 ####Numerical Example
 
-find any people age bigger than 18. 
+find any people age bigger than 18.
 
 **Test:** [GtTest.java]
 
@@ -113,8 +113,8 @@ public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>builder()
             .gt(Objects.nonNull(request.getAge()), "age", 18)
             .build();
-            
-    return personRepository.findAll(specification); 
+
+    return personRepository.findAll(specification);
 }
 ```
 
@@ -130,8 +130,8 @@ public List<Person> findAll(SearchRequest request) {
             .between(Objects.nonNull(request.getAge(), "age", new Range<>(18, 25))
             .between("birthday", new Range<>(new Date(), new Date()))
             .build();
-            
-    return personRepository.findAll(specification); 
+
+    return personRepository.findAll(specification);
 }  
 ```
 
@@ -147,8 +147,8 @@ public Page<Person> findAll(SearchRequest request) {
             .like("name", "ac", "%og%")
             .notLike("company", "ec")
             .build();
-            
-    return personRepository.findAll(specification); 
+
+    return personRepository.findAll(specification);
 }
 ```
 
@@ -173,12 +173,12 @@ public List<Phone> findAll(SearchRequest request) {
 
 ####Join
 
-each specification support association query as left join. 
+each specification support association query as left join.
 
 **Test:** [JoinTest.java]
 
 @ManyToOne association query, find person name equals to "Jack" and phone brand equals to "HuaWei".
-    
+
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Phone> specification = Specifications.<Phone>builder()
@@ -255,12 +255,12 @@ public Page<Person> findAll(SearchRequest request) {
             .between("birthday", new Range<>(new Date(), new Date()))
             .like("nickName", "%og%")
             .build();
-            
+
     Sort sort = Sorts.builder()
         .desc(StringUtils.isNotBlank(request.getName()), "name")
         .asc("birthday")
         .build();
-            
+
     return personRepository.findAll(specification, new PageRequest(0, 15, sort));
 }
 ```
@@ -286,7 +286,7 @@ public class PersonIdCard {
     private String name;
     private Integer age;
     private String number;
-    
+
     // Getters and setters are omitted for brevity
 }    
 ```
@@ -296,14 +296,14 @@ public List<PersonIdCard> findAll(SearchRequest request) {
     Specification<PersonIdCard> specification = Specifications.<PersonIdCard>builder()
             .gt(Objects.nonNull(request.getAge()), "age", 18)
             .build();
-            
-    return personIdCardRepository.findAll(specification); 
+
+    return personIdCardRepository.findAll(specification);
 }
 ```
 
 ####Projection, GroupBy, Aggregation
 
-Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**, 
+Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**,
 
 furthermore, Projection/GroupBy/Aggregation are often used for complex statistics report, it might seem like overkill to use Hibernate/JPA ORM to solve it.
 
@@ -316,8 +316,8 @@ Copyright 2016 Wen Hao
 Licensed under [Apache License]
 
 [Legacy Hibernate Criteria Queries]: https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria
-[EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java 
-[NotEqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java 
+[EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java
+[NotEqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java
 [InTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/InTest.java
 [GtTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/GtTest.java
 [BetweenTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java
@@ -327,4 +327,5 @@ Licensed under [Apache License]
 [AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [VirtualViewTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/VirtualViewTest.java
+[中文]: ./README_CN.md
 [Apache License]: ./LICENSE
