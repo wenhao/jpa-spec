@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)
 
-[:us:](./README.md) [:cn:](./README_CN.md)
+|  |  | 
+| :------------- | -------------: |
+| [![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)       | [:cn:](./README_CN.md)       |
 
 # jpa-spec
 
