@@ -243,7 +243,29 @@ public List<Phone> findAll(SearchRequest request) {
 }
 ```
 
-####Pagination and Sort
+####Sort
+
+**Test:** [SortTest.java]
+
+```java
+public List<Person> findAll(SearchRequest request) {
+    Specification<Person> specification = Specifications.<Person>builder()
+            .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
+            .gt("age", 18)
+            .between("birthday", new Range<>(new Date(), new Date()))
+            .like("nickName", "%og%")
+            .build();
+
+    Sort sort = Sorts.builder()
+        .desc(StringUtils.isNotBlank(request.getName()), "name")
+        .asc("birthday")
+        .build();
+
+    return personRepository.findAll(specification, sort);
+}
+```
+
+####Pagination
 
 find person by pagination and sort by name desc and birthday asc.
 
@@ -326,6 +348,7 @@ Licensed under [Apache License]
 [OrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/OrTest.java
 [AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
+[SortTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/SortsTest.java
 [VirtualViewTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/VirtualViewTest.java
 [中文]: ./README_CN.md
 [Apache License]: ./LICENSE
