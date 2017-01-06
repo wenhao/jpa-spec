@@ -2,6 +2,8 @@ plugins {
     id 'com.gradle.build-scan' version '1.2'
     id "com.jfrog.bintray" version "1.7.3"
     id "org.owasp.dependencycheck" version "1.4.3"
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.7.1'
 }
 
 buildScan {
@@ -76,6 +78,8 @@ dependencies {
 configurations.all {
     resolutionStrategy.force "org.springframework:spring-orm:$springOrmVersion"
 }
+
+cobertura.coverageFormats = ['html', 'xml']
 
 // publish to jcenter
 bintray {
