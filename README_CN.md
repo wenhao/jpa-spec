@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)
+[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec) [![Coverage Status](https://coveralls.io/repos/github/wenhao/jpa-spec/badge.svg?branch=master)](https://coveralls.io/github/wenhao/jpa-spec?branch=master)
 
 # jpa-spec
 
@@ -459,7 +459,7 @@ Spring Data JPA对投射、分组和聚合支持不是很好，
 
 ### Copyright and license
 
-Copyright 2016 Wen Hao
+Copyright © 2016-2017 Wen Hao
 
 Licensed under [Apache License]
 

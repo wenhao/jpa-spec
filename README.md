@@ -333,7 +333,7 @@ Alternatively, using virtual view and give a readable/significant class name to 
 
 ### Copyright and license
 
-Copyright 2016 Wen Hao
+Copyright © 2016-2017 Wen Hao
 
 Licensed under [Apache License]
 
