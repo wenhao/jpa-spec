@@ -1,7 +1,5 @@
 package com.github.wenhao.jpa.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
@@ -17,9 +15,10 @@ import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -61,7 +60,7 @@ public class JoinTest {
     }
 
     @Test
-    public void should_be_able_to_find_by_using_many_to_many_query() throws ParseException {
+    public void should_be_able_to_find_by_using_many_to_many_query() {
         // given
         Person jack = new PersonBuilder()
             .name("Jack")

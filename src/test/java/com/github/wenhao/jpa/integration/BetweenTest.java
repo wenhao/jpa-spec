@@ -30,20 +30,20 @@ public class BetweenTest {
     public void should_be_able_to_find_by_using_between() throws ParseException {
         // given
         Person jack = new PersonBuilder()
-                .name("Jack")
-                .birthday(getDate("1987-11-14"))
-                .build();
+            .name("Jack")
+            .birthday(getDate("1987-11-14"))
+            .build();
         Person eric = new PersonBuilder()
-                .name("Eric")
-                .birthday(getDate("1990-10-12"))
-                .build();
+            .name("Eric")
+            .birthday(getDate("1990-10-12"))
+            .build();
         personRepository.save(jack);
         personRepository.save(eric);
 
         // when
         Specification<Person> specification = Specifications.<Person>builder()
-                .between(jack.getBirthday() != null, "birthday", new Range<Date>(getDate("1980-01-01"), getDate("1989-12-31")))
-                .build();
+            .between(jack.getBirthday() != null, "birthday", new Range<Date>(getDate("1980-01-01"), getDate("1989-12-31")))
+            .build();
 
         List<Person> persons = personRepository.findAll(specification);
 

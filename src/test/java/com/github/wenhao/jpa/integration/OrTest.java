@@ -29,31 +29,31 @@ public class OrTest {
     public void should_be_able_to_find_by_using_or_with_multiple_values() {
         // given
         Person jack = new PersonBuilder()
-                .name("Jack")
-                .age(18)
-                .build();
+            .name("Jack")
+            .age(18)
+            .build();
         Person eric = new PersonBuilder()
-                .name("Eric")
-                .age(20)
-                .build();
+            .name("Eric")
+            .age(20)
+            .build();
         Person jackson = new PersonBuilder()
-                .age(30)
-                .nickName("Jackson")
-                .build();
+            .age(30)
+            .nickName("Jackson")
+            .build();
         personRepository.save(jack);
         personRepository.save(eric);
         personRepository.save(jackson);
 
         // when
         Specification<Person> specification = Specifications.<Person>builder()
-                .and(OrSpecifications.<Person>builder()
-                        .like("name", "%ac%")
-                        .gt("age", 19)
-                        .eq(jack.getCompany() != null, null)
-                        .ne(jack.getNickName() != null, null)
-                        .between(jack.getBirthday() != null, "birthday", new Range<Date>(new Date(), new Date()))
-                        .build())
-                .build();
+            .and(OrSpecifications.<Person>builder()
+                .like("name", "%ac%")
+                .gt("age", 19)
+                .eq(jack.getCompany() != null, null)
+                .ne(jack.getNickName() != null, null)
+                .between(jack.getBirthday() != null, "birthday", new Range<Date>(new Date(), new Date()))
+                .build())
+            .build();
 
         List<Person> persons = personRepository.findAll(specification);
 
