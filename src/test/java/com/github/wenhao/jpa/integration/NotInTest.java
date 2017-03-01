@@ -38,7 +38,7 @@ public class NotInTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .notIn(isNotBlank(jack.getName()), "name", "Eric")
             .build();
 

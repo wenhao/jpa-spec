@@ -38,7 +38,7 @@ public class InTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .in(isNotBlank(jack.getName()), "name", "Jack", "Eric")
             .build();
 

@@ -38,7 +38,7 @@ public class LikeTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .like(isNotBlank(jack.getName()), "name", "%ac%", "%ri%")
             .build();
 

@@ -41,7 +41,7 @@ public class BetweenTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .between(jack.getBirthday() != null, "birthday", new Range<Date>(getDate("1980-01-01"), getDate("1989-12-31")))
             .build();
 
