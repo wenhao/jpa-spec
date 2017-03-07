@@ -44,8 +44,8 @@ public class SortsTest {
         personRepository.save(aaron);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
-            .ne("name", null)
+        Specification<Person> specification = Specifications.<Person>and()
+            .ne("name", (Object) null)
             .build();
 
         Sort sort = Sorts.builder()
@@ -81,8 +81,8 @@ public class SortsTest {
         personRepository.save(aaron);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
-            .ne("name", null)
+        Specification<Person> specification = Specifications.<Person>and()
+            .ne("name", (Object) null)
             .build();
 
         Sort sort = Sorts.builder()

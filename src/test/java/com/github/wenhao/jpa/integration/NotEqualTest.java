@@ -38,7 +38,7 @@ public class NotEqualTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .eq("company", "company-name")
             .ne(StringUtils.isNotBlank(jack.getName()), "name", jack.getName())
             .ne("nickName", jack.getNickName(), "Aaron")

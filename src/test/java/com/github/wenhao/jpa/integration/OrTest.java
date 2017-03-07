@@ -1,6 +1,5 @@
 package com.github.wenhao.jpa.integration;
 
-import com.github.wenhao.jpa.OrSpecifications;
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
@@ -45,14 +44,12 @@ public class OrTest {
         personRepository.save(jackson);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
-            .and(OrSpecifications.<Person>builder()
-                .like("name", "%ac%")
-                .gt("age", 19)
-                .eq(jack.getCompany() != null, null)
-                .ne(jack.getNickName() != null, null)
-                .between(jack.getBirthday() != null, "birthday", new Range<Date>(new Date(), new Date()))
-                .build())
+        Specification<Person> specification = Specifications.<Person>or()
+            .like("name", "%ac%")
+            .gt("age", 19)
+            .eq(jack.getCompany() != null, null)
+            .ne(jack.getNickName() != null, null)
+            .between(jack.getBirthday() != null, "birthday", new Range<Date>(new Date(), new Date()))
             .build();
 
         List<Person> persons = personRepository.findAll(specification);

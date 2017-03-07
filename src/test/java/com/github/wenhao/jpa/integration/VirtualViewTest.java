@@ -48,7 +48,7 @@ public class VirtualViewTest {
         personRepository.save(jackson);
 
         // when
-        Specification<PersonIdCard> specification = Specifications.<PersonIdCard>builder()
+        Specification<PersonIdCard> specification = Specifications.<PersonIdCard>and()
             .gt("age", 18)
             .build();
         List<PersonIdCard> personIdCards = personIdCardRepository.findAll(specification);

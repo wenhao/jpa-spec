@@ -22,7 +22,6 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class AndTest {
+public class PredicateTest {
 
     @Autowired
     private PersonRepository personRepository;
@@ -57,9 +56,9 @@ public class AndTest {
 
 
         // when
-        Specification<Phone> specification = Specifications.<Phone>builder()
+        Specification<Phone> specification = Specifications.<Phone>and()
             .eq("brand", "HuaWei")
-            .and(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
+            .predicate(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
                 @Override
                 public Predicate toPredicate(Root<Phone> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                     Path<Person> person = root.get("person");
@@ -106,9 +105,9 @@ public class AndTest {
         personRepository.save(alex);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .between("age", new Range<Integer>(10, 35))
-            .and(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
+            .predicate(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
                 @Override
                 public Predicate toPredicate(Root<Phone> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                     Join address = root.join("addresses", JoinType.LEFT);

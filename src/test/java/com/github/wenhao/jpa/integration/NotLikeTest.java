@@ -40,7 +40,7 @@ public class NotLikeTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .notLike(isNotBlank(jack.getName()), "name", "%ac%")
             .notLike(isNotBlank(jack.getNickName()), "name", "%og%", "%ri%")
             .build();

@@ -37,7 +37,7 @@ public class GreatThanTest {
         personRepository.save(eric);
 
         // when
-        Specification<Person> specification = Specifications.<Person>builder()
+        Specification<Person> specification = Specifications.<Person>and()
             .gt("age", 18)
             .build();
 

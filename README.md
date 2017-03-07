@@ -56,7 +56,7 @@ public interface PersonRepository extends JpaRepository<Person, Long>, JpaSpecif
 
 ```java
 public Page<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt(Objects.nonNull(request.getAge()), "age", 18)
             .between("birthday", new Range<>(new Date(), new Date()))
@@ -75,7 +75,7 @@ find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or nul
 
 ```java
 public List<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .eq("nickName", "dog")
             .eq(StringUtils.isNotBlank(request.getName()), "name", "Jack", "Eric", null)
             .eq("company", null) //or eq("company", (Object) null)
@@ -93,7 +93,7 @@ find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "I
 
 ```java
 public List<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
             .notIn("company", "ThoughtWorks", "IBM")
             .build();
@@ -110,7 +110,7 @@ find any people age bigger than 18.
 
 ```java
 public List<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .gt(Objects.nonNull(request.getAge()), "age", 18)
             .build();
 
@@ -126,7 +126,7 @@ find any person age between 18 and 25, birthday between someday and someday.
 
 ```java
 public List<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .between(Objects.nonNull(request.getAge(), "age", new Range<>(18, 25))
             .between("birthday", new Range<>(new Date(), new Date()))
             .build();
@@ -143,7 +143,7 @@ find any person name like %ac% or %og%, company not like %ec%.
 
 ```java
 public Page<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .like("name", "ac", "%og%")
             .notLike("company", "ec")
             .build();
@@ -160,12 +160,10 @@ support or specifications.
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
-            .and(OrSpecifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>or()
                     .like("name", "%ac%")
                     .gt("age", 19)
-                    .build())
-            .build();
+                    .build();
 
     return phoneRepository.findAll(specification);
 }
@@ -181,7 +179,7 @@ each specification support association query as left join.
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
-    Specification<Phone> specification = Specifications.<Phone>builder()
+    Specification<Phone> specification = Specifications.<Phone>and()
         .eq(StringUtils.isNotBlank(request.getBrand()), "brand", "HuaWei")
         .eq(StringUtils.isNotBlank(request.getPersonName()), "person.name", "Jack")
         .build();
@@ -194,7 +192,7 @@ public List<Phone> findAll(SearchRequest request) {
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
         .between("age", new Range<>(10, 35))
         .eq(StringUtils.isNotBlank(jack.getName()), "addresses.street", "Chengdu")
         .build();
@@ -213,9 +211,9 @@ You can custom specification to do the @ManyToOne and @ManyToMany as well.
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
-    Specification<Phone> specification = Specifications.<Phone>builder()
+    Specification<Phone> specification = Specifications.<Phone>and()
         .eq(StringUtils.isNotBlank(request.getBrand()), "brand", "HuaWei")
-        .and(StringUtils.isNotBlank(request.getPersonName()), (root, query, cb) -> {
+        .predicate(StringUtils.isNotBlank(request.getPersonName()), (root, query, cb) -> {
             Path<Person> person = root.get("person");
             return cb.equal(person.get("name"), "Jack");
         })
@@ -231,9 +229,9 @@ public List<Phone> findAll(SearchRequest request) {
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
         .between("age", new Range<>(10, 35))
-        .and(StringUtils.isNotBlank(jack.getName()), ((root, query, cb) -> {
+        .predicate(StringUtils.isNotBlank(jack.getName()), ((root, query, cb) -> {
             Join address = root.join("addresses", JoinType.LEFT);
             return cb.equal(address.get("street"), "Chengdu");
         }))
@@ -249,7 +247,7 @@ public List<Phone> findAll(SearchRequest request) {
 
 ```java
 public List<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt("age", 18)
             .between("birthday", new Range<>(new Date(), new Date()))
@@ -271,7 +269,7 @@ find person by pagination and sort by name desc and birthday asc.
 
 ```java
 public Page<Person> findAll(SearchRequest request) {
-    Specification<Person> specification = Specifications.<Person>builder()
+    Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt("age", 18)
             .between("birthday", new Range<>(new Date(), new Date()))
@@ -315,7 +313,7 @@ public class PersonIdCard {
 
 ```java
 public List<PersonIdCard> findAll(SearchRequest request) {
-    Specification<PersonIdCard> specification = Specifications.<PersonIdCard>builder()
+    Specification<PersonIdCard> specification = Specifications.<PersonIdCard>and()
             .gt(Objects.nonNull(request.getAge()), "age", 18)
             .build();
 
