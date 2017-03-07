@@ -22,7 +22,7 @@ repositories {
 }
 
 group = 'com.github.wenhao'
-version = '3.0.0'
+version = '3.1.0'
 
 idea {
     project {
@@ -102,10 +102,10 @@ bintray {
         githubRepo = 'wenhao/jpa-spec'
         githubReleaseNotesFile = 'README.md'
         version {
-            name = '3.0.0'
-            desc = 'A JAP Query By Specification framework 3.0.0'
+            name = '3.1.0'
+            desc = 'A JAP Query By Specification framework 3.1.0'
             released = new Date()
-            vcsTag = '3.0.0'
+            vcsTag = '3.1.0'
         }
     }
 }
@@ -121,7 +121,7 @@ install {
             packaging 'jar'
             groupId 'com.github.wenhao'
             artifactId 'jpa-spec'
-            version '3.0.0'
+            version '3.1.0'
 
             licenses {
                 license {
@@ -175,7 +175,7 @@ uploadArchives {
                 packaging 'jar'
                 groupId 'com.github.wenhao'
                 artifactId 'jpa-spec'
-                version '3.0.0'
+                version '3.1.0'
 
                 scm {
                     url 'scm:git@github.com:wenhao/jpa-spec.git'

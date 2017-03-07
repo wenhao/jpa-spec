@@ -4,10 +4,10 @@ import static javax.persistence.criteria.Predicate.BooleanOperator.AND;
 import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
 
 public class Specifications {
-    public static <T> Builder<T> and() {
-        return new Builder<>(AND);
+    public static <T> PredicateBuilder<T> and() {
+        return new PredicateBuilder<>(AND);
     }
-    public static <T> Builder<T> or() {
-        return new Builder<>(OR);
+    public static <T> PredicateBuilder<T> or() {
+        return new PredicateBuilder<>(OR);
     }
 }
