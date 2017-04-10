@@ -53,13 +53,13 @@ dependencies {
 
 ### Specification By Examples:
 
-####Each specification support three parameters:
+#### Each specification support three parameters:
 
 1. **condition**: if true(default), apply this specification.
 2. **property**: field name.
 3. **values**: compare value with model, eq/ne/like support multiple values.
 
-####General Example
+#### General Example
 
 each Repository class should extends from two super class **JpaRepository** and **JpaSpecificationExecutor**.
 
@@ -81,7 +81,7 @@ public Page<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Equal/NotEqual Example
+#### Equal/NotEqual Example
 
 find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value, and company is null.
 
@@ -99,7 +99,7 @@ public List<Person> findAll(SearchRequest request) {
 }
 ```
 
-####In/NotIn Example
+#### In/NotIn Example
 
 find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "IBM".
 
@@ -116,7 +116,7 @@ public List<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Numerical Example
+#### Numerical Example
 
 find any people age bigger than 18.
 
@@ -132,7 +132,7 @@ public List<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Between Example
+#### Between Example
 
 find any person age between 18 and 25, birthday between someday and someday.
 
@@ -149,7 +149,7 @@ public List<Person> findAll(SearchRequest request) {
 }  
 ```
 
-####Like/NotLike Example
+#### Like/NotLike Example
 
 find any person name like %ac% or %og%, company not like %ec%.
 
@@ -166,7 +166,7 @@ public Page<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Or
+#### Or
 
 support or specifications.
 
@@ -183,7 +183,7 @@ public List<Phone> findAll(SearchRequest request) {
 }
 ```
 
-####Join
+#### Join
 
 each specification support association query as left join.
 
@@ -215,7 +215,7 @@ public List<Phone> findAll(SearchRequest request) {
 }
 ```
 
-####Custom Specification
+#### Custom Specification
 
 You can custom specification to do the @ManyToOne and @ManyToMany as well.
 
@@ -255,7 +255,7 @@ public List<Phone> findAll(SearchRequest request) {
 }
 ```
 
-####Sort
+#### Sort
 
 **Test:** [SortTest.java]
 
@@ -277,7 +277,7 @@ public List<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Pagination
+#### Pagination
 
 find person by pagination and sort by name desc and birthday asc.
 
@@ -299,7 +299,7 @@ public Page<Person> findAll(SearchRequest request) {
 }
 ```
 
-####Virtual View
+#### Virtual View
 
 Using **@org.hibernate.annotations.Subselect** to define a virtual view if you don't want a database table view.
 
@@ -335,7 +335,7 @@ public List<PersonIdCard> findAll(SearchRequest request) {
 }
 ```
 
-####Projection, GroupBy, Aggregation
+#### Projection, GroupBy, Aggregation
 
 Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**,
 

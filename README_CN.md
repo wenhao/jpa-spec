@@ -59,9 +59,9 @@ dependencies {
 ### 条件查询例子
 
 <!--
-####Each specification support three parameters:
+#### Each specification support three parameters:
 -->
-####每个条件查询支持三个参数:
+#### 每个条件查询支持三个参数:
 
 <!--
 1. condition: if true(default), apply this specification.
@@ -73,9 +73,9 @@ dependencies {
 3. **values**: 具体查询的值，eq/ne/like 支持多个值。
 
 <!--
-####General Example
+#### General Example
 -->
-####例子
+#### 例子
 
 <!--
 each Repository class should extends from two super class **JpaRepository** and **JpaSpecificationExecutor**.
@@ -101,9 +101,9 @@ public Page<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Equal/NotEqual Example
+#### Equal/NotEqual Example
 -->
-####Equal/NotEqual例子
+#### Equal/NotEqual例子
 
 <!--
 find any person nickName equals to "dog" and name equals to "Jack"/"Eric" or null value, and company is null.
@@ -128,9 +128,9 @@ public List<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####In/NotIn Example
+#### In/NotIn Example
 -->
-####In/NotIn例子
+#### In/NotIn例子
 
 <!--
 find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "IBM".
@@ -151,9 +151,9 @@ public List<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Numerical Example
+#### Numerical Example
 -->
-####数字比较例子
+#### 数字比较例子
 
 <!--
 find any people age bigger than 18. 
@@ -173,9 +173,9 @@ public List<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Between Example
+#### Between Example
 -->
-####Between例子
+#### Between例子
 
 <!--
 find any person age between 18 and 25, birthday between someday and someday.
@@ -196,9 +196,9 @@ public List<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Like/NotLike Example
+#### Like/NotLike Example
 -->
-####Like/NotLike例子
+#### Like/NotLike例子
 
 <!--
 find any person name like %ac% or %og%, company not like %ec%.
@@ -222,9 +222,9 @@ public Page<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Or
+#### Or
 -->
-####Or例子
+#### Or例子
 
 <!--
 support or specifications.
@@ -245,9 +245,9 @@ public List<Phone> findAll(SearchRequest request) {
 ```
 
 <!--
-####Join
+#### Join
 -->
-####关联查询
+#### 关联查询
 
 <!--
 each specification support association query as left join. 
@@ -289,9 +289,9 @@ public List<Phone> findAll(SearchRequest request) {
 ```
 
 <!--
-####Custom Specification
+#### Custom Specification
 -->
-####自定义条件查询
+#### 自定义条件查询
 
 <!--
 You can custom specification to do the @ManyToOne and @ManyToMany as well.
@@ -341,9 +341,9 @@ public List<Phone> findAll(SearchRequest request) {
 ```
 
 <!--
-####Sort
+#### Sort
 -->
-####排序
+#### 排序
 
 **Test:** [SortTest.java]
 
@@ -366,9 +366,9 @@ public List<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Pagination
+#### Pagination
 -->
-####分页
+#### 分页
 
 <!--
 find person by pagination and sort by name desc and birthday asc.
@@ -394,9 +394,9 @@ public Page<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-####Virtual View
+#### Virtual View
 -->
-####虚拟视图
+#### 虚拟视图
 
 <!--
 Using **@org.hibernate.annotations.Subselect** to define a virtual view if you don't want a database table view.
@@ -439,9 +439,9 @@ public List<PersonIdCard> findAll(SearchRequest request) {
 ```
 
 <!--
-####Projection, GroupBy, Aggregation
+#### Projection, GroupBy, Aggregation
 -->
-####投射、分组和聚合
+#### 投射、分组和聚合
 
 <!--
 Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**, 
