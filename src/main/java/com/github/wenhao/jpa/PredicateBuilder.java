@@ -145,4 +145,8 @@ public class PredicateBuilder<T> {
             }
         };
     }
+
+    public Specification<T> buildOrNullIfEmpty() {
+        return specifications.isEmpty() ? null : build();
+    }
 }
