@@ -14,10 +14,7 @@ import com.github.wenhao.jpa.specification.NotLikeSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,36 +47,36 @@ public class PredicateBuilder<T> {
         return this.predicate(condition, new NotEqualSpecification<T>(property, values));
     }
 
-    public PredicateBuilder<T> gt(String property, Number number) {
-        return gt(true, property, number);
+    public PredicateBuilder<T> gt(String property, Comparable<?> compare) {
+        return gt(true, property, compare);
     }
 
-    public PredicateBuilder<T> gt(boolean condition, String property, Number number) {
-        return this.predicate(condition, new GtSpecification<T>(property, number));
+    public PredicateBuilder<T> gt(boolean condition, String property, Comparable<?> compare) {
+        return this.predicate(condition, new GtSpecification<T>(property, compare));
     }
 
-    public PredicateBuilder<T> ge(String property, Number number) {
-        return ge(true, property, number);
+    public PredicateBuilder<T> ge(String property, Comparable<?> compare) {
+        return ge(true, property, compare);
     }
 
-    public PredicateBuilder<T> ge(boolean condition, String property, Number number) {
-        return this.predicate(condition, new GeSpecification<T>(property, number));
+    public PredicateBuilder<T> ge(boolean condition, String property, Comparable<? extends Object> compare) {
+        return this.predicate(condition, new GeSpecification<T>(property, compare));
     }
 
-    public PredicateBuilder<T> lt(String property, Number number) {
+    public PredicateBuilder<T> lt(String property, Comparable<?> number) {
         return lt(true, property, number);
     }
 
-    public PredicateBuilder<T> lt(boolean condition, String property, Number number) {
-        return this.predicate(condition, new LtSpecification<T>(property, number));
+    public PredicateBuilder<T> lt(boolean condition, String property, Comparable<?> compare) {
+        return this.predicate(condition, new LtSpecification<T>(property, compare));
     }
 
-    public PredicateBuilder<T> le(String property, Number number) {
-        return le(true, property, number);
+    public PredicateBuilder<T> le(String property, Comparable<?> compare) {
+        return le(true, property, compare);
     }
 
-    public PredicateBuilder<T> le(boolean condition, String property, Number number) {
-        return this.predicate(condition, new LeSpecification<T>(property, number));
+    public PredicateBuilder<T> le(boolean condition, String property, Comparable<?> compare) {
+        return this.predicate(condition, new LeSpecification<T>(property, compare));
     }
 
     public PredicateBuilder<T> between(String property, Range<? extends Comparable<?>> range) {
@@ -134,15 +131,12 @@ public class PredicateBuilder<T> {
     }
 
     public Specification<T> build() {
-        return new Specification<T>() {
-            @Override
-            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                Predicate[] predicates = new Predicate[specifications.size()];
-                for (int i = 0; i < specifications.size(); i++) {
-                    predicates[i] = specifications.get(i).toPredicate(root, query, cb);
-                }
-                return OR.equals(operator) ? cb.or(predicates) : cb.and(predicates);
+        return (root, query, cb) -> {
+            Predicate[] predicates = new Predicate[specifications.size()];
+            for (int i = 0; i < specifications.size(); i++) {
+                predicates[i] = specifications.get(i).toPredicate(root, query, cb);
             }
+            return OR.equals(operator) ? cb.or(predicates) : cb.and(predicates);
         };
     }
 }

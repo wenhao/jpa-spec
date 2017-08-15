@@ -8,17 +8,17 @@ import javax.persistence.criteria.Root;
 
 public class LtSpecification<T> extends AbstractSpecification<T> {
     private final String property;
-    private final Number number;
+    private final Comparable<Object> compare;
 
-    public LtSpecification(String property, Number number) {
+    public LtSpecification(String property, Comparable<? extends Object> compare) {
         this.property = property;
-        this.number = number;
+        this.compare = (Comparable<Object>) compare;
     }
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         From from = getRoot(property, root);
         String field = getProperty(property);
-        return cb.lt(from.get(field), number);
+        return cb.lessThan(from.get(field), compare);
     }
 }

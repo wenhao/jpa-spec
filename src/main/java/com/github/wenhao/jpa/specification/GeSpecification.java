@@ -8,17 +8,17 @@ import javax.persistence.criteria.Root;
 
 public class GeSpecification<T> extends AbstractSpecification<T> {
     private final String property;
-    private final Number number;
+    private final Comparable<Object> compare;
 
-    public GeSpecification(String property, Number number) {
+    public GeSpecification(String property, Comparable<? extends Object> compare) {
         this.property = property;
-        this.number = number;
+        this.compare = (Comparable<Object>) compare;
     }
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         From from = getRoot(property, root);
         String field = getProperty(property);
-        return cb.ge(from.get(field), number);
+        return cb.greaterThanOrEqualTo(from.get(field), compare);
     }
 }

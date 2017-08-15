@@ -39,7 +39,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.1.0'
+    compile 'com.github.wenhao:jpa-spec:3.1.1'
 }
 ```
 
@@ -49,7 +49,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
 </dependency>
 ```
 
@@ -151,14 +151,14 @@ public List<Person> findAll(SearchRequest request) {
 ```
 
 <!--
-#### Numerical Example
+#### Comparison Example
 -->
-#### 数字比较例子
+#### 比较例子
 
 <!--
-find any people age bigger than 18. 
+Support any comparison class which implements Comparable interface, find any people age bigger than 18. 
 -->
-查询任何年纪大于等于18的人。
+支持任何实现Comparable接口的类的比较，查询任何年纪大于等于18的人。
 
 **Test:** [GtTest.java]
 
@@ -166,6 +166,7 @@ find any people age bigger than 18.
 public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .gt(Objects.nonNull(request.getAge()), "age", 18)
+            .lt("birthday", new Date())
             .build();
 
     return personRepository.findAll(specification);
