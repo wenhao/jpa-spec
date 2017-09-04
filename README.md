@@ -188,6 +188,26 @@ public List<Phone> findAll(SearchRequest request) {
 }
 ```
 
+#### Mixed `And` and `Or`
+
+support mixed `and` and `or` specifications.
+
+**Test:** [AndOrTest.java]
+
+```java
+public List<Person> findAll(SearchRequest request) {
+    Specification<Person> specification = Specifications.<Person>and()
+                    .like("name", "%ac%")
+                    .predicate(Specifications.or()
+                            .lt("age", 19)
+                            .gt("age", 25)
+                            .build())
+                    .build();
+
+    return personRepository.findAll(specification);
+}
+```
+
 #### Join
 
 each specification support association query as left join.
