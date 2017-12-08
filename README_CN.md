@@ -19,7 +19,7 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 <!--
 * Compatible with Spring Data JPA and JPA 2.1 interface.
 * Equal/NotEqual/Like/NotLike/In/NotIn support multiple values, Equal/NotEqual support **Null** value.
-* Each specification support join query(left joiner). 
+* Each specification support join query(left joiner).
 * Support custom specification.
 * Builder style specification creator.
 * Support pagination and sort builder.
@@ -180,7 +180,7 @@ public List<Person> findAll(SearchRequest request) {
 #### 比较例子
 
 <!--
-Support any comparison class which implements Comparable interface, find any people age bigger than 18. 
+Support any comparison class which implements Comparable interface, find any people age bigger than 18.
 -->
 支持任何实现Comparable接口的类的比较，查询任何年纪大于等于18的人。
 
@@ -300,7 +300,7 @@ public List<Person> findAll(SearchRequest request) {
 #### 关联查询
 
 <!--
-each specification support association query as left join. 
+each specification support association query as left join.
 -->
 每个条件查询都支持左连接查询。
 
@@ -310,7 +310,7 @@ each specification support association query as left join.
 @ManyToOne association query, find person name equals to "Jack" and phone brand equals to "HuaWei".
 -->
 多对一查询，查询任何名字等于 "Jack" 并且此人的电话品牌是 "HuaWei"的人。
-    
+
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Phone> specification = Specifications.<Phone>and()
@@ -473,7 +473,7 @@ public class PersonIdCard {
     private String name;
     private Integer age;
     private String number;
-    
+
     // Getters and setters are omitted for brevity
 }    
 ```
@@ -494,7 +494,7 @@ public List<PersonIdCard> findAll(SearchRequest request) {
 #### 投射、分组和聚合
 
 <!--
-Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**, 
+Spring Data JPA doesn't support **Projection**(a little but trick), **GroupBy** and **Aggregation**,
 
 furthermore, Projection/GroupBy/Aggregation are often used for complex statistics report, it might seem like overkill to use Hibernate/JPA ORM to solve it.
 
@@ -513,14 +513,15 @@ Copyright © 2016-2017 Wen Hao
 Licensed under [Apache License]
 
 [Legacy Hibernate Criteria Queries]: https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria
-[EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java 
-[NotEqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java 
+[EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java
+[NotEqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java
 [InTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/InTest.java
 [GtTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/GtTest.java
 [BetweenTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java
 [LikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java
 [NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java
 [OrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/OrTest.java
+[AndOrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndOrTest.java
 [AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [SortTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/SortsTest.java

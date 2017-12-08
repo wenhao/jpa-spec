@@ -17,7 +17,7 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 
 ### Docs
 
-English Version: 
+English Version:
 
 [Latest]
 
@@ -390,6 +390,7 @@ Licensed under [Apache License]
 [LikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java
 [NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java
 [OrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/OrTest.java
+[AndOrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndOrTest.java
 [AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [SortTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/SortsTest.java
