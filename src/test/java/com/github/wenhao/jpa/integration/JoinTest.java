@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -92,7 +93,7 @@ public class JoinTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .between("age", new Range<Integer>(10, 35))
+            .between("age", Range.of(inclusive(10), inclusive(35)))
             .eq("addresses.street", "Chengdu")
             .build();
 

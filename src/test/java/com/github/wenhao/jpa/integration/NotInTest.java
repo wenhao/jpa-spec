@@ -1,8 +1,5 @@
 package com.github.wenhao.jpa.integration;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
@@ -15,6 +12,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

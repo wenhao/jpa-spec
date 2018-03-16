@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -49,7 +50,7 @@ public class OrTest {
             .gt("age", 19)
             .eq(jack.getCompany() != null, null)
             .ne(jack.getNickName() != null, null)
-            .between(jack.getBirthday() != null, "birthday", new Range<Date>(new Date(), new Date()))
+            .between(jack.getBirthday() != null, "birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
             .build();
 
         List<Person> persons = personRepository.findAll(specification);

@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -46,10 +47,10 @@ public class NotEqualTest {
             .ne("nickName", jack.getNickName(), "Aaron")
             .build();
 
-        Person person = personRepository.findOne(specification);
+        Optional<Person> person = personRepository.findOne(specification);
 
         // then
-        assertThat(person.getName()).isEqualTo(eric.getName());
+        assertThat(person.get().getName()).isEqualTo(eric.getName());
     }
 
     @Test

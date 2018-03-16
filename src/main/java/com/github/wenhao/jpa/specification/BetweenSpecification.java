@@ -11,9 +11,9 @@ import javax.persistence.criteria.Root;
 
 public class BetweenSpecification<T> extends AbstractSpecification<T> {
     private final String property;
-    private final Range range;
+    private final Range<? extends Object> range;
 
-    public BetweenSpecification(String property, Range range) {
+    public BetweenSpecification(String property, Range<? extends Object> range) {
         this.property = property;
         this.range = range;
     }
@@ -22,6 +22,8 @@ public class BetweenSpecification<T> extends AbstractSpecification<T> {
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         From from = getRoot(property, root);
         String field = getProperty(property);
-        return cb.between(from.get(field), range.getLowerBound(), range.getUpperBound());
+        Comparable<Object> lower = (Comparable<Object>) range.getLowerBound().getValue().get();
+        Comparable<Object> upper = (Comparable<Object>) range.getUpperBound().getValue().get();
+        return cb.between(from.get(field), lower, upper);
     }
 }

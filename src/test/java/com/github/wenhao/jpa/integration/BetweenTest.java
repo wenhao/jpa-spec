@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Range;
+import org.springframework.data.domain.Range.Bound;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -42,7 +44,7 @@ public class BetweenTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .between(jack.getBirthday() != null, "birthday", new Range<Date>(getDate("1980-01-01"), getDate("1989-12-31")))
+            .between(jack.getBirthday() != null, "birthday", Range.of(inclusive(getDate("1980-01-01")), inclusive(getDate("1989-12-31"))))
             .build();
 
         List<Person> persons = personRepository.findAll(specification);

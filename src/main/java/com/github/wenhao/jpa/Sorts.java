@@ -19,7 +19,7 @@ public class Sorts {
         private List<Order> orders;
 
         public Builder() {
-            this.orders = new ArrayList<Order>();
+            this.orders = new ArrayList<>();
         }
 
         public Builder asc(String property) {
@@ -45,7 +45,7 @@ public class Sorts {
         }
 
         public Sort build() {
-            return new Sort(orders);
+            return Sort.by(orders);
         }
     }
 }

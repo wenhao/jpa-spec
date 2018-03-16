@@ -21,6 +21,8 @@ English Version:
 
 [Latest]
 
+[3.2.0]
+
 [3.1.0]
 
 [3.0.0]
@@ -28,6 +30,8 @@ English Version:
 Chinese Version:
 
 [最新]
+
+[3.2.0_cn]
 
 [3.1.0_cn]
 
@@ -41,7 +45,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.1.1'
+    compile 'com.github.wenhao:jpa-spec:3.2.0'
 }
 ```
 
@@ -51,7 +55,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -77,7 +81,7 @@ public Page<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt(Objects.nonNull(request.getAge()), "age", 18)
-            .between("birthday", new Range<>(new Date(), new Date()))
+            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
             .like("nickName", "%og%", "%me")
             .build();
 
@@ -146,8 +150,8 @@ find any person age between 18 and 25, birthday between someday and someday.
 ```java
 public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-            .between(Objects.nonNull(request.getAge(), "age", new Range<>(18, 25))
-            .between("birthday", new Range<>(new Date(), new Date()))
+            .between(Objects.nonNull(request.getAge(), "age", Range.of(inclusive(18), inclusive(25)))
+            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
             .build();
 
     return personRepository.findAll(specification);
@@ -232,7 +236,7 @@ public List<Phone> findAll(SearchRequest request) {
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-        .between("age", new Range<>(10, 35))
+        .between("age", Range.of(inclusive(10), inclusive(35)))
         .eq(StringUtils.isNotBlank(jack.getName()), "addresses.street", "Chengdu")
         .build();
 
@@ -269,7 +273,7 @@ public List<Phone> findAll(SearchRequest request) {
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-        .between("age", new Range<>(10, 35))
+        .between("age", Range.of(inclusive(10), inclusive(35)))
         .predicate(StringUtils.isNotBlank(jack.getName()), ((root, query, cb) -> {
             Join address = root.join("addresses", JoinType.LEFT);
             return cb.equal(address.get("street"), "Chengdu");
@@ -289,7 +293,7 @@ public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt("age", 18)
-            .between("birthday", new Range<>(new Date(), new Date()))
+            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
             .like("nickName", "%og%")
             .build();
 
@@ -311,7 +315,7 @@ public Page<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt("age", 18)
-            .between("birthday", new Range<>(new Date(), new Date()))
+            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
             .like("nickName", "%og%")
             .build();
 
@@ -370,15 +374,17 @@ Alternatively, using virtual view and give a readable/significant class name to 
 
 ### Copyright and license
 
-Copyright © 2016-2017 Wen Hao
+Copyright © 2016-2018 Wen Hao
 
 Licensed under [Apache License]
 
 
-[Latest]: ./docs/3.1.1.md
+[Latest]: ./docs/3.2.1.md
+[3.2.0]: ./docs/3.2.0.md
 [3.1.0]: ./docs/3.1.0.md
 [3.0.0]: ./docs/3.0.0.md
-[最新]: ./docs/3.1.1_cn.md
+[最新]: ./docs/3.2.0_cn.md
+[3.2.0_cn]: ./docs/3.2.0_cn.md
 [3.1.0_cn]: ./docs/3.1.0_cn.md
 [3.0.0_cn]: ./docs/3.0.0_cn.md
 [Legacy Hibernate Criteria Queries]: https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria

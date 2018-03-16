@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -37,10 +38,10 @@ public class EqualTest {
             .eq(isNotBlank(person.getName()), "name", person.getName())
             .build();
 
-        Person result = personRepository.findOne(specification);
+        Optional<Person> result = personRepository.findOne(specification);
 
         // then
-        assertThat(result.getName()).isEqualTo(person.getName());
+        assertThat(result.get().getName()).isEqualTo(person.getName());
     }
 
     @Test
