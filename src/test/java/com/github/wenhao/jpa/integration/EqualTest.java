@@ -1,8 +1,5 @@
 package com.github.wenhao.jpa.integration;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
@@ -17,6 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class EqualTest {
@@ -28,15 +29,15 @@ public class EqualTest {
     public void should_be_able_to_find_by_using_equal() {
         // given
         Person person = new PersonBuilder()
-            .name("Jack")
-            .age(18)
-            .build();
+                .name("Jack")
+                .age(18)
+                .build();
         personRepository.save(person);
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .eq(isNotBlank(person.getName()), "name", person.getName())
-            .build();
+                .eq(isNotBlank(person.getName()), "name", person.getName())
+                .build();
 
         Optional<Person> result = personRepository.findOne(specification);
 
@@ -48,23 +49,23 @@ public class EqualTest {
     public void should_be_able_to_find_by_using_equal_for_single_null_value() {
         // given
         Person jack = new PersonBuilder()
-            .name("Jack")
-            .age(18)
-            .company("Abc")
-            .build();
+                .name("Jack")
+                .age(18)
+                .company("Abc")
+                .build();
         Person eric = new PersonBuilder()
-            .name("Eric")
-            .age(20)
-            .build();
+                .name("Eric")
+                .age(20)
+                .build();
 
         personRepository.save(jack);
         personRepository.save(eric);
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .eq("company", (Object) null)
-            .eq("nickName", null)
-            .build();
+                .eq("company", (Object) null)
+                .eq("nickName", null)
+                .build();
 
         List<Person> persons = personRepository.findAll(specification);
 
@@ -76,29 +77,55 @@ public class EqualTest {
     public void should_be_able_to_find_by_using_equal_with_multiple_values() {
         // given
         Person jack = new PersonBuilder()
-            .name("Jack")
-            .age(18)
-            .build();
+                .name("Jack")
+                .age(18)
+                .build();
         Person eric = new PersonBuilder()
-            .name("Eric")
-            .age(20)
-            .build();
+                .name("Eric")
+                .age(20)
+                .build();
         Person jackson = new PersonBuilder()
-            .age(30)
-            .nickName("Jackson")
-            .build();
+                .age(30)
+                .nickName("Jackson")
+                .build();
         personRepository.save(jack);
         personRepository.save(eric);
         personRepository.save(jackson);
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .eq(isNotBlank(jack.getName()), "name", jack.getName(), eric.getName(), null)
-            .build();
+                .eq(isNotBlank(jack.getName()), "name", jack.getName(), eric.getName(), null)
+                .build();
 
         List<Person> persons = personRepository.findAll(specification);
 
         // then
         assertThat(persons.size()).isEqualTo(3);
+    }
+
+    @Test
+    public void should_be_able_to_find_all_if_all_predicate_are_null() {
+        // given
+        Person jack = new PersonBuilder()
+                .name("Jack")
+                .age(18)
+                .build();
+        Person eric = new PersonBuilder()
+                .name("Eric")
+                .age(20)
+                .build();
+        personRepository.save(jack);
+        personRepository.save(eric);
+
+        // when
+        Specification<Person> specification = Specifications.<Person>and()
+                .eq(isNotBlank(EMPTY), "name", jack.getName())
+                .like(isNotBlank(EMPTY), "name", "%" + jack.getName() + "%")
+                .build();
+
+        List<Person> persons = personRepository.findAll(specification);
+
+        // then
+        assertThat(persons.size()).isEqualTo(2);
     }
 }
