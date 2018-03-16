@@ -146,4 +146,8 @@ public class PredicateBuilder<T> {
             return OR.equals(operator) ? cb.or(predicates) : cb.and(predicates);
         };
     }
+
+    public Specification<T> buildOrNullIfEmpty() {
+        return specifications.isEmpty() ? null : build();
+    }
 }
