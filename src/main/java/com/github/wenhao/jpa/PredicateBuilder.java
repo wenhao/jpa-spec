@@ -14,9 +14,13 @@ import com.github.wenhao.jpa.specification.NotLikeSpecification;
 import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
 
@@ -131,10 +135,13 @@ public class PredicateBuilder<T> {
     }
 
     public Specification<T> build() {
-        return (root, query, cb) -> {
+        return (Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
             Predicate[] predicates = new Predicate[specifications.size()];
             for (int i = 0; i < specifications.size(); i++) {
                 predicates[i] = specifications.get(i).toPredicate(root, query, cb);
+            }
+            if (Objects.equals(predicates.length, 0)) {
+                return null;
             }
             return OR.equals(operator) ? cb.or(predicates) : cb.and(predicates);
         };

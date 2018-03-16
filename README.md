@@ -21,7 +21,7 @@ English Version:
 
 [Latest]
 
-[3.2.0]
+[3.2.1]
 
 [3.1.0]
 
@@ -31,7 +31,7 @@ Chinese Version:
 
 [最新]
 
-[3.2.0_cn]
+[3.2.1_cn]
 
 [3.1.0_cn]
 
@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.0'
+    compile 'com.github.wenhao:jpa-spec:3.2.1'
 }
 ```
 
@@ -55,7 +55,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.0</version>
+    <version>3.2.1</version>
 </dependency>
 ```
 
@@ -380,11 +380,11 @@ Licensed under [Apache License]
 
 
 [Latest]: ./docs/3.2.1.md
-[3.2.0]: ./docs/3.2.0.md
+[3.2.1]: ./docs/3.2.1.md
 [3.1.0]: ./docs/3.1.0.md
 [3.0.0]: ./docs/3.0.0.md
-[最新]: ./docs/3.2.0_cn.md
-[3.2.0_cn]: ./docs/3.2.0_cn.md
+[最新]: ./docs/3.2.1_cn.md
+[3.2.1_cn]: ./docs/3.2.1_cn.md
 [3.1.0_cn]: ./docs/3.1.0_cn.md
 [3.0.0_cn]: ./docs/3.0.0_cn.md
 [Legacy Hibernate Criteria Queries]: https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria
