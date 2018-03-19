@@ -4,7 +4,6 @@ import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.repository.PersonRepository;
-import com.google.common.collect.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class BetweenTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .between(nonNull(jack.getBirthday()), "birthday", Range.closed(getDate("1980-01-01"), getDate("1989-12-31")))
+                .between(nonNull(jack.getBirthday()), "birthday", getDate("1980-01-01"), getDate("1989-12-31"))
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

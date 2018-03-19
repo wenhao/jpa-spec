@@ -4,7 +4,6 @@ import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.repository.PersonRepository;
-import com.google.common.collect.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -52,7 +50,7 @@ public class OrTest {
             .gt("age", 19)
             .eq(jack.getCompany() != null, null)
             .ne(jack.getNickName() != null, null)
-            .between(jack.getBirthday() != null, "birthday", Range.closed(new Date(), new Date()))
+            .between(jack.getBirthday() != null, "birthday", new Date(), new Date())
             .build();
 
         List<Person> persons = personRepository.findAll(specification);

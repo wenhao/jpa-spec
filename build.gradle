@@ -23,7 +23,7 @@ repositories {
 }
 
 group = 'com.github.wenhao'
-version = '3.2.2'
+version = '3.2.3'
 
 idea {
     project {
@@ -45,7 +45,6 @@ compileTestJava(compatibility)
 dependencies {
     compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
     compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
-    compile("com.google.guava:guava:$guavaVersion")
 
     testCompile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
@@ -120,7 +119,7 @@ publishing {
             artifact javadocJar
             groupId 'com.github.wenhao'
             artifactId 'jpa-spec'
-            version '3.2.2'
+            version '3.2.3'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'A JAP Query By Specification framework.')
@@ -155,10 +154,10 @@ bintray {
         githubRepo = 'wenhao/jpa-spec'
         githubReleaseNotesFile = 'README.md'
         version {
-            name = '3.2.2'
-            desc = 'A JAP Query By Specification framework 3.2.2'
+            name = '3.2.3'
+            desc = 'A JAP Query By Specification framework 3.2.3'
             released = new Date()
-            vcsTag = '3.2.2'
+            vcsTag = '3.2.3'
             gpg {
                 sign = true
                 passphrase = 'passphrase'

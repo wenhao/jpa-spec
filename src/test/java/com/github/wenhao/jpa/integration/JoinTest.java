@@ -6,7 +6,6 @@ import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
 import com.github.wenhao.jpa.repository.PhoneRepository;
-import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -93,7 +91,7 @@ public class JoinTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .between("age", Range.closed(10, 35))
+            .between("age", 10, 35)
             .eq("addresses.street", "Chengdu")
             .build();
 
