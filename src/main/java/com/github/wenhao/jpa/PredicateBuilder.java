@@ -11,7 +11,7 @@ import com.github.wenhao.jpa.specification.LtSpecification;
 import com.github.wenhao.jpa.specification.NotEqualSpecification;
 import com.github.wenhao.jpa.specification.NotInSpecification;
 import com.github.wenhao.jpa.specification.NotLikeSpecification;
-import org.springframework.data.domain.Range;
+import com.google.common.collect.Range;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -83,11 +83,11 @@ public class PredicateBuilder<T> {
         return this.predicate(condition, new LeSpecification<T>(property, compare));
     }
 
-    public PredicateBuilder<T> between(String property, Range<? extends Comparable<?>> range) {
+    public PredicateBuilder<T> between(String property, Range range) {
         return between(true, property, range);
     }
 
-    public PredicateBuilder<T> between(boolean condition, String property, Range<? extends Comparable<?>> range) {
+    public PredicateBuilder<T> between(boolean condition, String property, Range range) {
         return this.predicate(condition, new BetweenSpecification<T>(property, range));
     }
 

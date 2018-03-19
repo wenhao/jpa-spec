@@ -4,11 +4,11 @@ import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.repository.PersonRepository;
+import com.google.common.collect.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -52,7 +52,7 @@ public class OrTest {
             .gt("age", 19)
             .eq(jack.getCompany() != null, null)
             .ne(jack.getNickName() != null, null)
-            .between(jack.getBirthday() != null, "birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
+            .between(jack.getBirthday() != null, "birthday", Range.closed(new Date(), new Date()))
             .build();
 
         List<Person> persons = personRepository.findAll(specification);

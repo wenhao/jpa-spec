@@ -6,27 +6,22 @@ import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
 import com.github.wenhao.jpa.repository.PhoneRepository;
+import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -59,12 +54,9 @@ public class PredicateTest {
         // when
         Specification<Phone> specification = Specifications.<Phone>and()
             .eq("brand", "HuaWei")
-            .predicate(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
-                @Override
-                public Predicate toPredicate(Root<Phone> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                    Path<Person> person = root.get("person");
-                    return cb.equal(person.get("name"), jack.getName());
-                }
+            .predicate(StringUtils.isNotBlank(jack.getName()), (Specification<Phone>) (root, query, cb) -> {
+                Path<Person> person = root.get("person");
+                return cb.equal(person.get("name"), jack.getName());
             })
             .build();
 
@@ -107,13 +99,10 @@ public class PredicateTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .between("age", Range.of(inclusive(10), inclusive(35)))
-            .predicate(StringUtils.isNotBlank(jack.getName()), new Specification<Phone>() {
-                @Override
-                public Predicate toPredicate(Root<Phone> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                    Join address = root.join("addresses", JoinType.LEFT);
-                    return cb.equal(address.get("street"), "Chengdu");
-                }
+            .between("age", Range.closed(10, 35))
+            .predicate(StringUtils.isNotBlank(jack.getName()), (Specification<Phone>) (root, query, cb) -> {
+                Join address = root.join("addresses", JoinType.LEFT);
+                return cb.equal(address.get("street"), "Chengdu");
             })
             .build();
 

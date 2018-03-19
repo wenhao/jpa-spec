@@ -4,12 +4,11 @@ import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.repository.PersonRepository;
+import com.google.common.collect.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Range;
-import org.springframework.data.domain.Range.Bound;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Range.Bound.inclusive;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -32,20 +31,20 @@ public class BetweenTest {
     public void should_be_able_to_find_by_using_between() throws ParseException {
         // given
         Person jack = new PersonBuilder()
-            .name("Jack")
-            .birthday(getDate("1987-11-14"))
-            .build();
+                .name("Jack")
+                .birthday(getDate("1987-11-14"))
+                .build();
         Person eric = new PersonBuilder()
-            .name("Eric")
-            .birthday(getDate("1990-10-12"))
-            .build();
+                .name("Eric")
+                .birthday(getDate("1990-10-12"))
+                .build();
         personRepository.save(jack);
         personRepository.save(eric);
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .between(jack.getBirthday() != null, "birthday", Range.of(inclusive(getDate("1980-01-01")), inclusive(getDate("1989-12-31"))))
-            .build();
+                .between(nonNull(jack.getBirthday()), "birthday", Range.closed(getDate("1980-01-01"), getDate("1989-12-31")))
+                .build();
 
         List<Person> persons = personRepository.findAll(specification);
 

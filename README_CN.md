@@ -39,7 +39,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.1'
+    compile 'com.github.wenhao:jpa-spec:3.2.2'
 }
 ```
 
@@ -49,7 +49,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.1</version>
+    <version>3.2.2</version>
 </dependency>
 ```
 
@@ -59,7 +59,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.1</version>
+    <version>3.2.2</version>
     <exclusions>
         <exclusion>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -116,7 +116,7 @@ public Page<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt(Objects.nonNull(request.getAge()), "age", 18)
-            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
+            .between("birthday", Range.closed(new Date(), new Date()))
             .like("nickName", "%og%", "%me")
             .build();
 
@@ -212,8 +212,8 @@ find any person age between 18 and 25, birthday between someday and someday.
 ```java
 public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-            .between(Objects.nonNull(request.getAge(), "age", Range.of(inclusive(18), inclusive(25)))
-            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
+            .between(Objects.nonNull(request.getAge(), "age", Range.closed(18, 25))
+            .between("birthday", Range.closed(new Date(), new Date()))
             .build();
 
     return personRepository.findAll(specification);
@@ -330,7 +330,7 @@ public List<Phone> findAll(SearchRequest request) {
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-        .between("age", Range.of(inclusive(10), inclusive(35)))
+        .between("age", Range.closed(10, 35))
         .eq(StringUtils.isNotBlank(jack.getName()), "addresses.street", "Chengdu")
         .build();
 
@@ -379,7 +379,7 @@ public List<Phone> findAll(SearchRequest request) {
 ```java
 public List<Phone> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-        .between("age", Range.of(inclusive(10), inclusive(35)))
+        .between("age", Range.closed(10, 35))
         .predicate(StringUtils.isNotBlank(jack.getName()), ((root, query, cb) -> {
             Join address = root.join("addresses", JoinType.LEFT);
             return cb.equal(address.get("street"), "Chengdu");
@@ -402,7 +402,7 @@ public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt("age", 18)
-            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
+            .between("birthday", Range.closed(new Date(), new Date()))
             .like("nickName", "%og%")
             .build();
 
@@ -430,7 +430,7 @@ public Page<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
             .eq(StringUtils.isNotBlank(request.getName()), "name", request.getName())
             .gt("age", 18)
-            .between("birthday", Range.of(inclusive(new Date()), inclusive(new Date())))
+            .between("birthday", Range.closed(new Date(), new Date()))
             .like("nickName", "%og%")
             .build();
 

@@ -6,12 +6,12 @@ import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
 import com.github.wenhao.jpa.repository.PhoneRepository;
+import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -93,7 +93,7 @@ public class JoinTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .between("age", Range.of(inclusive(10), inclusive(35)))
+            .between("age", Range.closed(10, 35))
             .eq("addresses.street", "Chengdu")
             .build();
 
