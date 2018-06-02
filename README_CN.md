@@ -53,6 +53,12 @@ dependencies {
 </dependency>
 ```
 
+### 构建
+
+```
+./gradlew clean jTCV jTR build
+```
+
 ### Maven排除项目已存在的依赖
 
 ```xml

@@ -63,6 +63,12 @@ dependencies {
 </dependency>
 ```
 
+### Build
+
+```
+./gradlew clean jTCV jTR build
+```
+
 ### Specification By Examples:
 
 #### Each specification support three parameters:

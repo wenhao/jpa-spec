@@ -9,7 +9,11 @@ plugins {
     id 'maven'
     id 'maven-publish'
     id 'signing'
-    id "com.bmuschko.clover" version "2.2.1"
+    id 'jacoco'
+    id "com.github.ksoichiro.spelling" version "0.1.1"
+    id "com.simonharrer.modernizer" version "1.6.0-1"
+    id 'com.github.ksoichiro.console.reporter' version '0.5.0'
+    id 'com.github.ksoichiro.build.info' version '0.2.0'
 }
 
 buildScan {
@@ -43,8 +47,6 @@ dependencies {
     testImplementation("com.h2database:h2:$h2Version")
     testImplementation("junit:junit:$junitVersion")
 
-    clover 'org.openclover:clover:4.2.0'
-
     task sourcesJar(type: Jar) {
         from sourceSets.main.allSource
         classifier = 'sources'
@@ -69,47 +71,46 @@ dependencies {
     }
 }
 
-clover {
-    targetPercentage = '90%'
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
 
-    report {
-        html = true
-
-        testResultsDir = project.tasks.getByName('test').reports.junitXml.destination
-        testResultsInclude = 'TEST-*.xml'
-
-        columns {
-            coveredMethods format: 'longbar', min: '75'
-            coveredStatements format: '%'
-            coveredBranches format: 'raw'
-            totalPercentageCovered format: '%', scope: 'package'
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
         }
 
-        historical {
+        rule {
             enabled = true
-            historyIncludes = 'clover-*.xml.gz'
-            packageFilter = null
-            from = null
-            to = null
+            element = 'PACKAGE'
+            includes = ['com.*']
 
-            added {
-                range = 10
-                interval = '3 weeks'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
             }
-            mover {
-                threshold = 1
-                range = 10
-                interval = '3 weeks'
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
             }
-            mover {
-                threshold = 1
-                range = 10
-                interval = '3 months'
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
             }
-            mover {
-                threshold = 1
-                range = 10
-                interval = '1 year'
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
             }
         }
     }
