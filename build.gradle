@@ -34,8 +34,8 @@ idea {
 }
 
 dependencies {
-    implementation("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
-    implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
+    compileOnly("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
+    compileOnly("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
@@ -67,10 +67,6 @@ dependencies {
         required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
-}
-
-configurations.all {
-    resolutionStrategy.force "org.springframework:spring-orm:$springOrmVersion"
 }
 
 clover {
