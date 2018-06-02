@@ -2,8 +2,14 @@ plugins {
     id 'com.gradle.build-scan' version '1.9'
     id "com.jfrog.bintray" version "1.7.3"
     id "org.owasp.dependencycheck" version "1.4.3"
-    id 'net.saliman.cobertura' version '2.3.1'
     id 'com.github.kt3k.coveralls' version '2.7.1'
+    id 'java-library'
+    id 'idea'
+    id 'net.ltgt.apt' version '0.10'
+    id 'maven'
+    id 'maven-publish'
+    id 'signing'
+    id "com.bmuschko.clover" version "2.2.1"
 }
 
 buildScan {
@@ -11,19 +17,12 @@ buildScan {
     licenseAgree = 'yes'
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'signing'
-
 repositories {
     jcenter()
 }
 
 group = 'com.github.wenhao'
-version = '3.2.3'
+version = '3.1.1'
 
 idea {
     project {
@@ -34,23 +33,17 @@ idea {
     }
 }
 
-def compatibility = {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-compileJava(compatibility)
-compileTestJava(compatibility)
-
 dependencies {
-    compile("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
-    compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
+    implementation("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
+    implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
 
-    testCompile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
-    testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
-    testCompile("org.apache.commons:commons-lang3:$commonsLang3Version")
-    testCompile("com.h2database:h2:$h2Version")
-    testCompile("junit:junit:$junitVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation("org.apache.commons:commons-lang3:$commonsLang3Version")
+    testImplementation("com.h2database:h2:$h2Version")
+    testImplementation("junit:junit:$junitVersion")
+
+    clover 'org.openclover:clover:4.2.0'
 
     task sourcesJar(type: Jar) {
         from sourceSets.main.allSource
@@ -80,7 +73,51 @@ configurations.all {
     resolutionStrategy.force "org.springframework:spring-orm:$springOrmVersion"
 }
 
-cobertura.coverageFormats = ['html', 'xml']
+clover {
+    targetPercentage = '90%'
+
+    report {
+        html = true
+
+        testResultsDir = project.tasks.getByName('test').reports.junitXml.destination
+        testResultsInclude = 'TEST-*.xml'
+
+        columns {
+            coveredMethods format: 'longbar', min: '75'
+            coveredStatements format: '%'
+            coveredBranches format: 'raw'
+            totalPercentageCovered format: '%', scope: 'package'
+        }
+
+        historical {
+            enabled = true
+            historyIncludes = 'clover-*.xml.gz'
+            packageFilter = null
+            from = null
+            to = null
+
+            added {
+                range = 10
+                interval = '3 weeks'
+            }
+            mover {
+                threshold = 1
+                range = 10
+                interval = '3 weeks'
+            }
+            mover {
+                threshold = 1
+                range = 10
+                interval = '3 months'
+            }
+            mover {
+                threshold = 1
+                range = 10
+                interval = '1 year'
+            }
+        }
+    }
+}
 
 def pomConfig = {
     licenses {
@@ -119,7 +156,7 @@ publishing {
             artifact javadocJar
             groupId 'com.github.wenhao'
             artifactId 'jpa-spec'
-            version '3.2.3'
+            version '3.1.1'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'A JAP Query By Specification framework.')
@@ -154,10 +191,10 @@ bintray {
         githubRepo = 'wenhao/jpa-spec'
         githubReleaseNotesFile = 'README.md'
         version {
-            name = '3.2.3'
-            desc = 'A JAP Query By Specification framework 3.2.3'
+            name = '3.1.1'
+            desc = 'A JAP Query By Specification framework 3.1.1'
             released = new Date()
-            vcsTag = '3.2.3'
+            vcsTag = '3.1.1'
             gpg {
                 sign = true
                 passphrase = 'passphrase'
@@ -170,4 +207,8 @@ bintray {
             }
         }
     }
+}
+
+wrapper {
+    gradleVersion = '4.7'
 }
