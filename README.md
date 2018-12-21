@@ -138,7 +138,7 @@ public List<Person> findAll(SearchRequest request) {
 
 Support any comparison class which implements Comparable interface, find any people age bigger than 18.
 
-**Test:** [GtTest.java]
+**Test:** [GreatThanTest.java]
 
 ```java
 public List<Person> findAll(SearchRequest request) {
@@ -260,7 +260,7 @@ You can custom specification to do the @ManyToOne and @ManyToMany as well.
 
 @ManyToOne association query, find person name equals to "Jack" and phone brand equals to "HuaWei".
 
-**Test:** [AndTest.java]
+**Test:** [PredicateTest.java]
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
@@ -278,7 +278,7 @@ public List<Phone> findAll(SearchRequest request) {
 
 @ManyToMany association query, find person age between 10 and 35, live in "Chengdu" street.
 
-**Test:** [AndTest.java]
+**Test:** [PredicateTest.java]
 
 ```java
 public List<Phone> findAll(SearchRequest request) {
@@ -403,13 +403,13 @@ Licensed under [Apache License]
 [EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java
 [NotEqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotEqualTest.java
 [InTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/InTest.java
-[GtTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/GtTest.java
+[GreatThanTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/GreatThanTest.java
 [BetweenTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/BetweenTest.java
 [LikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/LikeTest.java
 [NotLikeTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/NotLikeTest.java
 [OrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/OrTest.java
 [AndOrTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndOrTest.java
-[AndTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/AndTest.java
+[PredicateTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/PredicateTest.java
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [SortTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/SortsTest.java
 [VirtualViewTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/VirtualViewTest.java
