@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Color codes
+red='\033[0;31m'
+yellow='\033[0;33m'
+
+command="./gradlew build"
+
+${command}
+
+if ! [ $? -eq 0 ]; then
+    printf "${red}Make sure successfully execute command: ${yellow}$command${red}."
+    exit 1
+fi

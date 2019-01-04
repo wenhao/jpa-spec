@@ -205,3 +205,9 @@ bintray {
         }
     }
 }
+
+copy {
+    from "./config/githooks/"
+    into "./.git/hooks/"
+    fileMode 0755
+}

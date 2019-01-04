@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Color codes
+red='\033[0;31m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+NC='\033[0m' # No colors
+
+# Regex & Usage
+commit_regex="^(\[\S+(\s\&\s\S+)*\]|merge)\s"
+error_message="Aborting commit. Commit message must start with ${yellow}[YOUR NAME]."
+usage="[YOUR NAME] Commit Message."
+
+if ! grep -qE "$commit_regex" "$1"; then
+  printf "${red}$error_message\n"
+  printf "${yellow}Commit Regex: ${NC}${commit_regex}\n"
+  printf "${red}Usage: ${NC}${usage}\n"
+  exit 1
+fi
