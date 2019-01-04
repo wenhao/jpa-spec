@@ -39,7 +39,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.3'
+    compile 'com.github.wenhao:jpa-spec:3.2.4'
 }
 ```
 
@@ -49,7 +49,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.3</version>
+    <version>3.2.4</version>
 </dependency>
 ```
 
@@ -65,7 +65,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.3</version>
+    <version>3.2.4</version>
     <exclusions>
         <exclusion>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -514,7 +514,7 @@ Spring Data JPA对投射、分组和聚合支持不是很好，
 
 ### Copyright and license
 
-Copyright © 2016-2018 Wen Hao
+Copyright © 2016-2019 Wen Hao
 
 Licensed under [Apache License]
 
