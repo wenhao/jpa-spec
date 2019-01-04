@@ -21,7 +21,7 @@ English Version:
 
 [Latest]
 
-[3.2.3]
+[3.2.4]
 
 [3.2.1]
 
@@ -33,7 +33,7 @@ Chinese Version:
 
 [最新]
 
-[3.2.3_cn]
+[3.2.4_cn]
 
 [3.2.1_cn]
 
@@ -49,7 +49,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.3'
+    compile 'com.github.wenhao:jpa-spec:3.2.4'
 }
 ```
 
@@ -59,7 +59,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.3</version>
+    <version>3.2.4</version>
 </dependency>
 ```
 
@@ -389,13 +389,13 @@ Copyright © 2016-2018 Wen Hao
 Licensed under [Apache License]
 
 
-[Latest]: ./docs/3.2.3.md
-[3.2.3]: ./docs/3.2.3.md
+[Latest]: ./docs/3.2.4.md
+[3.2.4]: ./docs/3.2.4.md
 [3.2.1]: ./docs/3.2.1.md
 [3.1.0]: ./docs/3.1.0.md
 [3.0.0]: ./docs/3.0.0.md
-[最新]: ./docs/3.2.3_cn.md
-[3.2.3_cn]: ./docs/3.2.3_cn.md
+[最新]: ./docs/3.2.4_cn.md
+[3.2.4_cn]: ./docs/3.2.4_cn.md
 [3.2.1_cn]: ./docs/3.2.1_cn.md
 [3.1.0_cn]: ./docs/3.1.0_cn.md
 [3.0.0_cn]: ./docs/3.0.0_cn.md
