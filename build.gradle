@@ -1,6 +1,6 @@
 plugins {
     id 'com.gradle.build-scan' version '1.9'
-    id "com.jfrog.bintray" version "1.7.3"
+    id "com.jfrog.bintray" version "1.8.4"
     id "org.owasp.dependencycheck" version "1.4.3"
     id 'com.github.kt3k.coveralls' version '2.7.1'
     id 'java-library'
