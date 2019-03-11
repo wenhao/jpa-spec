@@ -56,7 +56,7 @@ dependencies {
 ### 构建
 
 ```
-./gradlew clean jTCV jTR build
+./gradlew clean build
 ```
 
 ### Maven排除项目已存在的依赖

@@ -66,7 +66,7 @@ dependencies {
 ### Build
 
 ```
-./gradlew clean jTCV jTR build
+./gradlew clean build
 ```
 
 ### Specification By Examples:
