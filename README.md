@@ -17,29 +17,13 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 
 ### Docs
 
-English Version:
-
-[Latest]
-
-[3.2.4]
-
-[3.2.1]
-
-[3.1.0]
-
-[3.0.0]
-
-Chinese Version:
-
-[最新]
-
-[3.2.4_cn]
-
-[3.2.1_cn]
-
-[3.1.0_cn]
-
-[3.0.0_cn]
+| English Version | Chinese Version |
+|-----------------|-----------------|
+| [Latest]        | [最新]          |
+| [3.2.4]         | [3.2.4_cn]      |
+| [3.2.1]         | [3.2.1_cn]      |
+| [3.1.0]         | [3.1.0_cn]      |
+| [3.0.0]         | [3.0.0_cn]      |
 
 ### Gradle
 
