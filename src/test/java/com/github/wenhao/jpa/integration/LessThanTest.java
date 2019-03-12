@@ -26,18 +26,14 @@ import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.repository.PersonRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class LessThanTest {
 
@@ -48,20 +44,20 @@ public class LessThanTest {
     public void should_be_able_to_find_by_using_less_than() {
         // given
         Person jack = new PersonBuilder()
-            .name("Jack")
-            .age(20)
-            .build();
+                .name("Jack")
+                .age(20)
+                .build();
         Person eric = new PersonBuilder()
-            .name("Eric")
-            .age(18)
-            .build();
+                .name("Eric")
+                .age(18)
+                .build();
         personRepository.save(jack);
         personRepository.save(eric);
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-            .lt("age", 20)
-            .build();
+                .lt("age", 20)
+                .build();
 
         List<Person> persons = personRepository.findAll(specification);
 

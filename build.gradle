@@ -38,14 +38,18 @@ idea {
 }
 
 dependencies {
-    compileOnly("org.springframework.data:spring-data-jpa:$springDataJpaVersion")
-    compileOnly("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion")
+    compileOnly "org.springframework.data:spring-data-jpa:$springDataJpaVersion"
+    compileOnly "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:$jpaVersion"
 
-    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
-    testImplementation("org.apache.commons:commons-lang3:$commonsLang3Version")
-    testImplementation("com.h2database:h2:$h2Version")
-    testImplementation("junit:junit:$junitVersion")
+    testImplementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "org.apache.commons:commons-lang3:$commonsLang3Version"
+    testImplementation "com.h2database:h2:$h2Version"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
 
     task sourcesJar(type: Jar) {
         from sourceSets.main.allSource
@@ -69,6 +73,13 @@ dependencies {
         required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
+}
+
+test {
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+    }
+    useJUnitPlatform()
 }
 
 jacocoTestReport {

@@ -29,12 +29,11 @@ import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
 import com.github.wenhao.jpa.repository.PhoneRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
@@ -42,9 +41,6 @@ import javax.persistence.criteria.Path;
 import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class PredicateTest {
 

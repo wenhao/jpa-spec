@@ -26,21 +26,17 @@ import com.github.wenhao.jpa.Specifications;
 import com.github.wenhao.jpa.builder.PersonBuilder;
 import com.github.wenhao.jpa.model.Person;
 import com.github.wenhao.jpa.repository.PersonRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.assertj.core.api.Assertions.assertThat;
-
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class EqualTest {
 
@@ -67,6 +63,7 @@ public class EqualTest {
         assertThat(result.get().getName()).isEqualTo(person.getName());
     }
 
+    @SuppressWarnings("all")
     @Test
     public void should_be_able_to_find_by_using_equal_for_single_null_value() {
         // given
