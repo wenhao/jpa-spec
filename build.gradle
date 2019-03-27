@@ -3,6 +3,7 @@ plugins {
     id "com.jfrog.bintray" version "1.8.4"
     id "org.owasp.dependencycheck" version "5.0.0-M1"
     id 'com.github.kt3k.coveralls' version '2.7.1'
+    id 'checkstyle'
     id 'java-library'
     id 'idea'
     id 'net.ltgt.apt' version '0.21'
@@ -80,6 +81,17 @@ test {
         events 'PASSED', 'FAILED', 'SKIPPED'
     }
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion '8.1'
+    ignoreFailures = false
+    configFile file("$project.rootDir/config/checkstyle/checkstyle.xml")
+    sourceSets = [sourceSets.main]
+
+    checkstyleMain {
+        source = 'src/main/java'
+    }
 }
 
 jacocoTestReport {
