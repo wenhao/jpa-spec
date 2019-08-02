@@ -9,9 +9,9 @@
 .gradle/
 .idea/
 build/
-jpa-spec.ipr
-jpa-spec.iws
-jpa-spec.iml
+*.ipr
+*.iws
+*.iml
 src/.DS_Store
 
 .java-version
