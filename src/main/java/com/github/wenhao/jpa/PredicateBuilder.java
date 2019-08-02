@@ -33,6 +33,7 @@ import com.github.wenhao.jpa.specification.LtSpecification;
 import com.github.wenhao.jpa.specification.NotEqualSpecification;
 import com.github.wenhao.jpa.specification.NotInSpecification;
 import com.github.wenhao.jpa.specification.NotLikeSpecification;
+import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -40,10 +41,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-
-import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
 
 public class PredicateBuilder<T> {
 
@@ -128,19 +128,19 @@ public class PredicateBuilder<T> {
         return this.predicate(condition, new NotLikeSpecification<T>(property, patterns));
     }
 
-    public PredicateBuilder<T> in(String property, Object... values) {
+    public PredicateBuilder<T> in(String property, Collection<?> values) {
         return this.in(true, property, values);
     }
 
-    public PredicateBuilder<T> in(boolean condition, String property, Object... values) {
+    public PredicateBuilder<T> in(boolean condition, String property, Collection<?> values) {
         return this.predicate(condition, new InSpecification<T>(property, values));
     }
 
-    public PredicateBuilder<T> notIn(String property, Object... values) {
+    public PredicateBuilder<T> notIn(String property, Collection<?> values) {
         return this.notIn(true, property, values);
     }
 
-    public PredicateBuilder<T> notIn(boolean condition, String property, Object... values) {
+    public PredicateBuilder<T> notIn(boolean condition, String property, Collection<?> values) {
         return this.predicate(condition, new NotInSpecification<T>(property, values));
     }
 

@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.Arrays;
 import java.util.List;
 
 @DataJpaTest
@@ -57,7 +58,7 @@ public class InTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .in(isNotBlank(jack.getName()), "name", "Jack", "Eric")
+                .in(isNotBlank(jack.getName()), "name", Arrays.asList("Jack", "Eric"))
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

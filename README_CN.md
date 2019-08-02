@@ -39,7 +39,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.4'
+    compile 'com.github.wenhao:jpa-spec:3.2.5'
 }
 ```
 
@@ -49,7 +49,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.4</version>
+    <version>3.2.5</version>
 </dependency>
 ```
 
@@ -65,7 +65,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.4</version>
+    <version>3.2.5</version>
     <exclusions>
         <exclusion>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -172,8 +172,8 @@ find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "I
 ```java
 public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-            .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
-            .notIn("company", "ThoughtWorks", "IBM")
+            .in("name", request.getNames())
+            .notIn("company", Arrays.asList("ThoughtWorks", "IBM"))
             .build();
 
     return personRepository.findAll(specification);

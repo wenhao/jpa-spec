@@ -27,12 +27,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.From;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Collection;
 
 public class InSpecification<T> extends AbstractSpecification<T> {
     private String property;
-    private Object[] values;
+    private Collection<?> values;
 
-    public InSpecification(String property, Object[] values) {
+    public InSpecification(String property, Collection<?> values) {
         this.property = property;
         this.values = values;
     }

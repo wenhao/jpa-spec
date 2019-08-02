@@ -20,7 +20,7 @@ but it still productive and easily understandable. Build on Spring Data JPA and 
 | English Version | Chinese Version |
 |-----------------|-----------------|
 | [Latest]        | [最新]          |
-| [3.2.4]         | [3.2.4_cn]      |
+| [3.2.5]         | [3.2.5_cn]      |
 | [3.2.1]         | [3.2.1_cn]      |
 | [3.1.0]         | [3.1.0_cn]      |
 | [3.0.0]         | [3.0.0_cn]      |
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.4'
+    compile 'com.github.wenhao:jpa-spec:3.2.5'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>com.github.wenhao</groupId>
     <artifactId>jpa-spec</artifactId>
-    <version>3.2.4</version>
+    <version>3.2.5</version>
 </dependency>
 ```
 
@@ -110,8 +110,8 @@ find any person name in "Jack" or "Eric" and company not in "ThoughtWorks" or "I
 ```java
 public List<Person> findAll(SearchRequest request) {
     Specification<Person> specification = Specifications.<Person>and()
-            .in("name", request.getNames().toArray()) //or in("name", "Jack", "Eric")
-            .notIn("company", "ThoughtWorks", "IBM")
+            .in("name", request.getNames())
+            .notIn("company", Arrays.asList("ThoughtWorks", "IBM"))
             .build();
 
     return personRepository.findAll(specification);
@@ -373,13 +373,13 @@ Copyright © 2016-2019 Wen Hao
 Licensed under [Apache License]
 
 
-[Latest]: ./docs/3.2.4.md
-[3.2.4]: ./docs/3.2.4.md
+[Latest]: ./docs/3.2.5.md
+[3.2.5]: ./docs/3.2.5.md
 [3.2.1]: ./docs/3.2.1.md
 [3.1.0]: ./docs/3.1.0.md
 [3.0.0]: ./docs/3.0.0.md
-[最新]: ./docs/3.2.4_cn.md
-[3.2.4_cn]: ./docs/3.2.4_cn.md
+[最新]: ./docs/3.2.5_cn.md
+[3.2.5_cn]: ./docs/3.2.5_cn.md
 [3.2.1_cn]: ./docs/3.2.1_cn.md
 [3.1.0_cn]: ./docs/3.1.0_cn.md
 [3.0.0_cn]: ./docs/3.0.0_cn.md

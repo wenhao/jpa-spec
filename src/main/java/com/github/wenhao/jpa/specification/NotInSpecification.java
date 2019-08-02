@@ -27,12 +27,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.From;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Collection;
 
 public class NotInSpecification<T> extends AbstractSpecification<T> {
     private String property;
-    private Object[] values;
+    private Collection<?> values;
 
-    public NotInSpecification(String property, Object[] values) {
+    public NotInSpecification(String property, Collection<?> values) {
         this.property = property;
         this.values = values;
     }
