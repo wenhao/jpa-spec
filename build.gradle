@@ -27,7 +27,7 @@ repositories {
 }
 
 group = 'com.github.wenhao'
-version = '3.2.4'
+version = '3.2.5'
 
 idea {
     project {
@@ -183,7 +183,7 @@ publishing {
             artifact javadocJar
             groupId 'com.github.wenhao'
             artifactId 'jpa-spec'
-            version '3.2.4'
+            version '3.2.5'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'A JAP Query By Specification framework.')
@@ -218,10 +218,10 @@ bintray {
         githubRepo = 'wenhao/jpa-spec'
         githubReleaseNotesFile = 'README.md'
         version {
-            name = '3.2.4'
-            desc = 'A JAP Query By Specification framework 3.2.4'
+            name = '3.2.5'
+            desc = 'A JAP Query By Specification framework 3.2.5'
             released = new Date()
-            vcsTag = '3.2.4'
+            vcsTag = '3.2.5'
             gpg {
                 sign = true
                 passphrase = 'passphrase'

@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.wenhao:jpa-spec:3.2.5'
+    implementation 'com.github.wenhao:jpa-spec:3.2.5'
 }
 ```
 
