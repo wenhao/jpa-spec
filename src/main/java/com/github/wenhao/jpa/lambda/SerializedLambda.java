@@ -23,7 +23,14 @@
 package com.github.wenhao.jpa.lambda;
 
 
-import java.io.*;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
+
 
 public class SerializedLambda implements Serializable {
     private static final long serialVersionUID = 8025925345765570181L;
