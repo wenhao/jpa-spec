@@ -51,7 +51,7 @@ public class PersonBuilder {
         return this;
     }
     public PersonBuilder delete(Boolean delete) {
-        this.person.setIsDelete(delete);
+        this.person.setDelete(delete);
         return this;
     }
 
