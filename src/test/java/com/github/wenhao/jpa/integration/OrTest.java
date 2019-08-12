@@ -66,8 +66,8 @@ public class OrTest {
         Specification<Person> specification = Specifications.<Person>or()
                 .like(Person::getName, "%ac%")
                 .gt(Person::getAge, 19)
-                .eq(jack.getCompany() != null, null)
-                .ne(jack.getNickName() != null, null)
+                .eq(jack.getCompany() != null,(String) null)
+                .ne(jack.getNickName() != null,(String)null)
                 .between(jack.getBirthday() != null, Person::getBirthday, new Date(), new Date())
                 .build();
 
