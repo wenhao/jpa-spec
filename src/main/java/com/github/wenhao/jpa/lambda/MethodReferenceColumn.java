@@ -20,43 +20,14 @@
  * SOFTWARE.
  */
 
-package com.github.wenhao.jpa.model;
+package com.github.wenhao.jpa.lambda;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.function.Supplier;
 
-@Entity
-@Table(name = "id_card")
-public class IdCard implements Serializable {
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String number;
-    @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
+public interface MethodReferenceColumn<T> extends Supplier<T>, Serializable {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
+    default String getColumn() {
+        return MethodReferenceConvert.convertToColumn(this);
     }
 }

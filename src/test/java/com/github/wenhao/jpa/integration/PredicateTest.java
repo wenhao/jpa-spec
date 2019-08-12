@@ -29,7 +29,6 @@ import com.github.wenhao.jpa.model.Phone;
 import com.github.wenhao.jpa.repository.PersonRepository;
 import com.github.wenhao.jpa.repository.PhoneRepository;
 import org.apache.commons.lang3.StringUtils;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -40,6 +39,8 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import java.util.List;
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 public class PredicateTest {
@@ -128,6 +129,20 @@ public class PredicateTest {
 
         // then
         assertThat(phones.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void predicate_supplier() {
+        Person alex = null;
+
+        //no java.lang.NullPointerException
+        Specifications.<Person>and()
+                .predicate(alex != null, (b) -> {
+                    b.eq("name", alex.getName());
+                    b.eq("age", alex.getAge());
+                })
+                .build();
+
     }
 
 }
