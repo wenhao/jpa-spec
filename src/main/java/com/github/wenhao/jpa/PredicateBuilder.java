@@ -40,6 +40,7 @@ import java.util.function.Supplier;
 
 import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
 
+
 public class PredicateBuilder<T> {
 
     private final Predicate.BooleanOperator operator;
