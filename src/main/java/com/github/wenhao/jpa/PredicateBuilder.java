@@ -24,7 +24,19 @@ package com.github.wenhao.jpa;
 
 import com.github.wenhao.jpa.lambda.MethodReferenceColumn;
 import com.github.wenhao.jpa.lambda.StaticMethodReferenceColumn;
-import com.github.wenhao.jpa.specification.*;
+import com.github.wenhao.jpa.specification.BetweenSpecification;
+import com.github.wenhao.jpa.specification.EqualSpecification;
+import com.github.wenhao.jpa.specification.GeSpecification;
+import com.github.wenhao.jpa.specification.GtSpecification;
+import com.github.wenhao.jpa.specification.InSpecification;
+import com.github.wenhao.jpa.specification.LeSpecification;
+import com.github.wenhao.jpa.specification.LikeSpecification;
+import com.github.wenhao.jpa.specification.LtSpecification;
+import com.github.wenhao.jpa.specification.NotEqualSpecification;
+import com.github.wenhao.jpa.specification.NotInSpecification;
+import com.github.wenhao.jpa.specification.NotLikeSpecification;
+import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
