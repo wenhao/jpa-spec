@@ -48,13 +48,7 @@ public class SerializedLambda implements Serializable {
             oos.writeObject(lambdaColumn);
             oos.flush();
             byte[] data = baos.toByteArray();
-            try (ObjectInputStream objIn = new ObjectInputStream(new ByteArrayInputStream(data)) {
-                @Override
-                protected Class<?> resolveClass(ObjectStreamClass objectStreamClass) throws IOException, ClassNotFoundException {
-                    Class<?> clazz = super.resolveClass(objectStreamClass);
-                    return clazz == java.lang.invoke.SerializedLambda.class ? SerializedLambda.class : clazz;
-                }
-            }) {
+            try (ObjectInputStream objIn = new SerializedLambdaObjectInputStream(new ByteArrayInputStream(data))) {
                 SerializedLambda lambda = (SerializedLambda) objIn.readObject();
                 if (lambda.getMethodName().startsWith("lambda$")) {
                     throw new UnsupportedOperationException("请使用方法引用,例如: UserEntity::getName");
@@ -62,7 +56,6 @@ public class SerializedLambda implements Serializable {
                 return lambda;
             }
         } catch (NotSerializableException e) {
-
             throw new UnsupportedOperationException("请将类[" + e.getMessage() + "]实现[Serializable]接口");
         } catch (IOException | ClassNotFoundException e) {
             throw new UnsupportedOperationException("未找到class[" + e.getMessage() + "]");
