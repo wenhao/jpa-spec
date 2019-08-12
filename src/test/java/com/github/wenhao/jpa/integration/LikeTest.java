@@ -61,6 +61,8 @@ public class LikeTest {
         query.setName("");
         // when
         Specification<Person> specification = Specifications.<Person>and()
+                .like("name", "%ac%", "%ri%")
+                .like(Person::getName, "%ac%", "%ri%")
                 .like(isNotBlank(jack.getName()), Person::getName, "%ac%", "%ri%")
                 .like(isNotBlank(query.getName()), query::getName)
                 .build();

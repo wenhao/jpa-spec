@@ -57,6 +57,7 @@ public class LessThanTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .lt(Person::getAge, 20)
+                .lt("age", 20)
                 .lt(jack::getAge)
                 .build();
 

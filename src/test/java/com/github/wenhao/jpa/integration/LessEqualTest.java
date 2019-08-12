@@ -57,6 +57,7 @@ public class LessEqualTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .le(Person::getAge, 18)
+                .le("age", 18)
                 .le(eric::getAge)
                 .build();
 

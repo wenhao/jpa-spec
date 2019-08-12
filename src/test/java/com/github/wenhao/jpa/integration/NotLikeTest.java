@@ -61,6 +61,8 @@ public class NotLikeTest {
         query.setName("");
         // when
         Specification<Person> specification = Specifications.<Person>and()
+                .notLike(Person::getName, "%ac%")
+                .notLike("name", "%ac%")
                 .notLike(isNotBlank(jack.getName()), Person::getName, "%ac%")
                 .notLike(isNotBlank(jack.getNickName()), Person::getName, "%og%", "%ri%")
                 .notLike(isNotBlank(query.getNickName()), query::getName)

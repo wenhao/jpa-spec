@@ -57,6 +57,7 @@ public class GreatEqualTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .ge(Person::getAge, 20)
+                .ge("age", 20)
                 .ge(jack::getAge)
                 .build();
 
