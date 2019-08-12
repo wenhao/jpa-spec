@@ -50,8 +50,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
-
 
 public class PredicateBuilder<T> {
 
