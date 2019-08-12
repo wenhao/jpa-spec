@@ -50,6 +50,10 @@ public class PersonBuilder {
         this.person.setNickName(nickName);
         return this;
     }
+    public PersonBuilder delete(Boolean delete) {
+        this.person.setIsDelete(delete);
+        return this;
+    }
 
     public PersonBuilder company(String company) {
         this.person.setCompany(company);

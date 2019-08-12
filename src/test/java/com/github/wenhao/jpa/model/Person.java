@@ -52,6 +52,7 @@ public class Person implements Serializable {
     private String nickName;
     private String company;
     private Date birthday;
+    private Boolean isDelete;
     @OneToOne(cascade = ALL)
     @JoinColumn(name = "id_card_id")
     private IdCard idCard;
@@ -130,5 +131,13 @@ public class Person implements Serializable {
 
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public Boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(final Boolean delete) {
+        isDelete = delete;
     }
 }
