@@ -90,8 +90,8 @@ public class NotEqualTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .ne(Person::getName, null)
-                .ne(Person::getCompany, null)
+                .ne(Person::getName, (Object) null)
+                .ne(Person::getCompany, (Object) null)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

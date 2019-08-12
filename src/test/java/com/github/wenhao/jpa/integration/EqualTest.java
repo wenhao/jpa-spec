@@ -82,8 +82,8 @@ public class EqualTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .eq("company",  null)
-                .eq("nickName", null)
+                .eq("company", (Object) null)
+                .eq("nickName", (Object) null)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);
