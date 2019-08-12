@@ -57,6 +57,7 @@ public class GreatThanTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .gt(Person::getAge, 18)
+                .gt(eric::getAge)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

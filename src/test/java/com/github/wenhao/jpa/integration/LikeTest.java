@@ -55,9 +55,14 @@ public class LikeTest {
         personRepository.save(jack);
         personRepository.save(eric);
 
+
+
+        Person query=new Person();
+        query.setName("");
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .like(isNotBlank(jack.getName()), Person::getName, "%ac%", "%ri%")
+                .like(isNotBlank(query.getName()), query::getName)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

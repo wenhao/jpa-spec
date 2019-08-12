@@ -139,6 +139,7 @@ public class EqualTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .eq(isNotBlank(EMPTY), "name", jack.getName())
+                .eq(isNotBlank(EMPTY),  jack::getName)
                 .like(isNotBlank(EMPTY), "name", "%" + jack.getName() + "%")
                 .build();
 

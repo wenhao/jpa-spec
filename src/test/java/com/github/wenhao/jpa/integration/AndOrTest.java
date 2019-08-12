@@ -61,10 +61,10 @@ public class AndOrTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .like("name", "%ac%")
-                .predicate(Specifications.or()
-                        .lt("age", 19)
-                        .gt("age", 25)
+                .like(Person::getName, "%ac%")
+                .predicate(Specifications.<Person>or()
+                        .lt(Person::getAge, 19)
+                        .gt(Person::getAge, 25)
                         .build())
                 .build();
 

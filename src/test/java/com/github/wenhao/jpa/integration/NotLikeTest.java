@@ -57,10 +57,13 @@ public class NotLikeTest {
         personRepository.save(jack);
         personRepository.save(eric);
 
+        Person query=new Person();
+        query.setName("");
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .notLike(isNotBlank(jack.getName()), Person::getName, "%ac%")
                 .notLike(isNotBlank(jack.getNickName()), Person::getName, "%og%", "%ri%")
+                .notLike(isNotBlank(query.getNickName()), query::getName)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);
