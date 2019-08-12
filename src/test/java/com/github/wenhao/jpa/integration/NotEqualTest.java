@@ -91,7 +91,7 @@ public class NotEqualTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .ne(Person::getName, null)
-                .ne(Person::getCompany, (Object) null)
+                .ne(Person::getCompany, null)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);
