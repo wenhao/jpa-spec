@@ -64,11 +64,11 @@ public class OrTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>or()
-                .like("name", "%ac%")
-                .gt("age", 19)
+                .like(Person::getName, "%ac%")
+                .gt(Person::getAge, 19)
                 .eq(jack.getCompany() != null, null)
                 .ne(jack.getNickName() != null, null)
-                .between(jack.getBirthday() != null, "birthday", new Date(), new Date())
+                .between(jack.getBirthday() != null, Person::getBirthday, new Date(), new Date())
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);
@@ -93,8 +93,8 @@ public class OrTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>or()
-                .eq(isNotBlank(EMPTY), "name", jack.getName())
-                .like(isNotBlank(EMPTY), "name", "%" + jack.getName() + "%")
+                .eq(isNotBlank(EMPTY), Person::getName, jack.getName())
+                .like(isNotBlank(EMPTY), Person::getName, "%" + jack.getName() + "%")
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

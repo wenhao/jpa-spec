@@ -22,6 +22,7 @@
 
 package com.github.wenhao.jpa.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "address")
-public class Address {
+public class Address implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

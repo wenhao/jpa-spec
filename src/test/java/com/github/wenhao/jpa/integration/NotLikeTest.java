@@ -59,8 +59,8 @@ public class NotLikeTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .notLike(isNotBlank(jack.getName()), "name", "%ac%")
-                .notLike(isNotBlank(jack.getNickName()), "name", "%og%", "%ri%")
+                .notLike(isNotBlank(jack.getName()), Person::getName, "%ac%")
+                .notLike(isNotBlank(jack.getNickName()), Person::getName, "%og%", "%ri%")
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

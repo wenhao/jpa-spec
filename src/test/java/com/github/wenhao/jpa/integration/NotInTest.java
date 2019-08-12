@@ -58,7 +58,7 @@ public class NotInTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .notIn(isNotBlank(jack.getName()), "name", Arrays.asList("Eric"))
+                .notIn(isNotBlank(jack.getName()), Person::getName, Arrays.asList("Eric"))
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

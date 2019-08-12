@@ -54,7 +54,7 @@ public class EqualTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .eq(isNotBlank(person.getName()), "name", person.getName())
+                .eq(isNotBlank(person.getName()), Person::getName, person.getName())
                 .build();
 
         Optional<Person> result = personRepository.findOne(specification);

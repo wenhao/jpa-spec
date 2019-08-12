@@ -63,13 +63,13 @@ public class SortsTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .ne("name", (Object) null)
+                .ne(Person::getName, (Object) null)
                 .build();
 
         Sort sort = Sorts.builder()
-                .desc(jack.getAge() != null, "age")
-                .desc("name")
-                .desc(jack.getCompany() != null, "company")
+                .desc(jack.getAge() != null, Person::getAge)
+                .desc(Person::getName)
+                .desc(jack.getCompany() != null, Person::getCompany)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification, sort);

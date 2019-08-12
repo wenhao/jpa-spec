@@ -57,7 +57,7 @@ public class LikeTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .like(isNotBlank(jack.getName()), "name", "%ac%", "%ri%")
+                .like(isNotBlank(jack.getName()), Person::getName, "%ac%", "%ri%")
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

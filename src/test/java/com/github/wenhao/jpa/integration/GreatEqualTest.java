@@ -56,7 +56,7 @@ public class GreatEqualTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .ge("age", 20)
+                .ge(Person::getAge, 20)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

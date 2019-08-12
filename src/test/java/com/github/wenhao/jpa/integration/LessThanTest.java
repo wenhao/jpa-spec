@@ -56,7 +56,7 @@ public class LessThanTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .lt("age", 20)
+                .lt(Person::getAge, 20)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

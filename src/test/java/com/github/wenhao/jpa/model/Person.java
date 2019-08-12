@@ -24,6 +24,7 @@ package com.github.wenhao.jpa.model;
 
 import static javax.persistence.CascadeType.ALL;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +42,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

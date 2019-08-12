@@ -58,7 +58,7 @@ public class InTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .in(isNotBlank(jack.getName()), "name", Arrays.asList("Jack", "Eric"))
+                .in(isNotBlank(jack.getName()), Person::getName, Arrays.asList("Jack", "Eric"))
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

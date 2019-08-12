@@ -22,6 +22,7 @@
 
 package com.github.wenhao.jpa;
 
+import com.github.wenhao.jpa.lambda.StaticMethodReferenceColumn;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
@@ -47,12 +48,24 @@ public final class Sorts {
             this.orders = new ArrayList<>();
         }
 
+        public <T> Builder asc(StaticMethodReferenceColumn<T> staticMethodReferenceColumn) {
+            return asc(true, staticMethodReferenceColumn);
+        }
+
         public Builder asc(String property) {
             return asc(true, property);
         }
 
+        public <T> Builder desc(StaticMethodReferenceColumn<T> staticMethodReferenceColumn) {
+            return desc(true, staticMethodReferenceColumn);
+        }
+
         public Builder desc(String property) {
             return desc(true, property);
+        }
+
+        public <T> Builder asc(boolean condition, StaticMethodReferenceColumn<T> staticMethodReferenceColumn) {
+            return asc(condition, staticMethodReferenceColumn.getColumn());
         }
 
         public Builder asc(boolean condition, String property) {
@@ -60,6 +73,10 @@ public final class Sorts {
                 orders.add(new Order(ASC, property));
             }
             return this;
+        }
+
+        public <T> Builder desc(boolean condition, StaticMethodReferenceColumn<T> staticMethodReferenceColumn) {
+            return desc(condition, staticMethodReferenceColumn.getColumn());
         }
 
         public Builder desc(boolean condition, String property) {

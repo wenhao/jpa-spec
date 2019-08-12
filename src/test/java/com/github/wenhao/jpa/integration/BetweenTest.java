@@ -60,7 +60,7 @@ public class BetweenTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .between(nonNull(jack.getBirthday()), "birthday", getDate("1980-01-01"), getDate("1989-12-31"))
+                .between(nonNull(jack.getBirthday()), Person::getBirthday, getDate("1980-01-01"), getDate("1989-12-31"))
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);
@@ -68,6 +68,8 @@ public class BetweenTest {
         // then
         assertThat(persons.size()).isEqualTo(1);
     }
+
+
 
     private Date getDate(String source) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(source);

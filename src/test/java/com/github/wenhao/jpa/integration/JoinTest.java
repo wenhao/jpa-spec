@@ -66,7 +66,7 @@ public class JoinTest {
 
         // when
         Specification<Phone> specification = Specifications.<Phone>and()
-                .eq("brand", "HuaWei")
+                .eq(Phone::getBrand, "HuaWei")
                 .eq(StringUtils.isNotBlank(jack.getName()), "person.name", jack.getName())
                 .build();
 

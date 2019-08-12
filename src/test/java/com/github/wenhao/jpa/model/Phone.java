@@ -27,10 +27,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "phone")
-public class Phone {
+public class Phone implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

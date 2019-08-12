@@ -117,7 +117,7 @@ public class PredicateTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .between("age", 10, 35)
+                .between(Person::getAge, 10, 35)
                 .predicate(StringUtils.isNotBlank(jack.getName()), (Specification<Phone>) (root, query, cb) -> {
                     Join address = root.join("addresses", JoinType.LEFT);
                     return cb.equal(address.get("street"), "Chengdu");
@@ -132,15 +132,28 @@ public class PredicateTest {
     }
 
     @Test
-    public void predicate_supplier() {
+    public void predicate_consumer() {
         Person alex = null;
 
         //no java.lang.NullPointerException
         Specifications.<Person>and()
                 .predicate(alex != null, (b) -> {
-                    b.eq("name", alex.getName());
-                    b.eq("age", alex.getAge());
+                    b.eq(Person::getName, alex.getName())
+                     .eq(Person::getAge, alex.getAge());
                 })
+                .build();
+
+    }
+
+    @Test
+    public void predicate_supplier() {
+        Person alex = null;
+
+        //no java.lang.NullPointerException
+        Specifications.<Person>and()
+                .predicate(alex != null, () -> Specifications.<Person>and().eq(Person::getName, alex.getName())
+                                                                           .eq(Person::getAge, alex.getAge())
+                                                                           .build())
                 .build();
 
     }

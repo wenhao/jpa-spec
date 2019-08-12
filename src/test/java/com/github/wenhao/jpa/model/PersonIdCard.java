@@ -27,6 +27,7 @@ import org.hibernate.annotations.Subselect;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 @Immutable
@@ -34,7 +35,7 @@ import javax.persistence.Id;
            "FROM person p " +
            "LEFT JOIN id_card ic " +
            "ON p.id_card_id=ic.id")
-public class PersonIdCard {
+public class PersonIdCard implements Serializable {
     @Id
     private Long id;
     private String name;

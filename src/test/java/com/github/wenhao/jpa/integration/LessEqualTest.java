@@ -56,7 +56,7 @@ public class LessEqualTest {
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
-                .le("age", 18)
+                .le(Person::getAge, 18)
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

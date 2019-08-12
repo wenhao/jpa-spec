@@ -71,7 +71,7 @@ public class VirtualViewTest {
 
         // when
         Specification<PersonIdCard> specification = Specifications.<PersonIdCard>and()
-                .gt("age", 18)
+                .gt(PersonIdCard::getAge, 18)
                 .build();
         List<PersonIdCard> personIdCards = personIdCardRepository.findAll(specification);
 
