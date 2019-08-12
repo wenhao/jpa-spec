@@ -51,13 +51,9 @@ public class MethodReferenceConvert {
     }
 
     private static String toLowerCaseFirstOne(String str) {
-        if (Character.isLowerCase(str.charAt(0))) {
-            return str;
-        } else {
-            char[] chars = str.toCharArray();
-            chars[0] = Character.toLowerCase(chars[0]);
-            return new String(chars);
-        }
+        char[] chars = str.toCharArray();
+        chars[0] = Character.toLowerCase(chars[0]);
+        return new String(chars);
     }
 
 }
