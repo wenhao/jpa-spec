@@ -13,7 +13,7 @@
 
     <!-- 文件长度不超过200行 -->
     <module name="FileLength">
-        <property name="max" value="200"/>
+        <property name="max" value="400"/>
         <property name="severity" value="error"/>
     </module>
 
