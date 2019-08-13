@@ -9,4 +9,4 @@ script:
   - TERM=dumb ./gradlew check -i
 
 after_success:
-- ./gradlew cobertura coveralls
+  - bash <(curl -s https://codecov.io/bash)
