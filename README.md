@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)
 [![codecov](https://codecov.io/gh/wenhao/jpa-spec/branch/master/graph/badge.svg)](https://codecov.io/gh/wenhao/jpa-spec)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_shield)
+[![codebeat badge](https://codebeat.co/badges/59fb555b-ff2e-4547-8c36-decc4b05616c)](https://codebeat.co/projects/github-com-wenhao-jpa-spec-master)
+![](https://img.shields.io/badge/license-Apache--2.0-blue)
 
 # jpa-spec
 
