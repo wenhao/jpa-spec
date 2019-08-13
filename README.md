@@ -375,7 +375,7 @@ Alternatively, using virtual view and give a readable/significant class name to 
 
 Copyright © 2016-2019 Wen Hao
 
-Licensed under [Apache License]
+Licensed under [MIT License]
 
 
 [Latest]: ./docs/3.2.5.md

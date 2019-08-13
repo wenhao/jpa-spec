@@ -521,7 +521,7 @@ Spring Data JPA对投射、分组和聚合支持不是很好，
 
 Copyright © 2016-2019 Wen Hao
 
-Licensed under [Apache License]
+Licensed under [MIT License]
 
 [Legacy Hibernate Criteria Queries]: https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#appendix-legacy-criteria
 [EqualTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/EqualTest.java
