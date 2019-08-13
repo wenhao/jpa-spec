@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_shield)
+[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)
+[![codecov](https://codecov.io/gh/wenhao/jpa-spec/branch/master/graph/badge.svg)](https://codecov.io/gh/wenhao/jpa-spec)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_shield)
 
 # jpa-spec
 
