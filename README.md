@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec) [![Coverage Status](https://coveralls.io/repos/github/wenhao/jpa-spec/badge.svg?branch=master)](https://coveralls.io/github/wenhao/jpa-spec?branch=master) [:cn:](./README_CN.md)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_shield)
 
 # jpa-spec
 
