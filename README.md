@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec) [![Coverage Status](https://coveralls.io/repos/github/wenhao/jpa-spec/badge.svg?branch=master)](https://coveralls.io/github/wenhao/jpa-spec?branch=master) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_shield)
-[:cn:](./README_CN.md)
+[![Build Status](https://travis-ci.org/wenhao/jpa-spec.svg?branch=master)](https://travis-ci.org/wenhao/jpa-spec)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_shield)
 
 # jpa-spec
 
@@ -398,8 +397,6 @@ Licensed under [Apache License]
 [JoinTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/JoinTest.java
 [SortTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/SortsTest.java
 [VirtualViewTest.java]: ./src/test/java/com/github/wenhao/jpa/integration/VirtualViewTest.java
-[中文]: ./README_CN.md
 [Apache License]: ./LICENSE
-
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwenhao%2Fjpa-spec?ref=badge_large)
