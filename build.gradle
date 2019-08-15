@@ -14,11 +14,9 @@ plugins {
     id "com.simonharrer.modernizer" version "1.6.0-1"
     id 'com.github.ksoichiro.console.reporter' version '0.6.2'
     id 'com.github.ksoichiro.build.info' version '0.2.0'
-}
-
-buildScan {
-    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-    termsOfServiceAgree = 'yes'
+    id "com.github.ben-manes.versions" version '0.22.0'
+    id "net.rdrei.android.buildtimetracker" version "0.11.0"
+    id "com.github.hierynomus.license" version "0.15.0"
 }
 
 repositories {
@@ -139,8 +137,19 @@ jacocoTestCoverageVerification {
     dependsOn(jacocoTestReport)
 }
 
+license {
+    header rootProject.file('config/copyright/copyright.header')
+    excludes(["**/*.properties"])
+    strictCheck true
+}
+
 check.dependsOn jacocoTestCoverageVerification
 //check.dependsOn dependencyCheckAnalyze
+
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
 
 def pomConfig = {
     licenses {

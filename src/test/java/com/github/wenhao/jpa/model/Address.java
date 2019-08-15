@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright © 2019, Wen Hao <wenhao@126.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.github.wenhao.jpa.model;
 
 import java.util.HashSet;

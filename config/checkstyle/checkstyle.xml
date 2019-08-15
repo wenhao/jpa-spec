@@ -38,12 +38,6 @@
                   value='All TODOs should be named.  e.g. "TODO(johndoe): Refactor when v2 is released."'/>
     </module>
 
-    <module name="Header">
-        <property name="headerFile" value="config/checkstyle/copyright.header"/>
-        <property name="ignoreLines" value="2"/>
-        <property name="fileExtensions" value="java"/>
-    </module>
-
     <!-- 每个java文件一个语法树 -->
     <module name="TreeWalker">
         <!-- 使filecontentolder允许我们反过来对压制评论 -->
