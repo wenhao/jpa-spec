@@ -2,6 +2,15 @@ language: java
 jdk:
   - openjdk8
 
+addons:
+  sonarcloud:
+    organization: "wenhao"
+    token:
+      secure: "oOcew9ej+5mAzwX0kY1bTNHHOYePdtwBTS6sgtktxlLOi+O7Cjwo9OQV+RrZjqwsgNWuQ/tzNk8Ri4XLz/WNJgFxLWridUc8K/7lJswuSEmPKTHE/rSg0TZwhgZin1SOLqq5gkhb2o54QJZS/rdzjqdBJ2+fR3x5tNLcHs368EVy6Cr/Wunm4o/MolknthrXJGR9A31+zSgLD+JjCIgIfpk8kBOedFudIPmUK/QHR0NgZsw/Vr4Zv+xDDxGQZl1rK8gazrOiDpumwO+CxFPdCeuvH/RimhEr6W9TSCA78DCKDE+s8mrJnDR2XdutDGRVARegwnfjR9qzfECEaNqFQUJUlvwPyQ9gpv/4qA4iH1xTpIlFTgYCOcsvX0z/Ci7kMNEWwgNwAp91MHIAtBedUPixfSwU8IbJNb2DZfbGKCPxtNmyhXbBvXlVc/WkYoTWVfvmAehHCiyGUnMvc4LpER/dBbmqpcBXSw2zuEGH8QlPMel9kvfWvH1AA7cehjgZodOFGwLLAVFrf+D8x2DgQQz84CAYD2lgulLB+gK/sgrNTB1VIzv7NXEPJDcFgHg0OZQuRSAr3zyjBjzDVXEIYKsxbuAsaEADqH2yRt9loOeUjKcuhOQFWBmbmx4nD5XevBHKA0rdFOhOiKWESfwxjYYulgTzwxsTesUJ3zcQU68="
+
+  script:
+    - ./gradlew sonarqube
+
 install:
   - TERM=dumb ./gradlew assemble
 

@@ -8,7 +8,7 @@ NC='\033[0m' # No colors
 
 # Regex & Usage
 commit_regex="^(\[\S+(\s\&\s\S+)*\]|merge)\s"
-error_message="Aborting commit. Commit message must start with ${yellow}[YOUR NAME]."
+error_message="Aborting commit. Commit message must start with [YOUR NAME]."
 usage="[YOUR NAME] Commit Message."
 
 if ! grep -qE "$commit_regex" "$1"; then
