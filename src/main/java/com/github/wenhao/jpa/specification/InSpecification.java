@@ -29,8 +29,8 @@ import javax.persistence.criteria.Root;
 import java.util.Collection;
 
 public class InSpecification<T> extends AbstractSpecification<T> {
-    private String property;
-    private Collection<?> values;
+    private final String property;
+    private final transient Collection<?> values;
 
     public InSpecification(String property, Collection<?> values) {
         this.property = property;

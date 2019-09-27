@@ -31,8 +31,8 @@ import javax.persistence.criteria.Root;
 
 public class BetweenSpecification<T> extends AbstractSpecification<T> {
     private final String property;
-    private final Comparable<Object> lower;
-    private final Comparable<Object> upper;
+    private final transient Comparable<Object> lower;
+    private final transient Comparable<Object> upper;
 
     public BetweenSpecification(String property, Object lower, Object upper) {
         this.property = property;

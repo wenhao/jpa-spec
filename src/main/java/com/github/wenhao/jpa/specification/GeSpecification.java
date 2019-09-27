@@ -29,7 +29,7 @@ import javax.persistence.criteria.Root;
 
 public class GeSpecification<T> extends AbstractSpecification<T> {
     private final String property;
-    private final Comparable<Object> compare;
+    private final transient Comparable<Object> compare;
 
     public GeSpecification(String property, Comparable<? extends Object> compare) {
         this.property = property;
