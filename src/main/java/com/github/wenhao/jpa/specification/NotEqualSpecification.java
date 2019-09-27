@@ -29,7 +29,7 @@ import javax.persistence.criteria.Root;
 
 public class NotEqualSpecification<T> extends AbstractSpecification<T> {
     private final String property;
-    private final Object[] values;
+    private final transient Object[] values;
 
     public NotEqualSpecification(String property, Object... values) {
         this.property = property;
