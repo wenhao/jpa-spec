@@ -154,7 +154,8 @@ buildScan {
 
 sonarqube {
     properties {
-        sonar.projectKey = wenhao_jpa-spec
+        property "sonar.projectName", "A JAP Query By Specification framework."
+        property "sonar.projectKey", "wenhao_jpa-spec"
     }
 }
 
