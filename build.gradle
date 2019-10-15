@@ -154,7 +154,7 @@ buildScan {
 
 sonarqube {
     properties {
-        property "sonar.projectName", "A JAP Query By Specification framework."
+        property "sonar.projectName", "A JPA Query By Specification framework."
         property "sonar.projectKey", "wenhao_jpa-spec"
     }
 }
@@ -199,7 +199,7 @@ publishing {
             version '3.2.5'
             pom.withXml {
                 def root = asNode()
-                root.appendNode('description', 'A JAP Query By Specification framework.')
+                root.appendNode('description', 'A JPA Query By Specification framework.')
                 root.appendNode('name', 'jpa-spec')
                 root.appendNode('url', 'https://github.com/wenhao/jpa-spec')
                 root.appendNode('inceptionYear', '2016')
@@ -221,7 +221,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'jpa-spec'
-        desc = 'A JAP Query By Specification framework'
+        desc = 'A JPA Query By Specification framework'
         licenses = ['MIT']
         websiteUrl = 'https://github.com/wenhao/jpa-spec'
         issueTrackerUrl = 'https://github.com/wenhao/jpa-spec/issues'
@@ -232,7 +232,7 @@ bintray {
         githubReleaseNotesFile = 'README.md'
         version {
             name = '3.2.5'
-            desc = 'A JAP Query By Specification framework 3.2.5'
+            desc = 'A JPA Query By Specification framework 3.2.5'
             released = new Date()
             vcsTag = '3.2.5'
             gpg {
