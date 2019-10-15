@@ -59,7 +59,7 @@ public class NotLikeTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .notLike(isNotBlank(jack.getName()), "name", "%ac%")
-                .notLike(isNotBlank(jack.getNickName()), "name", "%og%", "%ri%")
+                .notLike("name", "%og%", "%ri%")
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);

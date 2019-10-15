@@ -46,10 +46,12 @@ public class InTest {
         // given
         Person jack = new PersonBuilder()
                 .name("Jack")
+                .nickName("Jack")
                 .age(18)
                 .build();
         Person eric = new PersonBuilder()
                 .name("Eric")
+                .nickName("Eric")
                 .age(20)
                 .build();
         personRepository.save(jack);
@@ -58,6 +60,7 @@ public class InTest {
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .in(isNotBlank(jack.getName()), "name", Arrays.asList("Jack", "Eric"))
+                .in("name", Arrays.asList("Jack", "Eric"))
                 .build();
 
         List<Person> persons = personRepository.findAll(specification);
