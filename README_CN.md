@@ -451,7 +451,7 @@ public Page<Person> findAll(SearchRequest request) {
         .asc("birthday")
         .build();
 
-    return personRepository.findAll(specification, new PageRequest(0, 15, sort));
+    return personRepository.findAll(specification, PageRequest.of(0, 15, sort));
 }
 ```
 
