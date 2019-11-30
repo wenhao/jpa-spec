@@ -48,12 +48,14 @@ public class EqualTest {
         Person person = new PersonBuilder()
                 .name("Jack")
                 .age(18)
+                .married(true)
                 .build();
         personRepository.save(person);
 
         // when
         Specification<Person> specification = Specifications.<Person>and()
                 .eq(isNotBlank(person.getName()), "name", person.getName())
+                .eq("married", Boolean.TRUE)
                 .build();
 
         Optional<Person> result = personRepository.findOne(specification);

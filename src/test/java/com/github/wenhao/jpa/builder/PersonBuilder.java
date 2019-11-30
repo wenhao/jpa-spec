@@ -83,6 +83,11 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder married(boolean married) {
+        this.person.setMarried(married);
+        return this;
+    }
+
     public Person build() {
         return this.person;
     }

@@ -50,6 +50,7 @@ public class Person {
     private String nickName;
     private String company;
     private Date birthday;
+    private boolean married;
     @OneToOne(cascade = ALL)
     @JoinColumn(name = "id_card_id")
     private IdCard idCard;
@@ -104,6 +105,14 @@ public class Person {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public boolean isMarried() {
+        return married;
+    }
+
+    public void setMarried(final boolean married) {
+        this.married = married;
     }
 
     public IdCard getIdCard() {
