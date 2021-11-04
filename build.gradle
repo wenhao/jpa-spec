@@ -250,3 +250,14 @@ copy {
     into "./.git/hooks/"
     fileMode 0755
 }
+
+allprojects {
+    tasks.withType(Test).configureEach {
+        maxParallelForks = 4
+        if (!project.hasProperty("createReports")) {
+            reports.html.required = false
+            reports.junitXml.required = false
+        }
+    }
+
+}
